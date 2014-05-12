@@ -2,10 +2,10 @@
 
 #functions
 in_array() {
-    local haystack=${1}[@]
-    local needle=${2}
-    for i in ${!haystack}; do
-        if [[ ${i} == ${needle} ]]; then
+    local HAYSTACK=${1}[@]
+    local NEEDLE=${2}
+    for i in ${!HAYSTACK}; do
+        if [[ ${i} == ${NEEDLE} ]]; then
             return 0
         fi
     done
@@ -13,42 +13,41 @@ in_array() {
 }
 
 # init declaration
-declare modulepath
-declare outputpath
-declare -a moduledirs
-declare -a alloweddirs
-alloweddirs=(controllers components core documentation install models out tests translations views)
+declare MODULEPATH
+declare OUTPUTPATH
+declare RESULT
+declare -a MODULEDIRS
+declare -a ALLOWEDDIRS
+ALLOWEDDIRS=(controllers components core documentation install models out tests translations views)
 #admins log settings   config  lib  xml  controller  licenses
 
-modulepath=$1
-outputpath=$2
+MODULEPATH=$1
+OUTPUTPATH=$2
+RESULT=success
 
 # logfile creation
-logfile=$outputpath"directory.log"
-if [ -f $logfile ]
+LOGFILE=$OUTPUTPATH"directory.log"
+if [ -f $LOGFILE ]
 then
-rm $logfile
+rm $LOGFILE
 fi
-touch $logfile
+touch $LOGFILE
 
-echo ${alloweddirs[@]}
+MODULEDIRS=`ls -l --time-style="long-iso" $MODULEPATH | egrep '^d' | awk '{print $8}'`
 
-moduledirs=`ls -l --time-style="long-iso" $modulepath | egrep '^d' | awk '{print $8}'`
-
-echo ""
-echo "#########checkfoldername#############"
-echo ""
-for f in $moduledirs
+#for f in $(find $MODULEPATH -mindepth 1 -maxdepth 2 -type d)
+for f in $MODULEDIRS
 do
-    in_array alloweddirs ${f} && echo ${f}" found" || echo "Directory "${f}" is not allowed"  >> $logfile
-    echo ${f}
+    if(! in_array ALLOWEDDIRS ${f} )
+    then
+        echo "<failure>Directory "${f}" is not allowed</failure>"  >> $LOGFILE
+        RESULT=failure
+    fi
 done
+echo "</failure>"  >> $LOGFILE
+echo "</result>"  >> $LOGFILE
 
+##Beginning
 
-echo ""
-echo "########gothroughfiles##############"
-echo ""
-
-echo ""
-echo "#########checkmetadata#############"
-echo ""
+echo "<failures>" | cat - $LOGFILE > temp && mv temp $LOGFILE
+echo "<result type="$RESULT">" | cat - $LOGFILE > temp && mv temp $LOGFILE
