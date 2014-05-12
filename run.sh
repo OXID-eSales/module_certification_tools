@@ -1,39 +1,38 @@
 #!/bin/bash
 
 # init declaration
-declare modulepath
-declare delete_old_runs
-declare -a moduledirs
-declare basepath
-declare outputdir
+declare MODULEPATH
+declare DELETE_OLD_RUNS
+declare BASEPATH
+declare OUTPUTDIR
 
 # getting path information
 pushd . > /dev/null
-basepath="${BASH_SOURCE[0]}";
-if ([ -h "${basepath}" ]); then
-  while([ -h "${basepath}" ]); do cd `dirname "$SCRIPT_PATH"`; SCRIPT_PATH=`readlink "${basepath}"`; done
+BASEPATH="${BASH_SOURCE[0]}";
+if ([ -h "${BASEPATH}" ]); then
+  while([ -h "${BASEPATH}" ]); do cd `dirname "$SCRIPT_PATH"`; SCRIPT_PATH=`readlink "${BASEPATH}"`; done
 fi
-cd `dirname ${basepath}` > /dev/null
-basepath=`pwd`;
+cd `dirname ${BASEPATH}` > /dev/null
+BASEPATH=`pwd`;
 popd  > /dev/null
 
 # loading config file
-if [ ! -f "$basepath""/config.cfg" ]; then
+if [ ! -f "$BASEPATH""/config.cfg" ]; then
   echo " ! ERROR: config file is not found, stops executing"
   exit
 fi
-. "$basepath""/config.cfg"
+. "$BASEPATH""/config.cfg"
 
 
 
 ############insert here functionality to determine the path of output directory
 DATE=$(/bin/date +%Y%m%d%H%M%S)
-outputdir=/output/${DATE}
+OUTPUTDIR=/output/${DATE}
 
 
 
 #var settings
-modulepath=/htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/
+MODULEPATH=/htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/
 
 
 # options
@@ -41,7 +40,7 @@ while getopts ":dh" opt
   do
     case "$opt" in
       "d")
-        delete_old_runs=true
+        DELETE_OLD_RUNS=true
         echo "Option 'delete' is specified, script will now remove unused result sets."
         ;;
       "h")
@@ -70,7 +69,7 @@ while getopts ":dh" opt
   done
 
 ######################### Directory Cleaning
-${basepath}/lib/bin/prepareOutputPath.sh $basepath $outputdir $delete_old_runs
+${BASEPATH}/lib/bin/prepareOutputPath.sh $BASEPATH $OUTPUTDIR $DELETE_OLD_RUNS
 
 
 #########################
@@ -82,7 +81,7 @@ ${basepath}/lib/bin/prepareOutputPath.sh $basepath $outputdir $delete_old_runs
 
 ######################### directory structure check
 
-# ./directory_structure.sh $modulepath $outputdir
+${BASEPATH}/lib/bin/directory_structure.sh $MODULEPATH $OUTPUTDIR
 
 
 ######################### OUTPUT
