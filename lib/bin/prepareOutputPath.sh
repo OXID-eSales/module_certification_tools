@@ -5,30 +5,27 @@ BASEPATH=$1
 OUTPUTPATH=$2
 DELETE=$3
 
-echo 'BASE'
-echo ${BASEPATH}
-echo 'BASE'
-echo ${OUTPUTPATH}
-echo 'BASE'
-echo ${DELETE}
-
-# when no base path given, get ist by itself
-if [ !$BASEPATH ] || [ ! -d $BASEPATH ]; then
-    PATH=`pwd`
-    PATH=${PATH%/*}
-    BASEPATH=${PATH%/*}
+# check for required parameters
+if [ ! ${BASEPATH} ] || [ ! ${OUTPUTPATH} ]; then
+    echo "************************************************"
+    echo "|  Module Certification Tool "
+    echo "|  Output Path Preparation "
+    echo "|  by OXID eSALES AG 2014 "
+    echo "************************************************"
+    echo "|  Usage: "
+    echo "|  prepareOutputPath.sh <run.sh script path> <name of output path> "
+    echo "************************************************"
+    echo ""
 fi
 
-
 # get base output path
-OUTPUTPATH=${BASEPATH}/output
+OUTPUTBASEPATH=${BASEPATH}/output
 
 # change to ouput path, clear if needed and create new actual timestamp as name
 cd ${BASEPATH}
 if [ $DELETE ]; then
-    /bin/rm -r ${OUTPUTPATH}
+    /bin/rm -r ${OUTPUTBASEPATH} > /dev/null
 fi
 
-echo $DATE
-echo $OUTPUTPATH
-/bin/mkdir -p ${OUTPUTPATH}
+echo  ${BASEPATH}
+/bin/mkdir -p ${BASEPATH}${OUTPUTPATH}
