@@ -2,7 +2,15 @@
 
 # get parameter from command line
 BASEPATH=$1
-DELETE=$2
+OUTPUTPATH=$2
+DELETE=$3
+
+echo 'BASE'
+echo ${BASEPATH}
+echo 'BASE'
+echo ${OUTPUTPATH}
+echo 'BASE'
+echo ${DELETE}
 
 # when no base path given, get ist by itself
 if [ !$BASEPATH ] || [ ! -d $BASEPATH ]; then
@@ -11,8 +19,6 @@ if [ !$BASEPATH ] || [ ! -d $BASEPATH ]; then
     BASEPATH=${PATH%/*}
 fi
 
-# get current date
-DATE=$(/bin/date +%Y%m%d%H%M%S)
 
 # get base output path
 OUTPUTPATH=${BASEPATH}/output
@@ -25,4 +31,4 @@ fi
 
 echo $DATE
 echo $OUTPUTPATH
-/bin/mkdir -p ${OUTPUTPATH}/${DATE}
+/bin/mkdir -p ${OUTPUTPATH}

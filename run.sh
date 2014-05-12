@@ -10,8 +10,8 @@ declare outputdir
 # getting path information
 pushd . > /dev/null
 basepath="${BASH_SOURCE[0]}";
-if ([ -h "${basepath}" ]) then
-  while([ -h "${basepath}" ]) do cd `dirname "$SCRIPT_PATH"`; SCRIPT_PATH=`readlink "${basepath}"`; done
+if ([ -h "${basepath}" ]); then
+  while([ -h "${basepath}" ]); do cd `dirname "$SCRIPT_PATH"`; SCRIPT_PATH=`readlink "${basepath}"`; done
 fi
 cd `dirname ${basepath}` > /dev/null
 basepath=`pwd`;
@@ -27,7 +27,9 @@ fi
 
 
 ############insert here functionality to determine the path of output directory
-outputdir=/htdocs/efire/moduleCertification/output/
+DATE=$(/bin/date +%Y%m%d%H%M%S)
+outputdir=/output/${DATE}
+
 
 
 #var settings
@@ -68,7 +70,7 @@ while getopts ":dh" opt
   done
 
 ######################### Directory Cleaning
-#./SCRIPTOFBISSIE.sh $outputdir $delete_old_runs
+${basepath}/lib/bin/prepareOutputPath.sh $basepath $outputdir $delete_old_runs
 
 
 #########################
@@ -80,7 +82,7 @@ while getopts ":dh" opt
 
 ######################### directory structure check
 
- ./directory_structure.sh $modulepath $outputdir
+# ./directory_structure.sh $modulepath $outputdir
 
 
 ######################### OUTPUT
