@@ -1,16 +1,11 @@
 #!/bin/bash
 
-# $1 -> coverage-datei /htdocs/efire/coverage3.xml
-# $2 -> ausgabe-datei /htdocs/efire/report3.xml
-# $3 -> verzeichnis, welches gecheckt wierden soll /htdocs/efire/oxid-phpmd/src/main/
-# $4 -> opt. test(-verzeichnis) unit/core/service/fromServer/model/result/Unit_oeplShopLanguagesTest.php
-
-
 # init declaration
 declare modulepath
-declare delete
+declare delete_old_runs
 declare -a moduledirs
 declare basepath
+declare outputdir
 
 # getting path information
 pushd . > /dev/null
@@ -22,7 +17,6 @@ cd `dirname ${basepath}` > /dev/null
 basepath=`pwd`;
 popd  > /dev/null
 
-
 # loading config file
 if [ ! -f "$basepath""/config.cfg" ]; then
   echo " ! ERROR: config file is not found, stops executing"
@@ -30,8 +24,14 @@ if [ ! -f "$basepath""/config.cfg" ]; then
 fi
 . "$basepath""/config.cfg"
 
-#var setting
 
+
+############insert here functionality to determine the path of output directory
+outputdir=/htdocs/efire/moduleCertification/output/
+
+
+#var settings
+modulepath=/htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/
 
 
 # options
@@ -39,7 +39,7 @@ while getopts ":dh" opt
   do
     case "$opt" in
       "d")
-        delete=true
+        delete_old_runs=true
         echo "Option 'delete' is specified, script will now remove unused result sets."
         ;;
       "h")
@@ -67,7 +67,8 @@ while getopts ":dh" opt
     esac
   done
 
-#########################
+######################### Directory Cleaning
+#./SCRIPTOFBISSIE.sh $outputdir $delete_old_runs
 
 
 #########################
@@ -77,9 +78,9 @@ while getopts ":dh" opt
 # /htdocs/efire/oxid-phpmd/src/bin/oxmd $3 $1 --reportfile-xml $2
 
 
-#########################
+######################### directory structure check
 
-# ./folder_check.sh
+ ./directory_structure.sh $modulepath $outputdir
 
 
 ######################### OUTPUT
