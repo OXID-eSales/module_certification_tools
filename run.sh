@@ -81,7 +81,7 @@ ${BASEPATH}/lib/bin/prepareOutputPath.sh $BASEPATH $OUTPUTDIR $DELETE_OLD_RUNS
 
 ######################### directory structure check
 
-${BASEPATH}/lib/bin/directory_structure.sh $MODULEPATH $OUTPUTDIR
+${BASEPATH}/lib/bin/directory_structure.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
 
 
 ######################### OUTPUT
