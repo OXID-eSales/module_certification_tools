@@ -72,25 +72,19 @@ while getopts ":dh" opt
 ######################### Directory Cleaning
 ${BASEPATH}/lib/bin/prepareOutputPath.sh $BASEPATH $OUTPUTDIR $DELETE_OLD_RUNS
 
-
 ######################### Run tests and oxmd for metrics
 ${BASEPATH}/lib/bin/runTestsAndMetrics.sh $MODULEPATH $BASEPATH $OUTPUTDIR $CLOVER_LOCATION
-# phpunit  --coverage-clover $1 $4
-
-# /htdocs/efire/oxid-phpmd/src/bin/oxmd $3 $1 --reportfile-xml $2
-
 
 ######################### directory structure check
-
 ${BASEPATH}/lib/bin/directory_structure.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
 
 ######################### prefix check
-
 ${BASEPATH}/lib/bin/prefix.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
 
+######################### file check
+${BASEPATH}/lib/bin/globals.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
 
 ######################### OUTPUT
 
 # no output yet
 
-# ./runModuleCertification.sh /htdocs/efire/coverage4.xml /htdocs/efire/report4.xml /htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/model/
