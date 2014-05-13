@@ -5,6 +5,8 @@ BASEPATH=$1
 OUTPUTPATH=$2
 DELETE=$3
 
+echo $DELETE
+
 # check for required parameters
 if [ ! ${BASEPATH} ] || [ ! ${OUTPUTPATH} ]; then
     echo "************************************************"
@@ -23,9 +25,9 @@ OUTPUTBASEPATH=${BASEPATH}/output
 
 # change to ouput path, clear if needed and create new actual timestamp as name
 cd ${BASEPATH}
-if [ $DELETE ]; then
+if [ $DELETE ] && [ ! 'NO'=$DELETE ]; then
+echo 'DELETE'
     /bin/rm -r ${OUTPUTBASEPATH} > /dev/null
 fi
 
-echo  ${BASEPATH}
 /bin/mkdir -p ${BASEPATH}${OUTPUTPATH}
