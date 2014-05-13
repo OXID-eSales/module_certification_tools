@@ -35,13 +35,12 @@ touch $LOGFILE
 
 MODULEDIRS=`ls -l --time-style="long-iso" $MODULEPATH | egrep '^d' | awk '{print $8}'`
 
-#for f in $(find $MODULEPATH -mindepth 1 -maxdepth 2 -type d)
 for f in $MODULEDIRS
 do
     if(! in_array ALLOWEDDIRS ${f} )
     then
         echo "<failure>Directory "${f}" is not allowed</failure>"  >> $LOGFILE
-        RESULT=failure
+        RESULT=warning
     fi
 done
 echo "</failure>"  >> $LOGFILE
@@ -51,3 +50,4 @@ echo "</result>"  >> $LOGFILE
 
 echo "<failures>" | cat - $LOGFILE > temp && mv temp $LOGFILE
 echo "<result type="$RESULT">" | cat - $LOGFILE > temp && mv temp $LOGFILE
+
