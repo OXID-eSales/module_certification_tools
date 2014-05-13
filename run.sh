@@ -5,6 +5,7 @@ declare MODULEPATH
 declare DELETE_OLD_RUNS
 declare BASEPATH
 declare OUTPUTDIR
+declare CLOVER_LOCATION
 
 # getting path information
 pushd . > /dev/null
@@ -32,7 +33,7 @@ OUTPUTDIR=/output/${DATE}
 
 
 #var settings
-MODULEPATH=/htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/
+MODULEPATH=$CFG_MODULEPATH
 
 
 # options
@@ -72,8 +73,8 @@ while getopts ":dh" opt
 ${BASEPATH}/lib/bin/prepareOutputPath.sh $BASEPATH $OUTPUTDIR $DELETE_OLD_RUNS
 
 
-#########################
-
+######################### Run tests and oxmd for metrics
+${BASEPATH}/lib/bin/runTestsAndMetrics.sh $MODULEPATH $BASEPATH $OUTPUTDIR $CLOVER_LOCATION
 # phpunit  --coverage-clover $1 $4
 
 # /htdocs/efire/oxid-phpmd/src/bin/oxmd $3 $1 --reportfile-xml $2
