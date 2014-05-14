@@ -1,6 +1,6 @@
 <?php
 
-class MdXmlDataExtractor {
+class MdXmlModel {
 
     protected $_oXml = null;
 
@@ -10,7 +10,7 @@ class MdXmlDataExtractor {
         return $this;
     }
 
-    public function getFailures() {
+    public function getViolations() {
         $aViolations = array();
 
         foreach( $this->_oXml->file as $file ) {
@@ -19,19 +19,19 @@ class MdXmlDataExtractor {
             foreach( $file->violation as $violation ) {
                 $oViolation = new Violation();
 
-                $oViolation->addFile( $sName )
-                           ->addType( (string) $violation[ 'rule' ] )
+                $oViolation->setFile( $sName )
+                           ->setType( (string) $violation[ 'rule' ] )
                            ->addInformation( 'Begin', (int) $violation[ 'beginline' ] )
                            ->addInformation( 'End', (int) $violation[ 'endline' ] )
                            ->addInformation( 'Package', (string) $violation[ 'package' ] )
                            ->addInformation( 'Class', (string) $violation[ 'class' ] )
                            ->addInformation( 'Method', (string) $violation[ 'method' ] )
-                           ->addMessage( trim( (string) $violation ) );
+                           ->setMessage( trim( (string) $violation ) );
 
                 $aViolations[] = $oViolation;
             }
         }
 
-        var_dump($aViolations);
+        return $aViolations;
     }
 }

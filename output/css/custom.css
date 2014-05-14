@@ -1,0 +1,11 @@
+h2 {
+    text-align: center;
+}
+
+.result-table {
+    margin: 50px;
+}
+
+.result-table ul li:first-of-type {
+    background-color: #EEEEEE;
+}
