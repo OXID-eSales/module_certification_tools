@@ -26,7 +26,7 @@ OUTPUTPATH=$2
 RESULT=success
 
 # logfile creation
-LOGFILE=$OUTPUTPATH"/directory.log"
+LOGFILE=$OUTPUTPATH"/directory.xml"
 if [ -f $LOGFILE ]
 then
 rm $LOGFILE
