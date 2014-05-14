@@ -14,7 +14,7 @@ OUTPUTPATH=$2
 RESULT=success
 
 # logfile creation
-LOGFILE=$OUTPUTPATH"/prefix.log"
+LOGFILE=$OUTPUTPATH"/prefix.xml"
 if [ -f $LOGFILE ]
 then
 rm $LOGFILE

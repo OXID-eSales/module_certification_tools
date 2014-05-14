@@ -10,7 +10,7 @@ OUTPUTPATH=$2
 RESULT=success
 
 # logfile creation
-LOGFILE=$OUTPUTPATH"/globals.log"
+LOGFILE=$OUTPUTPATH"/globals.xml"
 if [ -f $LOGFILE ]
 then
 rm $LOGFILE
