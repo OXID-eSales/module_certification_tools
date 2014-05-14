@@ -84,6 +84,7 @@ ${BASEPATH}/lib/bin/prefix.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
 
 ######################### file check
 ${BASEPATH}/lib/bin/globals.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
+${BASEPATH}/lib/bin/method_length.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
 
 ######################### OUTPUT
 
