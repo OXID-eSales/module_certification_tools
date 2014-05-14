@@ -34,7 +34,8 @@ OUTPUTDIR=/output/${DATE}
 
 #var settings
 MODULEPATH=$CFG_MODULEPATH
-
+CLOVER_LOCATION=$CFG_CLOVER_LOCATION
+DELETE_OLD_RUNS=$CFG_DELETE_OLD_RUNS
 
 # options
 while getopts ":dh" opt
