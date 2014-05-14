@@ -27,10 +27,17 @@ class Violation {
      *
      * @return $this
      */
-    public function addMessage( $sMessage ) {
+    public function setMessage( $sMessage ) {
         $this->_sMessage = $sMessage;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessage() {
+        return $this->_sMessage;
     }
 
     /**
@@ -38,10 +45,17 @@ class Violation {
      *
      * @return $this
      */
-    public function addType( $sType ) {
+    public function setType( $sType ) {
         $this->_sType = $sType;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType() {
+        return $this->_sType;
     }
 
     /**
@@ -49,10 +63,17 @@ class Violation {
      *
      * @return $this
      */
-    public function addFile( $sFile ) {
+    public function setFile( $sFile ) {
         $this->_sFile = $sFile;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFile() {
+        return $this->_sFile;
     }
 
     /**
@@ -65,6 +86,15 @@ class Violation {
         $this->_aInformation[ $sType ] = $sInformation;
 
         return $this;
+    }
+
+    /**
+     * @param string $sType
+     *
+     * @return string
+     */
+    public function getInformation( $sType ) {
+        return $this->_aInformation[ $sType ];
     }
 
 } 
