@@ -97,12 +97,12 @@ class Violation {
 
     /**
      * @param string $sType
-     * @param string $sInformation
+     * @param mixed $xInformation
      *
      * @return $this
      */
-    public function addInformation( $sType, $sInformation ) {
-        $this->_aInformation[ $sType ] = $sInformation;
+    public function addInformation( $sType, $xInformation ) {
+        $this->_aInformation[ $sType ] = $xInformation;
 
         return $this;
     }
@@ -110,7 +110,7 @@ class Violation {
     /**
      * @param string $sType
      *
-     * @return string
+     * @return mixed
      */
     public function getInformation( $sType ) {
         return $this->_aInformation[ $sType ];
