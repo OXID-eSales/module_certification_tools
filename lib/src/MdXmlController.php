@@ -25,11 +25,14 @@ class MdXmlController {
 
     public function getHtml() {
         $oModel = new MdXmlModel();
-        $aViolations = $oModel->loadXmlFile( $this->_sFilePath )->getViolations();
+        $oModel->loadXmlFile( $this->_sFilePath );
+        $aViolations = $oModel->getViolations();
+        $aOverview = $oModel->getOverview();
 
         $oView = new View();
         $sHtml = $oView->setTemplate( 'mdTable' )
                        ->assignVariable( 'aViolations', $aViolations )
+                       ->assignVariable( 'aOverview', $aOverview )
                        ->render();
 
         return $sHtml;

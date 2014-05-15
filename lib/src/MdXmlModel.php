@@ -53,4 +53,17 @@ class MdXmlModel {
 
         return $aViolations;
     }
+
+    public function getOverview() {
+        $aNamespaces = $this->_oXml->getNamespaces();
+        $oCertification = $this->_oXml->children( $aNamespaces[ 'oxid' ] )->certification;
+
+        foreach ( $oCertification->rule as $rule ) {
+            $oViolation = new Violation();
+
+            var_dump($rule[ 'path'] );
+        }
+
+
+    }
 }
