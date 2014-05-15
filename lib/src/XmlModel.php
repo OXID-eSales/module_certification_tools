@@ -19,22 +19,37 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-require_once '../src/MdXmlController.php';
-require_once '../src/MdXmlModel.php';
-require_once '../src/XmlModel.php';
-require_once '../src/Violation.php';
-require_once '../src/View.php';
-require_once '../src/MainController.php';
-require_once '../src/XmlController.php';
+class XmlModel {
 
-$aConfiguration = array(
-    'sMdXmlFile'  => '../../output/20140514162445/oxmd-result.xml',
-    'sDirectoryXmlFile'  => '../../output/20140514162445/directory.xml',
-    'sGlobalsXmlFile'  => '../../output/20140514162445/globals.xml',
-    'sPrefixXmlFile'  => '../../output/20140514162445/prefix.xml',
-    'sOutputFile' => '../../output/report.html'
-);
+    /**
+     * @var null
+     */
+    protected $_oXml = null;
 
-$oController = new MainController();
-$oController->setConfiguration( $aConfiguration )->indexAction();
+    /**
+     * @param string $sFilename
+     *
+     * @return $this
+     */
+    public function loadXmlFile( $sFilename ) {
+        $this->_oXml = simplexml_load_file( $sFilename );
 
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getViolations() {
+        $aViolations = array();
+        foreach( $this->_oXml->failures->failure as $failure ) {
+            $oViolation = new Violation();
+
+            $oViolation->setMessage( trim( (string) $failure ) );
+
+            $aViolations[] = $oViolation;
+        }
+
+        return $aViolations;
+    }
+}

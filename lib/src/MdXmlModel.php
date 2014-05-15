@@ -21,14 +21,25 @@
 
 class MdXmlModel {
 
+    /**
+     * @var SimpleXMLElement
+     */
     protected $_oXml = null;
 
+    /**
+     * @param string $sFilename
+     *
+     * @return $this
+     */
     public function loadXmlFile( $sFilename ) {
         $this->_oXml = simplexml_load_file( $sFilename );
 
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getViolations() {
         $aViolations = array();
 
@@ -54,16 +65,21 @@ class MdXmlModel {
         return $aViolations;
     }
 
+    /**
+     * @return array
+     */
     public function getOverview() {
-        $aNamespaces = $this->_oXml->getNamespaces();
+        $aNamespaces = $this->_oXml->getNamespaces(true);
+
         $oCertification = $this->_oXml->children( $aNamespaces[ 'oxid' ] )->certification;
+        #var_dump($oCertification);
 
         foreach ( $oCertification->rule as $rule ) {
             $oViolation = new Violation();
 
-            var_dump($rule[ 'path'] );
+            #var_dump($rule);
         }
 
-
+        return array();
     }
 }

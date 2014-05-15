@@ -21,26 +21,52 @@
 
 class View {
 
+    /**
+     * @var string
+     */
     protected $_sTemplate = '';
 
+    /**
+     * @var array
+     */
     protected $_aVariables = array();
 
+    /**
+     * @var string
+     */
     protected $_sTemplateExtension = 'phtml';
 
+    /**
+     * @var string
+     */
     protected $_sTemplateDirectory = '../tpl/';
 
+    /**
+     * @param string $sTemplate
+     *
+     * @return $this
+     */
     public function setTemplate( $sTemplate ) {
         $this->_sTemplate = $sTemplate;
 
         return $this;
     }
 
+    /**
+     * @param string $sVariableName
+     * @param mixed $xVariableContent
+     *
+     * @return $this
+     */
     public function assignVariable( $sVariableName, $xVariableContent ) {
         $this->_aVariables[ $sVariableName ] = $xVariableContent;
 
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function render() {
         $data = (object) $this->_aVariables;
         ob_start();

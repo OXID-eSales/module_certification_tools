@@ -19,39 +19,56 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-class MdXmlController {
+class XmlController {
 
     /**
      * @var string
      */
-    protected $_sFilePath = '';
+    protected $_sXmlFile = '';
+
+    /**
+     * @var string
+     */
+    protected $_sHeading = '';
+
+    /**
+     * @param string $sXmlFile
+     *
+     * @return $this
+     */
+    public function setXmlFile( $sXmlFile ) {
+        $this->_sXmlFile = $sXmlFile;
+
+        return $this;
+    }
+
+    /**
+     * @param string $sHeading
+     *
+     * @return $this
+     */
+    public function setHeading( $sHeading ) {
+        $this->_sHeading = $sHeading;
+
+        return $this;
+    }
 
     /**
      * @return string
      */
     public function getHtml() {
-        $oModel = new MdXmlModel();
-        $oModel->loadXmlFile( $this->_sFilePath );
-        $aViolations = $oModel->getViolations();
-        $aOverview = $oModel->getOverview();
-
+        $oModel = new XmlModel();
+        $oModel->loadXmlFile( $this->_sXmlFile );
         $oView = new View();
-        $sHtml = $oView->setTemplate( 'mdTable' )
-                       ->assignVariable( 'aViolations', $aViolations )
-                       ->assignVariable( 'aOverview', $aOverview )
-                       ->render();
+        $aViolations = $oModel->getViolations();
+        if ( count( $aViolations ) > 0 ) {
+            $sHtml = $oView->setTemplate( 'plainTable' )
+                           ->assignVariable( 'aViolations', $oModel->getViolations() )
+                           ->assignVariable( 'sHeading', $this->_sHeading )
+                           ->render();
+        }
 
         return $sHtml;
     }
 
-    /**
-     * @param string $sFilePath
-     *
-     * @return $this
-     */
-    public function setXmlFile( $sFilePath ) {
-        $this->_sFilePath = $sFilePath;
-
-        return $this;
-    }
-}
+} 

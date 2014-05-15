@@ -26,12 +26,20 @@ class MainController {
      */
     protected $_oConfiguration;
 
+    /**
+     * @param array $aConfiguration
+     *
+     * @return $this
+     */
     public function setConfiguration( $aConfiguration ) {
         $this->_oConfiguration = (object) $aConfiguration;
 
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function indexAction() {
         $oView = new View();
         $oView->setTemplate( 'index' );
@@ -41,6 +49,11 @@ class MainController {
                                ->getHtml();
 
         $sHtml = $oView->assignVariable( 'oModules', array( $sMdHtml ) )->render();
+
+        $oXmlController = new XmlController();
+        $sHtml .= $oXmlController->setXmlFile( $this->_oConfiguration->sDirectoryXmlFile )->setHeading( 'Directories' )->getHtml();
+        $sHtml .= $oXmlController->setXmlFile( $this->_oConfiguration->sGlobalsXmlFile )->setHeading( 'Globals' )->getHtml();
+        $sHtml .= $oXmlController->setXmlFile( $this->_oConfiguration->sPrefixXmlFile )->setHeading( 'Prefixes' )->getHtml();
 
         file_put_contents( $this->_oConfiguration->sOutputFile, $sHtml );
 
