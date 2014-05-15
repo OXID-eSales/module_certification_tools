@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This file is part of the OXID module certification tool licensed under GPLv3 (http://www.gnu.org/licenses)
+# @copyright (C) OXID eSales AG 2003-2014
+
 # get parameter from command line
 BASEPATH=$1
 OUTPUTPATH=$2

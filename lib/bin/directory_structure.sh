@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This file is part of the OXID module certification tool licensed under GPLv3 (http://www.gnu.org/licenses)
+# @copyright (C) OXID eSales AG 2003-2014
+
 #functions
 in_array() {
     local HAYSTACK=${1}[@]
