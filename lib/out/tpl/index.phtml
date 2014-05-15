@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../lib/out/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../lib/out/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="../../lib/out/css/custom.css">
+        <script src="../../lib/out/js/jquery.min.js"></script>
+        <script src="../../lib/out/js/bootstrap.min.js"></script>
+        <!--[if lt IE 9]>
+        <script src="../../lib/out/js/html5shiv.js"></script>
+        <script src="../../lib/out/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <?php foreach ( $data->oModules as $sModule ) { ?>
+            <?php echo $sModule; ?>
+        <?php } ?>
+    </body>
+</html>

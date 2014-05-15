@@ -22,7 +22,6 @@ declare RESULT
 declare -a MODULEDIRS
 declare -a ALLOWEDDIRS
 ALLOWEDDIRS=(controllers components core documentation install models out tests translations views)
-#admins log settings   config  lib  xml  controller  licenses
 
 MODULEPATH=$1
 OUTPUTPATH=$2
@@ -38,11 +37,12 @@ touch $LOGFILE
 
 MODULEDIRS=`ls -l --time-style="long-iso" $MODULEPATH | egrep '^d' | awk '{print $8}'`
 
-for f in $MODULEDIRS
+for FILE in $MODULEDIRS
 do
-    if(! in_array ALLOWEDDIRS ${f} )
+echo $FILE
+    if(! in_array ALLOWEDDIRS ${FILE} )
     then
-        echo "<failure>Directory "${f}" is not allowed</failure>"  >> $LOGFILE
+        echo "<failure>Directory \""${FILE}"\" is not allowed</failure>"  >> $LOGFILE
         RESULT=warning
     fi
 done

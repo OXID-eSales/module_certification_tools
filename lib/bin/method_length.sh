@@ -27,24 +27,23 @@ rm $LOGFILE
 fi
 touch $LOGFILE
 
-for e in ${DIRSTOCHECK[@]}
+for DIR in ${DIRSTOCHECK[@]}
 do
-    if [ ! -d ${MODULEPATH}${e} ]; then
+    if [ ! -d ${MODULEPATH}${DIR} ]; then
         continue
     fi
-    for FILE in $(find ${MODULEPATH}${e} -type f -name *.php -not -iwholename 'test' )
+    for FILE in $(find ${MODULEPATH}${DIR} -type f -name *.php -not -iwholename 'test' )
     do
-
         POINTER=0
         LINESOFOCCURENCE=`grep -n "public function \|public static function \|protected function \|private function " $FILE |cut -f1 -d:`
         for LINEOFOCCURENCE in $(echo $LINESOFOCCURENCE); do
             let LOC=$LINEOFOCCURENCE-$POINTER
 
             if [[ "$LOC" -gt 120 ]] && [[ "$POINTER" -gt 0 ]]; then
-                    echo "<failure>File "${FILE}" in ${MODULEPATH}${e} contains methods with more than 120 LOC</failure>"  >> $LOGFILE
+                    echo "<failure>File "${FILE}" in ${MODULEPATH}${DIR} contains methods with more than 120 LOC</failure>"  >> $LOGFILE
                     RESULT=failure
             elif [[ "$LOC" -gt 90 ]] && [[ "$POINTER" -gt 0 ]]; then
-                    echo "<failure>File "${FILE}" in ${MODULEPATH}${e} contains methods with more than 90 LOC</failure>"  >> $LOGFILE
+                    echo "<failure>File "${FILE}" in ${MODULEPATH}${DIR} contains methods with more than 90 LOC</failure>"  >> $LOGFILE
                     if [[ $RESULT != "failure" ]]; then
                         RESULT=warning
                     fi

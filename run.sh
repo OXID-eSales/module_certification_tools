@@ -27,13 +27,9 @@ if [ ! -f "$BASEPATH""/config.cfg" ]; then
 fi
 . "$BASEPATH""/config.cfg"
 
-
-
 ############insert here functionality to determine the path of output directory
 DATE=$(/bin/date +%Y%m%d%H%M%S)
 OUTPUTDIR=/output/${DATE}
-
-
 
 #var settings
 MODULEPATH=$CFG_MODULEPATH
@@ -90,6 +86,5 @@ ${BASEPATH}/lib/bin/globals.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
 ${BASEPATH}/lib/bin/method_length.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
 
 ######################### OUTPUT
-
-# no output yet
+php ${BASEPATH}/lib/bin/showResult.php ${BASEPATH}/$OUTPUTDIR
 

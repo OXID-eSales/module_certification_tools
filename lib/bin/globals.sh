@@ -20,10 +20,10 @@ rm $LOGFILE
 fi
 touch $LOGFILE
 
-for f in $(find ${MODULEPATH} -type f -name *.php -not -iwholename 'test')
+for FILE in $(find ${MODULEPATH} -type f -name *.php -not -iwholename 'test')
 do
-            if grep '$_POST\|$_GET\|$_SERVER\|$_FILES\|$_COOKIE\|$_SESSION\|$_REQUEST\|$_ENV\|$GLOBALS' $f; then
-                    echo "<failure>File "${f}" uses global variables</failure>"  >> $LOGFILE
+            if grep '$_POST\|$_GET\|$_SERVER\|$_FILES\|$_COOKIE\|$_SESSION\|$_REQUEST\|$_ENV\|$GLOBALS' $FILE; then
+                    echo "<failure>File "${FILE}" uses global variables</failure>"  >> $LOGFILE
                     RESULT=failure
             fi
 done

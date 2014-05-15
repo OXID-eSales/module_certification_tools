@@ -39,7 +39,7 @@ class View {
     /**
      * @var string
      */
-    protected $_sTemplateDirectory = '../tpl/';
+    protected $_sTemplateDirectory = './lib/out/tpl/';
 
     /**
      * @param string $sTemplate
