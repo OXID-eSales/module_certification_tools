@@ -27,7 +27,7 @@ require_once './lib/src/MainController.php';
 
 $aConfiguration = array(
     'sMdXmlFile'  => $argv[1]."/oxmd-result.xml",
-    'sOutputFile' => $argv[2]."/report.html"
+    'sOutputFile' => $argv[1]."/report.html"
 );
 
 $oController = new MainController();
