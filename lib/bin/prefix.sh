@@ -24,18 +24,18 @@ rm $LOGFILE
 fi
 touch $LOGFILE
 
-for e in ${DIRSTOCHECK[@]}
+for DIR in ${DIRSTOCHECK[@]}
 do
-    if [ ! -d ${MODULEPATH}${e} ]; then
+    if [ ! -d ${MODULEPATH}${DIR} ]; then
         continue
     fi
-    for f in $(find ${MODULEPATH}${e} -type f -name *.php -not -iwholename 'test')
+    for FILE in $(find ${MODULEPATH}${DIR} -type f -name *.php -not -iwholename 'test')
     do
-        a=${f##*/}
+        a=${FILE##*/}
         if [ $PREFIX != ${a:0:${#PREFIX}} ]; then
             echo $a
             echo "false"
-            echo "<failure>File "${f}" in ${MODULEPATH}${e} doesnt start with Prefix $PREFIX</failure>"  >> $LOGFILE
+            echo "<failure>File "${FILE}" in ${MODULEPATH}${DIR} doesnt start with Prefix $PREFIX</failure>"  >> $LOGFILE
             RESULT=warning
         fi
     done

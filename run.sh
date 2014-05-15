@@ -90,6 +90,5 @@ ${BASEPATH}/lib/bin/globals.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
 ${BASEPATH}/lib/bin/method_length.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
 
 ######################### OUTPUT
-
-# no output yet
+php ${BASEPATH}/lib/bin/showResult.php ${BASEPATH}/$OUTPUTDIR ${BASEPATH}/output
 

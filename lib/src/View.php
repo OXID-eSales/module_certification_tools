@@ -27,7 +27,7 @@ class View {
 
     protected $_sTemplateExtension = 'phtml';
 
-    protected $_sTemplateDirectory = '../tpl/';
+    protected $_sTemplateDirectory = './lib/tpl/';
 
     public function setTemplate( $sTemplate ) {
         $this->_sTemplate = $sTemplate;
