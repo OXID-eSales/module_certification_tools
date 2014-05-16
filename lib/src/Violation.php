@@ -19,32 +19,45 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
+/**
+ * Class Violation a data holding class for the violations of rules
+ */
 class Violation {
 
     /**
+     * Contains a detailed message for the ruel violation.
+     *
      * @var string
      */
     protected $_sMessage = '';
 
     /**
+     * Contains the type of rule violation.
+     *
      * @var string
      */
     protected $_sType = '';
 
     /**
+     * Contains the file tha violated the rule.
+     *
      * @var string
      */
     protected $_sFile = '';
 
     /**
+     * Contains an array with additional informations.
+     *
      * @var array
      */
     protected $_aInformation = array();
 
     /**
-     * @param string $sMessage
+     * Setter for the Message.
      *
-     * @return $this
+     * @param string $sMessage message to set
+     *
+     * @return $this the object itself
      */
     public function setMessage( $sMessage ) {
         $this->_sMessage = $sMessage;
@@ -53,16 +66,20 @@ class Violation {
     }
 
     /**
-     * @return string
+     * Getter for the message.
+     *
+     * @return string the stored message
      */
     public function getMessage() {
         return $this->_sMessage;
     }
 
     /**
-     * @param string $sType
+     * Setter for violation type.
      *
-     * @return $this
+     * @param string $sType the type to set.
+     *
+     * @return $this the object itself
      */
     public function setType( $sType ) {
         $this->_sType = $sType;
@@ -71,16 +88,20 @@ class Violation {
     }
 
     /**
-     * @return string
+     * Getter for the violation type.
+     *
+     * @return string the type of violation
      */
     public function getType() {
         return $this->_sType;
     }
 
     /**
-     * @param string $sFile
+     * Setter for the violating file.
      *
-     * @return $this
+     * @param string $sFile the file that violates the rule
+     *
+     * @return $this the object itself
      */
     public function setFile( $sFile ) {
         $this->_sFile = $sFile;
@@ -89,17 +110,21 @@ class Violation {
     }
 
     /**
-     * @return string
+     * Getter for the violating file.
+     *
+     * @return string the file that violates the rule
      */
     public function getFile() {
         return $this->_sFile;
     }
 
     /**
-     * @param string $sType
-     * @param mixed $xInformation
+     * Adds special information to the violation object.
      *
-     * @return $this
+     * @param string $sType the type of additional information
+     * @param mixed $xInformation the information to be stored
+     *
+     * @return $this the object itself
      */
     public function addInformation( $sType, $xInformation ) {
         $this->_aInformation[ $sType ] = $xInformation;
@@ -108,9 +133,11 @@ class Violation {
     }
 
     /**
-     * @param string $sType
+     * Gets additional information for a special information type.
      *
-     * @return mixed
+     * @param string $sType the type of additional information to get
+     *
+     * @return mixed the stored additional information
      */
     public function getInformation( $sType ) {
         return $this->_aInformation[ $sType ];

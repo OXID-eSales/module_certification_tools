@@ -19,15 +19,22 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
+/**
+ * Class MdXmlController controller class to handle the output of the OXMD module
+ */
 class MdXmlController {
 
     /**
+     * The path to the output file of OXMD.
+     *
      * @var string
      */
     protected $_sFilePath = '';
 
     /**
-     * @return string
+     * Returns the HTML code for the output of the OXMD file.
+     *
+     * @return string HTML code for the output
      */
     public function getHtml() {
         $oModel = new MdXmlModel();
@@ -45,9 +52,11 @@ class MdXmlController {
     }
 
     /**
-     * @param string $sFilePath
+     * Sets the path to the output file of the OXMD module.
      *
-     * @return $this
+     * @param string $sFilePath full path of the XML file
+     *
+     * @return $this the controller itself
      */
     public function setXmlFile( $sFilePath ) {
         $this->_sFilePath = $sFilePath;

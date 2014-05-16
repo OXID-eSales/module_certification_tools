@@ -19,32 +19,45 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
+/**
+ * Class View class for handling the template files
+ */
 class View {
 
     /**
+     * Contain the nme of the template corresponding to the view object.
+     *
      * @var string
      */
     protected $_sTemplate = '';
 
     /**
+     * Contains all assigned variables.
+     *
      * @var array
      */
     protected $_aVariables = array();
 
     /**
+     * The file name extension of the template files.
+     *
      * @var string
      */
     protected $_sTemplateExtension = 'phtml';
 
     /**
+     * The path of the directory containing the template files.
+     *
      * @var string
      */
-    protected $_sTemplateDirectory = './lib/out/tpl/';
+    protected $_sTemplateDirectory = '../out/tpl/';
 
     /**
-     * @param string $sTemplate
+     * Set the template for this view object.
      *
-     * @return $this
+     * @param string $sTemplate name of the template
+     *
+     * @return $this the view object itself
      */
     public function setTemplate( $sTemplate ) {
         $this->_sTemplate = $sTemplate;
@@ -53,10 +66,12 @@ class View {
     }
 
     /**
-     * @param string $sVariableName
-     * @param mixed $xVariableContent
+     * Assigns a variable to the template.
      *
-     * @return $this
+     * @param string $sVariableName name of the assigned variable
+     * @param mixed $xVariableContent data containing the assigned variable
+     *
+     * @return $this the view object itself
      */
     public function assignVariable( $sVariableName, $xVariableContent ) {
         $this->_aVariables[ $sVariableName ] = $xVariableContent;
@@ -65,7 +80,9 @@ class View {
     }
 
     /**
-     * @return string
+     * Reeturns the HTML code after rendering.
+     *
+     * @return string the rendered HTML code
      */
     public function render() {
         $data = (object) $this->_aVariables;
@@ -77,8 +94,4 @@ class View {
 
         return $sOutput;
     }
-
-
-
-
 }

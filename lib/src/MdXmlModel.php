@@ -19,46 +19,61 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
+/**
+ * Class MdXmlModel model class for handling the output of the OXMD module
+ */
 class MdXmlModel {
 
     /**
+     * The SimpleXML object created form the XML output of OXMD.
+     *
      * @var SimpleXMLElement
      */
     protected $_oXml = null;
 
     /**
-     * @param string $sFilename
+     * Loads the XML output file ob OXMD into a SimpleXML object.
      *
-     * @return $this
+     * @param string $sFilename full path to the XML file of OXMD
+     *
+     * @return $this the model object itself
      */
     public function loadXmlFile( $sFilename ) {
+        // workaround for simpleXML namespace issue
+        $sData = file_get_contents( $sFilename );
+        $sData = str_replace( '<oxid:', '<', $sData );
+        $sData = str_replace( '</oxid:', '</', $sData );
+        file_put_contents( $sFilename, $sData );
+
         $this->_oXml = simplexml_load_file( $sFilename );
 
         return $this;
     }
 
     /**
-     * @return array
+     * Get all violations of code metrics from the OXMD XML file.
+     *
+     * @return array returns all violations of code metrics determind by OXMD
      */
     public function getViolations() {
         $aViolations = array();
 
-        foreach( $this->_oXml->file as $file ) {
-            $sName = (string) $file[ 'name' ];
+        foreach( $this->_oXml->file as $oFile ) {
+            $sName = (string) $oFile[ 'name' ];
 
-            foreach( $file->violation as $violation ) {
-                $oViolation = new Violation();
+            foreach( $oFile->violation as $oViolation ) {
+                $oOutputViolation = new Violation();
 
-                $oViolation->setFile( $sName )
-                           ->setType( (string) $violation[ 'rule' ] )
-                           //->addInformation( 'Begin', (int) $violation[ 'beginline' ] )
-                           //->addInformation( 'End', (int) $violation[ 'endline' ] )
-                           //->addInformation( 'Package', (string) $violation[ 'package' ] )
-                           //->addInformation( 'Class', (string) $violation[ 'class' ] )
-                           ->addInformation( 'Method', (string) $violation[ 'method' ] )
-                           ->setMessage( trim( (string) $violation ) );
+                $oOutputViolation->setFile( $sName )
+                           ->setType( (string) $oViolation[ 'rule' ] )
+                           ->addInformation( 'Begin', (int) $oViolation[ 'beginline' ] )
+                           ->addInformation( 'End', (int) $oViolation[ 'endline' ] )
+                           ->addInformation( 'Package', (string) $oViolation[ 'package' ] )
+                           ->addInformation( 'Class', (string) $oViolation[ 'class' ] )
+                           ->addInformation( 'Method', (string) $oViolation[ 'method' ] )
+                           ->setMessage( trim( (string) $oViolation ) );
 
-                $aViolations[] = $oViolation;
+                $aViolations[] = $oOutputViolation;
             }
         }
 
@@ -66,20 +81,34 @@ class MdXmlModel {
     }
 
     /**
-     * @return array
+     * Returns a summary object with the important results of OXMD.
+     *
+     * @return object summary information of the OXMD XML file
      */
     public function getOverview() {
-        $aNamespaces = $this->_oXml->getNamespaces(true);
+        $oOverviewData = (object) array( 'sPrice' => null, 'sFactor' => null, 'aViolations' => array() );
 
-        $oCertification = $this->_oXml->children( $aNamespaces[ 'oxid' ] )->certification;
-        #var_dump($oCertification);
+        $oCertification = $this->_oXml->certification;
+        $oOverviewData->sPrice = (string )$oCertification[ 'price' ];
+        $oOverviewData->sFactor = (string) $oCertification[ 'factor' ];
 
-        foreach ( $oCertification->rule as $rule ) {
-            $oViolation = new Violation();
+        foreach ( $oCertification->rule as $oRule ) {
+            if ( ((string) $oRule[ 'violated' ]) == 'true' ) {
+                $oViolation = new Violation();
+                $oViolation->setType( (string) $oRule[ 'name' ] );
+                $oViolation->addInformation( 'value', (string) $oRule[ 'value' ] );
+                $oViolation->addInformation( 'factor', (string) $oRule[ 'factor' ] );
 
-            #var_dump($rule);
+                $aFiles = array();
+                foreach ( $oRule->file as $oFile ) {
+                    $aFiles[] = (string) $oFile[ 'class' ] . '::' . (string) $oFile[ 'method' ] . ' (' . (string) $oFile[ 'path' ] . ')';
+                }
+                $oViolation->addInformation( 'files', $aFiles );
+
+                $oOverviewData->aViolations[] = $oViolation;
+            }
         }
 
-        return array();
+        return $oOverviewData;
     }
 }

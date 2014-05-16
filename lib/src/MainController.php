@@ -19,17 +19,24 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
+/**
+ * Class MainController main controller class for the application
+ */
 class MainController {
 
     /**
+     * Contains als the configuration values for the application.
+     *
      * @var object
      */
     protected $_oConfiguration;
 
     /**
-     * @param array $aConfiguration
+     * Fills the configuration object of the class with given values.
      *
-     * @return $this
+     * @param array $aConfiguration array with all the configuration values
+     *
+     * @return $this the controller itself
      */
     public function setConfiguration( $aConfiguration ) {
         $this->_oConfiguration = (object) $aConfiguration;
@@ -38,7 +45,9 @@ class MainController {
     }
 
     /**
-     * @return $this
+     * Main Action for running the application.
+     *
+     * @return $this the controller itself
      */
     public function indexAction() {
         $oView = new View();

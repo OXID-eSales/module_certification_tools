@@ -19,22 +19,31 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
+/**
+ * Class XmlController controller class for handling XML output file of generic check modules
+ */
 class XmlController {
 
     /**
+     * Contains the path to the XML file.
+     *
      * @var string
      */
     protected $_sXmlFile = '';
 
     /**
+     * Contains the Heading should be shown in output.
+     *
      * @var string
      */
     protected $_sHeading = '';
 
     /**
-     * @param string $sXmlFile
+     * Sets the path of the XML file with the output.
      *
-     * @return $this
+     * @param string $sXmlFile the file containing the XML output of a generic check module
+     *
+     * @return $this the controller itself
      */
     public function setXmlFile( $sXmlFile ) {
         $this->_sXmlFile = $sXmlFile;
@@ -43,9 +52,11 @@ class XmlController {
     }
 
     /**
-     * @param string $sHeading
+     * Sets the heading that should be shown in output.
      *
-     * @return $this
+     * @param string $sHeading the heading for this XML file.
+     *
+     * @return $this the controller ifself
      */
     public function setHeading( $sHeading ) {
         $this->_sHeading = $sHeading;
@@ -54,7 +65,9 @@ class XmlController {
     }
 
     /**
-     * @return string
+     * Returns the rendered HTML code with the information from the cecker module.
+     *
+     * @return string the HTML output corresponding to the XML file output of the module
      */
     public function getHtml() {
         $oModel = new XmlModel();

@@ -19,13 +19,13 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-require_once './lib/src/MdXmlController.php';
-require_once './lib/src/MdXmlModel.php';
-require_once './lib/src/XmlModel.php';
-require_once './lib/src/Violation.php';
-require_once './lib/src/View.php';
-require_once './lib/src/MainController.php';
-require_once './lib/src/XmlController.php';
+require_once '../src/MdXmlController.php';
+require_once '../src/MdXmlModel.php';
+require_once '../src/XmlModel.php';
+require_once '../src/Violation.php';
+require_once '../src/View.php';
+require_once '../src/MainController.php';
+require_once '../src/XmlController.php';
 
 $aConfiguration = array(
     'sModulePath'       => $argv[2],
