@@ -1,4 +1,4 @@
-Modul-Zertifizierungs Tool
+Module-Certification-Tool
 ==========================
 LICENSES
 --------
@@ -6,7 +6,7 @@ LICENSES
 
 HOW TO USE
 ----------
-## Perparing system
+## Preparing system
 
 1. change to module_certification_tools/lib/oxmd directory
 
