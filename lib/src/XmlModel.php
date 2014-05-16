@@ -42,12 +42,14 @@ class XmlModel {
      */
     public function getViolations() {
         $aViolations = array();
-        foreach( $this->_oXml->failures->failure as $failure ) {
-            $oViolation = new Violation();
+        if (isset($this->_oXml->failures->failure) ){
+            foreach( $this->_oXml->failures->failure as $failure ) {
+                $oViolation = new Violation();
 
-            $oViolation->setMessage( trim( (string) $failure ) );
+                $oViolation->setMessage( trim( (string) $failure ) );
 
-            $aViolations[] = $oViolation;
+                $aViolations[] = $oViolation;
+            }
         }
 
         return $aViolations;

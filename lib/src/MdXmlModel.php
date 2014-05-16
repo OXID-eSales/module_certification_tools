@@ -51,10 +51,10 @@ class MdXmlModel {
 
                 $oViolation->setFile( $sName )
                            ->setType( (string) $violation[ 'rule' ] )
-                           ->addInformation( 'Begin', (int) $violation[ 'beginline' ] )
-                           ->addInformation( 'End', (int) $violation[ 'endline' ] )
-                           ->addInformation( 'Package', (string) $violation[ 'package' ] )
-                           ->addInformation( 'Class', (string) $violation[ 'class' ] )
+                           //->addInformation( 'Begin', (int) $violation[ 'beginline' ] )
+                           //->addInformation( 'End', (int) $violation[ 'endline' ] )
+                           //->addInformation( 'Package', (string) $violation[ 'package' ] )
+                           //->addInformation( 'Class', (string) $violation[ 'class' ] )
                            ->addInformation( 'Method', (string) $violation[ 'method' ] )
                            ->setMessage( trim( (string) $violation ) );
 
