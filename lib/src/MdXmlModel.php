@@ -96,14 +96,14 @@ class MdXmlModel {
             if ( ((string) $oRule[ 'violated' ]) == 'true' ) {
                 $oViolation = new Violation();
                 $oViolation->setType( (string) $oRule[ 'name' ] );
-                $oViolation->addInformation( 'value', (string) $oRule[ 'value' ] );
-                $oViolation->addInformation( 'factor', (string) $oRule[ 'factor' ] );
+                $oViolation->addInformation( 'Value', (string) $oRule[ 'value' ] );
+                $oViolation->addInformation( 'Factor', (string) $oRule[ 'factor' ] );
 
                 $aFiles = array();
                 foreach ( $oRule->file as $oFile ) {
                     $aFiles[] = (string) $oFile[ 'class' ] . '::' . (string) $oFile[ 'method' ] . ' (' . (string) $oFile[ 'path' ] . ')';
                 }
-                $oViolation->addInformation( 'files', $aFiles );
+                $oViolation->addInformation( 'Files', $aFiles );
 
                 $oOverviewData->aViolations[] = $oViolation;
             }
