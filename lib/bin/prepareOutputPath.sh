@@ -24,7 +24,7 @@ if [ ! ${BASEPATH} ] || [ ! ${OUTPUTPATH} ]; then
 fi
 
 # get base output path
-OUTPUTBASEPATH=${BASEPATH}/output
+OUTPUTBASEPATH=${BASEPATH}/result
 
 # change to ouput path, clear if needed and create new actual timestamp as name
 cd ${BASEPATH}

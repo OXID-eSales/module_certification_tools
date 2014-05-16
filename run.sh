@@ -29,7 +29,7 @@ fi
 
 ############insert here functionality to determine the path of output directory
 DATE=$(/bin/date +%Y%m%d%H%M%S)
-OUTPUTDIR=/output/${DATE}
+OUTPUTDIR=/result/${DATE}
 
 #var settings
 MODULEPATH=$CFG_MODULEPATH
