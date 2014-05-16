@@ -28,6 +28,7 @@ require_once './lib/src/MainController.php';
 require_once './lib/src/XmlController.php';
 
 $aConfiguration = array(
+    'sModulePath'       => $argv[2],
     'sMdXmlFile'        => $argv[1] . '/oxmd-result.xml',
     'sDirectoryXmlFile' => $argv[1] . '/directory.xml',
     'sGlobalsXmlFile'   => $argv[1] . '/globals.xml',
