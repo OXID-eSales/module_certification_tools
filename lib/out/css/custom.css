@@ -6,6 +6,11 @@ h2 {
     margin: 50px;
 }
 
-.result-table ul li:first-of-type {
+.result-table ul li.overflow-right {
+    direction: rtl;
+    overflow-x: hidden;
+}
+
+.result-table ul li.highlighted-cell {
     background-color: #EEEEEE;
 }
