@@ -1,14 +1,14 @@
 <h2>Module Metrics Details</h2>
 <div class="result-table">
     <ul class="list-group">
-        <li class="list-group-item col-md-4">Filename</li>
-        <li class="list-group-item col-md-1">Type</li>
-        <li class="list-group-item col-md-2">Methodname</li>
-        <li class="list-group-item col-md-5">Detailed Message</li>
+        <li class="list-group-item col-md-4 highlighted-cell">Filename</li>
+        <li class="list-group-item col-md-1 highlighted-cell">Type</li>
+        <li class="list-group-item col-md-2 highlighted-cell">Methodname</li>
+        <li class="list-group-item col-md-5 highlighted-cell">Detailed Message</li>
     </ul>
     <?php foreach ( $data->aViolations as $oViolation ) { ?>
         <ul class="list-group">
-            <li class="list-group-item col-md-4"><?php echo $oViolation->getFile(); ?></li>
+            <li class="list-group-item col-md-4 overflow-right"><?php echo $oViolation->getFile(); ?></li>
             <li class="list-group-item col-md-1"><?php echo $oViolation->getType(); ?></li>
             <li class="list-group-item col-md-2"><?php echo $oViolation->getInformation( 'Method' ); ?></li>
             <li class="list-group-item col-md-5"><?php echo $oViolation->getMessage(); ?></li>
@@ -18,26 +18,26 @@
 <h2>Module Metrics Summary</h2>
 <div class="result-table">
     <ul class="list-group">
-        <li class="list-group-item col-md-6">Factor</li>
+        <li class="list-group-item col-md-6 highlighted-cell">Factor</li>
         <li class="list-group-item col-md-6"><?php echo $data->aOverview->sFactor; ?></li>
     </ul>
     <ul class="list-group">
-        <li class="list-group-item col-md-6">Price</li>
+        <li class="list-group-item col-md-6 highlighted-cell">Price</li>
         <li class="list-group-item col-md-6"><?php echo $data->aOverview->sPrice; ?></li>
     </ul>
 </div>
 <div class="result-table">
     <ul class="list-group">
-        <li class="list-group-item col-md-4">Type</li>
-        <li class="list-group-item col-md-4">Factor</li>
-        <li class="list-group-item col-md-4">Value</li>
+        <li class="list-group-item col-md-4 highlighted-cell">Type</li>
+        <li class="list-group-item col-md-4 highlighted-cell">Factor</li>
+        <li class="list-group-item col-md-4 highlighted-cell">Value</li>
         <li class="list-group-item col-md-12">Appearances</li>
     </ul>
     <?php foreach ( $data->aOverview->aViolations as $oViolation ) { ?>
         <ul class="list-group">
-            <li class="list-group-item col-md-4"><?php echo $oViolation->getType(); ?></li>
-            <li class="list-group-item col-md-4"><?php echo $oViolation->getInformation( 'Factor' ); ?></li>
-            <li class="list-group-item col-md-4"><?php echo $oViolation->getInformation( 'Value' ); ?></li>
+            <li class="list-group-item col-md-4 highlighted-cell"><?php echo $oViolation->getType(); ?></li>
+            <li class="list-group-item col-md-4 highlighted-cell"><?php echo $oViolation->getInformation( 'Factor' ); ?></li>
+            <li class="list-group-item col-md-4 highlighted-cell"><?php echo $oViolation->getInformation( 'Value' ); ?></li>
             <li class="list-group-item col-md-12"><?php echo implode( '<br>', $oViolation->getInformation( 'Files' ) ); ?></li>
         </ul>
     <?php } ?>
