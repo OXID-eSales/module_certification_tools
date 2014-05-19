@@ -52,7 +52,7 @@ while getopts ":dh" opt
         echo "************************************************"
         echo "|  The following parameter can be set: "
         echo "|  d) deletes unsused result sets"
-        echo "|  h) shows helping information (this fancy peace of shit)"
+        echo "|  h) show helping information "
         echo "************************************************"
         echo ""
         ;;
