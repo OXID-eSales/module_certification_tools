@@ -1,21 +1,5 @@
-<h2>Module Metrics Details</h2>
-<div class="result-table">
-    <ul class="list-group">
-        <li class="list-group-item col-md-4 highlighted-cell">Filename</li>
-        <li class="list-group-item col-md-1 highlighted-cell">Type</li>
-        <li class="list-group-item col-md-2 highlighted-cell">Methodname</li>
-        <li class="list-group-item col-md-5 highlighted-cell">Detailed Message</li>
-    </ul>
-    <?php foreach ( $data->aViolations as $oViolation ) { ?>
-        <ul class="list-group">
-            <li class="list-group-item col-md-4 overflow-right"><?php echo $oViolation->getFile(); ?></li>
-            <li class="list-group-item col-md-1"><?php echo $oViolation->getType(); ?></li>
-            <li class="list-group-item col-md-2"><?php echo $oViolation->getInformation( 'Method' ); ?></li>
-            <li class="list-group-item col-md-5"><?php echo $oViolation->getMessage(); ?></li>
-        </ul>
-    <?php } ?>
-</div>
-<h2>Module Metrics Summary</h2>
+<h2>Module Metrics</h2>
+<h3>Metrics Summary</h3>
 <div class="result-table">
     <ul class="list-group">
         <li class="list-group-item col-md-6 highlighted-cell">Factor</li>
@@ -39,6 +23,23 @@
             <li class="list-group-item col-md-4 highlighted-cell"><?php echo $oViolation->getInformation( 'Factor' ); ?></li>
             <li class="list-group-item col-md-4 highlighted-cell"><?php echo $oViolation->getInformation( 'Value' ); ?></li>
             <li class="list-group-item col-md-12"><?php echo implode( '<br>', $oViolation->getInformation( 'Files' ) ); ?></li>
+        </ul>
+    <?php } ?>
+</div>
+<h3>Metric Details</h3>
+<div class="result-table">
+    <ul class="list-group">
+        <li class="list-group-item col-md-4 highlighted-cell">Filename</li>
+        <li class="list-group-item col-md-1 highlighted-cell">Type</li>
+        <li class="list-group-item col-md-2 highlighted-cell">Methodname</li>
+        <li class="list-group-item col-md-5 highlighted-cell">Detailed Message</li>
+    </ul>
+    <?php foreach ( $data->aViolations as $oViolation ) { ?>
+        <ul class="list-group">
+            <li class="list-group-item col-md-4 overflow-right"><?php echo $oViolation->getFile(); ?></li>
+            <li class="list-group-item col-md-1"><?php echo $oViolation->getType(); ?></li>
+            <li class="list-group-item col-md-2"><?php echo $oViolation->getInformation( 'Method' ); ?></li>
+            <li class="list-group-item col-md-5"><?php echo $oViolation->getMessage(); ?></li>
         </ul>
     <?php } ?>
 </div>
