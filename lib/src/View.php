@@ -50,7 +50,12 @@ class View {
      *
      * @var string
      */
-    protected $_sTemplateDirectory = '../out/tpl/';
+    protected $_sTemplateDirectory = null;
+
+    public function  __construct()
+    {
+        $this->_sTemplateDirectory = realpath( __DIR__ . '/../out/tpl/');
+    }
 
     /**
      * Set the template for this view object.
@@ -87,7 +92,7 @@ class View {
     public function render() {
         $data = (object) $this->_aVariables;
         ob_start();
-        $sFilepath = $this->_sTemplateDirectory . $this->_sTemplate . '.' . $this->_sTemplateExtension;
+        $sFilepath = $this->_sTemplateDirectory . '/' . $this->_sTemplate . '.' . $this->_sTemplateExtension;
         include $sFilepath;
         $sOutput = ob_get_contents();
         ob_end_clean();
