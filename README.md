@@ -1,7 +1,30 @@
 Module-Certification-Tool
 ==========================
-LICENSES
---------
+
+
+This tool is for preparing the OXID eShop module certification process.
+Es gibt Auskunft über die Einhaltung der Regeln, die bei der Modulzertifizierung beachtet weden müssen.
+
+1. check of module directory structure
+ * are the correct names used.
+
+2. check of correct usage of partner prefix
+ * do all classes start with partner prefix
+
+3. check for usage of globals
+ * check if globals like $_POST,$_GET or similar are used in code
+
+4. check of method length
+ * simple tool that count s the lines of code in each method
+
+5. check for metrics
+ * measurement of code coverage in unit tests
+ * check for C.R.A.P index, n-path complexity and cyclomatic complexity
+
+6. calculation of certification cost based on the metrics from step 5
+
+Running a simple script will check for the certification rules and write a html output, that will display the results,
+so the user easily can see price of certification and possible code smells. Based on this results user can find code, that can be improved to lower certification costs.
 
 
 HOW TO USE
@@ -27,3 +50,8 @@ HOW TO USE
 3. Execute the run.sh script
 > hostname:module_certification_tool$ ./run.sh
  * When starting with -d option, CFG_DELETE_OLD_RUNS from config.cfg is ignored and all old results will be deleted
+
+
+
+LICENSES
+--------
