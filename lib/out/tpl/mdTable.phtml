@@ -29,17 +29,17 @@
 <h3>Metric Details</h3>
 <div class="result-table">
     <ul class="list-group">
-        <li class="list-group-item col-md-4 highlighted-cell">Filename</li>
-        <li class="list-group-item col-md-1 highlighted-cell">Type</li>
-        <li class="list-group-item col-md-2 highlighted-cell">Methodname</li>
-        <li class="list-group-item col-md-5 highlighted-cell">Detailed Message</li>
+        <li class="list-group-item col-md-4 highlighted-cell">Class::Method</li>
+        <li class="list-group-item col-md-2 highlighted-cell">Type</li>
+        <li class="list-group-item col-md-6 highlighted-cell">Detailed Message</li>
     </ul>
     <?php foreach ( $data->aViolations as $oViolation ) { ?>
         <ul class="list-group">
-            <li class="list-group-item col-md-4 overflow-right"><?php echo $oViolation->getFile(); ?></li>
-            <li class="list-group-item col-md-1"><?php echo $oViolation->getType(); ?></li>
-            <li class="list-group-item col-md-2"><?php echo $oViolation->getInformation( 'Method' ); ?></li>
-            <li class="list-group-item col-md-5"><?php echo $oViolation->getMessage(); ?></li>
+            <li class="list-group-item col-md-4">
+                <?php echo $oViolation->getInformation( 'Class' ); ?>::<?php echo $oViolation->getInformation( 'Method' ); ?>
+            </li>
+            <li class="list-group-item col-md-2"><?php echo $oViolation->getType(); ?></li>
+            <li class="list-group-item col-md-6"><?php echo $oViolation->getMessage(); ?></li>
         </ul>
     <?php } ?>
 </div>
