@@ -21,6 +21,8 @@
 
 namespace Com\OxidEsales\ModuleCertificationTool\Parser;
 
+use Com\OxidEsales\ModuleCertificationTool\Model\CertificationResult;
+use Com\OxidEsales\ModuleCertificationTool\Model\CertificationRule;
 use Com\OxidEsales\ModuleCertificationTool\Model\MdResult;
 use Com\OxidEsales\ModuleCertificationTool\Violation;
 
@@ -43,14 +45,46 @@ class MdXmlParser
         return $this->parseXml($oXml);
     }
 
+    /**
+     * @param $oXml
+     * @return CertificationResult
+     */
     public function parseXml($oXml)
     {
-        $oMdResult = new MdResult();
+       $oCertificationResult = new CertificationResult();
 
-        $oMdResult->setViolations($this->getViolations($oXml));
-        $oMdResult->setOverview($this->getOverview($oXml));
+        $oCertification = $oXml->certification;
+        $oCertificationResult->setPrice((string )$oCertification['price']);
+        $oCertificationResult->setFactor((float)$oCertification['factor']);
 
-        return $oMdResult;
+        $aCertificationRules = array();
+
+        if (isset($oCertification->rule)) {
+            foreach ($oCertification->rule as $oRuleElement) {
+                $oCertificationRule = $this->parseCertificationRule($oRuleElement);
+                $aCertificationRules[$oCertificationRule->getName()] = $oCertificationRule;
+            }
+        }
+
+        $oCertificationResult->setCertificationRules($aCertificationRules);
+
+        return $oCertificationResult;
+    }
+
+    /**
+     * @param $oRuleElement
+     * @return CertificationRule
+     */
+    public function parseCertificationRule($oRuleElement) {
+
+        $oCertificationRule = new CertificationRule();
+
+        $oCertificationRule->setName((string)$oRuleElement['name']);
+        $oCertificationRule->setViolated((bool)$oRuleElement['violated']);
+        $oCertificationRule->setValue((int)$oRuleElement['value']);
+        $oCertificationRule->setFactor((float)$oRuleElement['factor']);
+
+        return $oCertificationRule;
     }
 
     /**
@@ -93,6 +127,7 @@ class MdXmlParser
      */
     public function getOverview($oXml)
     {
+        $aViolations = array();
         $oOverviewData = (object)array('sPrice' => null, 'sFactor' => null, 'aViolations' => array());
 
         $oCertification = $oXml->certification;
@@ -101,22 +136,25 @@ class MdXmlParser
 
         if (isset($oCertification->rule)) {
             foreach ($oCertification->rule as $oRule) {
-                if (((string)$oRule['violated']) == 'true') {
-                    $oViolation = new Violation();
-                    $oViolation->setType((string)$oRule['name']);
-                    $oViolation->addInformation('Value', (string)$oRule['value']);
-                    $oViolation->addInformation('Factor', (string)$oRule['factor']);
+                $oViolation = new Violation();
+                $oViolation->setViolated(((string)$oRule['violated']) == 'true');
+                $oViolation->setType((string)$oRule['name']);
+                $oViolation->addInformation('Value', (string)$oRule['value']);
+                $oViolation->addInformation('Factor', (string)$oRule['factor']);
 
-                    $aFiles = array();
-                    foreach ($oRule->file as $oFile) {
-                        $aFiles[] = (string)$oFile['class'] . '::' . (string)$oFile['method'] . ' (' . (string)$oFile['path'] . ')';
-                    }
-                    $oViolation->addInformation('Files', $aFiles);
+                $aViolations[$oViolation->getType()] = $oViolation;
 
-                    $oOverviewData->aViolations[] = $oViolation;
+                $aFiles = array();
+                foreach ($oRule->file as $oFile) {
+                    $aFiles[] = (string)$oFile['class'] . '::' . (string)$oFile['method'] . ' (' . (string)$oFile['path'] . ')';
                 }
+                $oViolation->addInformation('Files', $aFiles);
+
+                $oOverviewData->aViolations[] = $oViolation;
             }
         }
+
+        var_dump($aViolations);
 
         return $oOverviewData;
     }

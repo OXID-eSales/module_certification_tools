@@ -10,6 +10,9 @@ class ModuleCertificationResult
     private $aDirectoryViolations;
     private $oMdResult;
 
+    private $aCertificationResults;
+
+
     public function getPrefixViolations()
     {
         return $this->aPrefixViolations;
@@ -40,6 +43,9 @@ class ModuleCertificationResult
         $this->aDirectoryViolations = $aDirectoryViolations;
     }
 
+    /**
+     * @return MdResult
+     */
     public function getMdResult()
     {
         return $this->oMdResult;
@@ -49,4 +55,6 @@ class ModuleCertificationResult
     {
         $this->oMdResult = $oMdResult;
     }
+
+
 }

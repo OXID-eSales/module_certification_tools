@@ -21,10 +21,21 @@
 
 namespace Com\OxidEsales\ModuleCertificationTool;
 
+use Com\OxidEsales\ModuleCertificationTool\Model\CertificationResult;
+use Com\OxidEsales\ModuleCertificationTool\Model\ModuleCertificationResult;
+
 /**
- * Class MdXmlController controller class to handle the output of the OXMD module
+ * Class CertificationPriceController controller class to handle the output of the OXMD module
  */
-class MdXmlController {
+class CertificationPriceController
+{
+
+    private $result;
+
+    public function __construct( CertificationResult $result )
+    {
+        $this->result = $result;
+    }
 
     /**
      * The path to the output file of OXMD.
@@ -38,31 +49,15 @@ class MdXmlController {
      *
      * @return string HTML code for the output
      */
-    public function getHtml() {
-        $oModel = new MdXmlModel();
-        $oModel->loadXmlFile( $this->_sFilePath );
-        $aViolations = $oModel->getViolations();
-        $aOverview = $oModel->getOverview();
+    public function getHtml()
+    {
 
         $oView = new View();
-        $sHtml = $oView->setTemplate( 'mdTable' )
-                       ->assignVariable( 'aViolations', $aViolations )
-                       ->assignVariable( 'aOverview', $aOverview )
-                       ->render();
+        $sHtml = $oView->setTemplate( 'certificationPrice' )
+            ->assignVariable( 'oCertificationResult', $this->result )
+            ->render();
 
         return $sHtml;
     }
 
-    /**
-     * Sets the path to the output file of the OXMD module.
-     *
-     * @param string $sFilePath full path of the XML file
-     *
-     * @return $this the controller itself
-     */
-    public function setXmlFile( $sFilePath ) {
-        $this->_sFilePath = $sFilePath;
-
-        return $this;
-    }
 }

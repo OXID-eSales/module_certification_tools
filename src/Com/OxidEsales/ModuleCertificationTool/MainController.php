@@ -58,32 +58,31 @@ class MainController {
     public function indexAction() {
 
         $oMdXmlParser = new MdXmlParser();
-        $oMdResult = $oMdXmlParser->parse($this->_oConfiguration->sMdXmlFile);
+        $oCertificationResult = $oMdXmlParser->parse($this->_oConfiguration->sMdXmlFile);
 
         $oViolationXmlParser = new ViolationXmlParser();
         $aDirectoryViolations = $oViolationXmlParser->parse($this->_oConfiguration->sDirectoryXmlFile);
         $aGlobalViolations = $oViolationXmlParser->parse($this->_oConfiguration->sGlobalsXmlFile);
         $aPrefixViolations = $oViolationXmlParser->parse($this->_oConfiguration->sPrefixXmlFile);
 
-        $oModuleCertificationResult = new ModuleCertificationResult();
-        $oModuleCertificationResult->setMdResult($oMdResult);
-        $oModuleCertificationResult->setDirectoryViolations($aDirectoryViolations);
-        $oModuleCertificationResult->setGlobalViolations($aGlobalViolations);
-        $oModuleCertificationResult->setPrefixViolations($aPrefixViolations);
+//        $oModuleCertificationResult = new ModuleCertificationResult();
+//        $oModuleCertificationResult->setMdResult($oMdResult);
+//        $oModuleCertificationResult->setDirectoryViolations($aDirectoryViolations);
+//        $oModuleCertificationResult->setGlobalViolations($aGlobalViolations);
+//        $oModuleCertificationResult->setPrefixViolations($aPrefixViolations);
 
         $oView = new View();
         $oView->setTemplate( 'index' );
 
-        $oController = new MdXmlController();
-        $sMdHtml = $oController->setXmlFile( $this->_oConfiguration->sMdXmlFile )
-                               ->getHtml();
+        $oController = new CertificationPriceController($oCertificationResult);
+        $sMdHtml = $oController->getHtml();
 
         $sHtml = $oView->assignVariable( 'oModules', array( $sMdHtml ) )->render();
 
-        $oXmlController = new XmlController();
-        $sHtml .= $oXmlController->setXmlFile( $this->_oConfiguration->sDirectoryXmlFile )->setHeading( 'Directories' )->getHtml();
-        $sHtml .= $oXmlController->setXmlFile( $this->_oConfiguration->sGlobalsXmlFile )->setHeading( 'Globals' )->getHtml();
-        $sHtml .= $oXmlController->setXmlFile( $this->_oConfiguration->sPrefixXmlFile )->setHeading( 'Prefixes' )->getHtml();
+//        $oXmlController = new XmlController();
+//        $sHtml .= $oXmlController->setXmlFile( $this->_oConfiguration->sDirectoryXmlFile )->setHeading( 'Directories' )->getHtml();
+//        $sHtml .= $oXmlController->setXmlFile( $this->_oConfiguration->sGlobalsXmlFile )->setHeading( 'Globals' )->getHtml();
+//        $sHtml .= $oXmlController->setXmlFile( $this->_oConfiguration->sPrefixXmlFile )->setHeading( 'Prefixes' )->getHtml();
 
         file_put_contents( $this->_oConfiguration->sOutputFile, $sHtml );
 
