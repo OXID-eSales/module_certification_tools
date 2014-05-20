@@ -2,33 +2,29 @@ Module-Certification-Tool
 ==========================
 
 
-This tool is for preparing the OXID eShop module certification process.
-Es gibt Auskunft über die Einhaltung der Regeln, die bei der Modulzertifizierung beachtet weden müssen.
+About
+-----
 
-1. check of module directory structure
- * are the correct names used.
+This tool is for preparing the OXID eShop module certification process. It will help you to check if your module meets
+the certification rules and will give you an estimation of the expected certification costs. You can use it to further
+optizime your module before actually submitting it.
 
-2. check of correct usage of partner prefix
- * do all classes start with partner prefix
+The following checks are performed:
 
-3. check for usage of globals
- * check if globals like $_POST,$_GET or similar are used in code
+* Check of module directory structure (are the directories named correctly)
+* Check of correct usage of partner prefix (do all classes start with a partner prefix)
+* Check for usage of globals (No $_POST,$_GET must be used)
+* Check of method length
+* Check of code metrics (code coverage, C.R.A.P index, n-path complexity, cyclomatic complexity)
+* Calculation of certification cost based on the metrics
 
-4. check of method length
- * simple tool that count s the lines of code in each method
-
-5. check for metrics
- * measurement of code coverage in unit tests
- * check for C.R.A.P index, n-path complexity and cyclomatic complexity
-
-6. calculation of certification cost based on the metrics from step 5
-
-Running a simple script will check for the certification rules and write a html output, that will display the results,
-so the user easily can see price of certification and possible code smells. Based on this results user can find code, that can be improved to lower certification costs.
+The script will generate HTML output that shows the expected certification costs and lists classes/modules that violate
+the certification rules.
 
 
-HOW TO USE
+How to use
 ----------
+
 ## Preparing system
 
 1. change to module_certification_tools/lib/oxmd directory
@@ -40,6 +36,7 @@ HOW TO USE
 > hostname:module_certification_tool/lib/omd$ php composer.phar install
 
 ## Let certification tool run
+
 1. change to module_certification_tools directory
 
 2. edit config.cfg
@@ -52,9 +49,8 @@ HOW TO USE
  * When starting with -d option, CFG_DELETE_OLD_RUNS from config.cfg is ignored and all old results will be deleted
 
 
-
-LICENSES
---------
+License
+-------
 
 The Module Certification Tool is licensed under a GPLv3 license.
 
