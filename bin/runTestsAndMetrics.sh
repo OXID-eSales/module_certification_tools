@@ -29,4 +29,4 @@ fi
 
 cd $BASEPATH;
 echo "Execute metrics calculation and generate report file in ${BASEPATH}${OUTPUTDIR} ignoring ${MODULEPATH}/tests/"
-COMMAND=sudo php lib/oxmd/src/bin/oxmd $MODULEPATH $CLOVER_LOCATION xml --extension php --exclude ${MODULEPATH}/tests/ --reportfile-xml ${BASEPATH}${OUTPUTDIR}/oxmd-result.xml > /dev/null
+COMMAND=sudo php vendor/bin/oxmd $MODULEPATH $CLOVER_LOCATION xml --extension php --exclude ${MODULEPATH}/tests/ --reportfile-xml ${BASEPATH}${OUTPUTDIR}/oxmd-result.xml > /dev/null

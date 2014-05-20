@@ -72,21 +72,21 @@ while getopts ":dh" opt
   done
 
 ######################### Directory Cleaning
-${BASEPATH}/lib/bin/prepareOutputPath.sh $BASEPATH $OUTPUTDIR $DELETE_OLD_RUNS
+${BASEPATH}/bin/prepareOutputPath.sh $BASEPATH $OUTPUTDIR $DELETE_OLD_RUNS
 
 ######################### Run tests and oxmd for metrics
-${BASEPATH}/lib/bin/runTestsAndMetrics.sh $MODULEPATH $BASEPATH $OUTPUTDIR $CLOVER_LOCATION
+${BASEPATH}/bin/runTestsAndMetrics.sh $MODULEPATH $BASEPATH $OUTPUTDIR $CLOVER_LOCATION
 
 ######################### directory structure check
-${BASEPATH}/lib/bin/directory_structure.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
+${BASEPATH}/bin/directory_structure.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
 
 ######################### prefix check
-${BASEPATH}/lib/bin/prefix.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR $PREFIX
+${BASEPATH}/bin/prefix.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR $PREFIX
 
 ######################### file check
-${BASEPATH}/lib/bin/globals.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
-${BASEPATH}/lib/bin/method_length.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
+${BASEPATH}/bin/globals.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
+${BASEPATH}/bin/method_length.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
 
 ######################### OUTPUT
-php ${BASEPATH}/lib/bin/showResult.php ${BASEPATH}/$OUTPUTDIR $MODULEPATH
+php ${BASEPATH}/bin/showResult.php ${BASEPATH}/$OUTPUTDIR $MODULEPATH
 

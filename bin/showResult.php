@@ -19,18 +19,18 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-require_once realpath( __DIR__ . '/../src/MdXmlController.php');
-require_once realpath( __DIR__ . '/../src/MdXmlModel.php');
-require_once realpath( __DIR__ . '/../src/XmlModel.php');
-require_once realpath( __DIR__ . '/../src/Violation.php');
-require_once realpath( __DIR__ . '/../src/View.php');
-require_once realpath( __DIR__ . '/../src/MainController.php');
-require_once realpath( __DIR__ . '/../src/XmlController.php');
+require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/MdXmlController.php');
+require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/MdXmlModel.php');
+require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/XmlModel.php');
+require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Violation.php');
+require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/View.php');
+require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/MainController.php');
+require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/XmlController.php');
 
-require_once realpath( __DIR__ . '/../src/Model/MdResult.php');
-require_once realpath( __DIR__ . '/../src/Model/ModuleCertificationResult.php');
-require_once realpath( __DIR__ . '/../src/Parser/MdXmlParser.php');
-require_once realpath( __DIR__ . '/../src/Parser/ViolationXmlParser.php');
+require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Model/MdResult.php');
+require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Model/ModuleCertificationResult.php');
+require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Parser/MdXmlParser.php');
+require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Parser/ViolationXmlParser.php');
 
 $aConfiguration = array(
     'sModulePath'       => $argv[2],
