@@ -27,8 +27,10 @@ OUTPUTBASEPATH=${BASEPATH}/result
 # change to ouput path, clear if needed and create output path directory
 cd ${BASEPATH}
 if [ $DELETE ] && [ 'NO' != $DELETE ]; then
-echo 'delete old results'
-    /bin/rm -r ${OUTPUTBASEPATH} > /dev/null
+    if [ -d "$OUTPUTBASEPATH" ]; then
+        echo 'delete old results'
+        /bin/rm -r ${OUTPUTBASEPATH} > /dev/null
+    fi
 fi
 
 /bin/mkdir -p ${BASEPATH}${OUTPUTPATH}
