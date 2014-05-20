@@ -10,6 +10,12 @@
         }
     ],
     "require": {
-        "phpmd/oxmd": "dev-master"
+        "phpmd/oxmd": "dev-master",
+        "phpmd/phpmd": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
     }
 }

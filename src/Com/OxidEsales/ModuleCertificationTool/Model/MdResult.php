@@ -19,6 +19,8 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
+namespace Com\OxidEsales\ModuleCertificationTool\Model;
+
 /**
  * Class MdResult class for the application
  */

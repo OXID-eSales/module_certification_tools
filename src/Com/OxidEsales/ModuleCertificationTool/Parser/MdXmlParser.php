@@ -19,6 +19,11 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
+namespace Com\OxidEsales\ModuleCertificationTool\Parser;
+
+use Com\OxidEsales\ModuleCertificationTool\Model\MdResult;
+use Com\OxidEsales\ModuleCertificationTool\Violation;
+
 /**
  * Class MdXmlParser class for the application
  */

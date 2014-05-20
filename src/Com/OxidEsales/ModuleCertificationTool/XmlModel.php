@@ -19,6 +19,8 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
+namespace Com\OxidEsales\ModuleCertificationTool;
+
 /**
  * Class XmlModel model class for handling the xml output of the generic modules
  */

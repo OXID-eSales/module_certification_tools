@@ -19,6 +19,8 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
+namespace Com\OxidEsales\ModuleCertificationTool;
+
 /**
  * Class MdXmlModel model class for handling the output of the OXMD module
  */

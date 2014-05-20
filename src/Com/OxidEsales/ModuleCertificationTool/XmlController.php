@@ -19,6 +19,8 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
+namespace Com\OxidEsales\ModuleCertificationTool;
+
 /**
  * Class XmlController controller class for handling XML output file of generic check modules
  */

@@ -1,5 +1,6 @@
 <?php
 
+namespace Com\OxidEsales\ModuleCertificationTool\Model;
 
 class ModuleCertificationResult
 {

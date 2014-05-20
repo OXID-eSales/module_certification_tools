@@ -19,6 +19,8 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
+namespace Com\OxidEsales\ModuleCertificationTool;
+
 /**
  * Class View class for handling the template files
  */
@@ -54,7 +56,7 @@ class View {
 
     public function  __construct()
     {
-        $this->_sTemplateDirectory = realpath( __DIR__ . '/../out/tpl/');
+        $this->_sTemplateDirectory = realpath( __DIR__ . '/../../../../resource/tpl/');
     }
 
     /**

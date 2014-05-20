@@ -16,6 +16,10 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
+namespace Com\OxidEsales\ModuleCertificationTool\Parser;
+
+use Com\OxidEsales\ModuleCertificationTool\Violation;
+
 /**
  * Class ViolationXmlParser class for the application
  */

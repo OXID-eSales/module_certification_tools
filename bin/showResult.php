@@ -19,18 +19,20 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/MdXmlController.php');
-require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/MdXmlModel.php');
-require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/XmlModel.php');
-require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Violation.php');
-require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/View.php');
-require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/MainController.php');
-require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/XmlController.php');
+//require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/MdXmlController.php');
+//require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/MdXmlModel.php');
+//require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/XmlModel.php');
+//require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Violation.php');
+//require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/View.php');
+//require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/MainController.php');
+//require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/XmlController.php');
+//
+//require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Model/MdResult.php');
+//require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Model/ModuleCertificationResult.php');
+//require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Parser/MdXmlParser.php');
+//require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Parser/ViolationXmlParser.php');
 
-require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Model/MdResult.php');
-require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Model/ModuleCertificationResult.php');
-require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Parser/MdXmlParser.php');
-require_once realpath( __DIR__ . '/../src/Com/OxidEsales/ModuleCertificationTool/Parser/ViolationXmlParser.php');
+require_once __DIR__ . "/../vendor/autoload.php";
 
 $aConfiguration = array(
     'sModulePath'       => $argv[2],
@@ -41,6 +43,6 @@ $aConfiguration = array(
     'sOutputFile'       => $argv[1] . '/report.html'
 );
 
-$oController = new MainController();
+$oController = new \Com\OxidEsales\ModuleCertificationTool\MainController();
 $oController->setConfiguration( $aConfiguration )->indexAction();
 
