@@ -28,7 +28,8 @@ use Com\OxidEsales\ModuleCertificationTool\Parser\ViolationXmlParser;
 /**
  * Class MainController main controller class for the application
  */
-class MainController {
+class MainController
+{
 
     /**
      * Contains als the configuration values for the application.
@@ -44,8 +45,9 @@ class MainController {
      *
      * @return $this the controller itself
      */
-    public function setConfiguration( $aConfiguration ) {
-        $this->_oConfiguration = (object) $aConfiguration;
+    public function setConfiguration( $aConfiguration )
+    {
+        $this->_oConfiguration = (object)$aConfiguration;
 
         return $this;
     }
@@ -55,34 +57,53 @@ class MainController {
      *
      * @return $this the controller itself
      */
-    public function indexAction() {
+    public function indexAction()
+    {
 
         $oMdXmlParser = new MdXmlParser();
-        $oCertificationResult = $oMdXmlParser->parse($this->_oConfiguration->sMdXmlFile);
+        $oCertificationResult = $oMdXmlParser->parse( $this->_oConfiguration->sMdXmlFile );
 
         $oViolationXmlParser = new ViolationXmlParser();
-        $aDirectoryViolations = $oViolationXmlParser->parse($this->_oConfiguration->sDirectoryXmlFile);
-        $aGlobalViolations = $oViolationXmlParser->parse($this->_oConfiguration->sGlobalsXmlFile);
-        $aPrefixViolations = $oViolationXmlParser->parse($this->_oConfiguration->sPrefixXmlFile);
-
-//        $oModuleCertificationResult = new ModuleCertificationResult();
-//        $oModuleCertificationResult->setMdResult($oMdResult);
-//        $oModuleCertificationResult->setDirectoryViolations($aDirectoryViolations);
-//        $oModuleCertificationResult->setGlobalViolations($aGlobalViolations);
-//        $oModuleCertificationResult->setPrefixViolations($aPrefixViolations);
+        $aDirectoryViolations = $oViolationXmlParser->parse( $this->_oConfiguration->sDirectoryXmlFile );
+        $aGlobalViolations = $oViolationXmlParser->parse( $this->_oConfiguration->sGlobalsXmlFile );
+        $aPrefixViolations = $oViolationXmlParser->parse( $this->_oConfiguration->sPrefixXmlFile );
 
         $oView = new View();
         $oView->setTemplate( 'index' );
 
-        $oController = new CertificationPriceController($oCertificationResult);
+        $oController = new CertificationPriceController( $oCertificationResult );
         $sMdHtml = $oController->getHtml();
 
-        $sHtml = $oView->assignVariable( 'oModules', array( $sMdHtml ) )->render();
+        $oView->assignVariable('sCertificationResult', $sMdHtml);
 
-//        $oXmlController = new XmlController();
-//        $sHtml .= $oXmlController->setXmlFile( $this->_oConfiguration->sDirectoryXmlFile )->setHeading( 'Directories' )->getHtml();
-//        $sHtml .= $oXmlController->setXmlFile( $this->_oConfiguration->sGlobalsXmlFile )->setHeading( 'Globals' )->getHtml();
-//        $sHtml .= $oXmlController->setXmlFile( $this->_oConfiguration->sPrefixXmlFile )->setHeading( 'Prefixes' )->getHtml();
+        $aCertViolationHtmls = array();
+        foreach ($oCertificationResult->getCertificationRules() as $ruleName => $certificationRule) {
+            /* @var \Com\OxidEsales\ModuleCertificationTool\Model\CertificationRule $certificationRule */
+            if ($certificationRule->getViolated()) {
+                $aViolations = $certificationRule->getViolations();
+                $oCertViolationsController = new CertificationRuleViolationsController($aViolations);
+                $oCertViolationsController->setHeading($ruleName);
+                $aCertViolationHtmls[] = $oCertViolationsController->getHtml();
+            }
+        }
+
+        $oView->assignVariable('aCertViolations', $aCertViolationHtmls);
+
+        $oXmlController = new GenericChecksController( $aDirectoryViolations );
+        $sDirectoriesHtml = $oXmlController->setHeading( 'Directories' )->getHtml();
+
+        $oXmlController = new GenericChecksController( $aGlobalViolations );
+        $sGlobalsHtml = $oXmlController->setHeading( 'Globals' )->getHtml();
+
+        $oXmlController = new GenericChecksController( $aPrefixViolations );
+        $sPrefixesHtml = $oXmlController->setHeading( 'Prefixes' )->getHtml();
+
+        $oView->assignVariable(
+            'aGenericChecks',
+            array( $sDirectoriesHtml, $sGlobalsHtml, $sPrefixesHtml )
+        );
+
+        $sHtml = $oView->render();
 
         file_put_contents( $this->_oConfiguration->sOutputFile, $sHtml );
 

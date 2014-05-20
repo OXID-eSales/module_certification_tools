@@ -1,0 +1,19 @@
+<h3><?php echo $data->sHeading; ?></h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Class</th>
+            <th>Method</th>
+            <th>Line</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ( $data->aViolations as $oViolation ) { ?>
+            <tr>
+                <td><?php echo $oViolation->getClass() ?></td>
+                <td><?php echo $oViolation->getMethod() ?></td>
+                <td><?php echo $oViolation->getLine() ?></td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>

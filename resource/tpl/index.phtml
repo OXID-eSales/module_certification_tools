@@ -18,8 +18,20 @@
             <div class="jumbotron">
                 <h1>OXID eShop Module Certification Metrics</h1>
             </div>
-            <?php foreach ( $data->oModules as $sModule ) { ?>
-                <?php echo $sModule; ?>
+            <?php echo $data->sCertificationResult ?>
+
+            <div class="page-header">
+                <h2>Violations</h2>
+            </div>
+            <?php foreach ( $data->aCertViolations as $aCertViolation ) { ?>
+                <?php echo $aCertViolation; ?>
+            <?php } ?>
+
+            <div class="page-header">
+                <h2>Generic Checks</h2>
+            </div>
+            <?php foreach ( $data->aGenericChecks as $aGenericCheck ) { ?>
+                <?php echo $aGenericCheck; ?>
             <?php } ?>
         </div>
     </body>

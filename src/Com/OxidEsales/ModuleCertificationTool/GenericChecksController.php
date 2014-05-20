@@ -24,14 +24,13 @@ namespace Com\OxidEsales\ModuleCertificationTool;
 /**
  * Class XmlController controller class for handling XML output file of generic check modules
  */
-class XmlController {
+class GenericChecksController
+{
 
-    /**
-     * Contains the path to the XML file.
-     *
-     * @var string
-     */
-    protected $_sXmlFile = '';
+    public function __construct(array $aViolations) {
+        $this->aViolations = $aViolations;
+    }
+
 
     /**
      * Contains the Heading should be shown in output.
@@ -40,18 +39,7 @@ class XmlController {
      */
     protected $_sHeading = '';
 
-    /**
-     * Sets the path of the XML file with the output.
-     *
-     * @param string $sXmlFile the file containing the XML output of a generic check module
-     *
-     * @return $this the controller itself
-     */
-    public function setXmlFile( $sXmlFile ) {
-        $this->_sXmlFile = $sXmlFile;
 
-        return $this;
-    }
 
     /**
      * Sets the heading that should be shown in output.
@@ -60,28 +48,27 @@ class XmlController {
      *
      * @return $this the controller ifself
      */
-    public function setHeading( $sHeading ) {
+    public function setHeading( $sHeading )
+    {
         $this->_sHeading = $sHeading;
 
         return $this;
     }
 
     /**
-     * Returns the rendered HTML code with the information from the cecker module.
+     * Returns the rendered HTML code with the information from the checker module.
      *
      * @return string the HTML output corresponding to the XML file output of the module
      */
-    public function getHtml() {
-        $oModel = new XmlModel();
-        $oModel->loadXmlFile( $this->_sXmlFile );
+    public function getHtml()
+    {
         $oView = new View();
-        $aViolations = $oModel->getViolations();
         $sHtml = "";
-        if ( count( $aViolations ) > 0 ) {
-            $sHtml = $oView->setTemplate( 'plainTable' )
-                           ->assignVariable( 'aViolations', $oModel->getViolations() )
-                           ->assignVariable( 'sHeading', $this->_sHeading )
-                           ->render();
+        if ( count( $this->aViolations ) > 0 ) {
+            $sHtml = $oView->setTemplate( 'genericViolationList' )
+                ->assignVariable( 'aViolations', $this->aViolations )
+                ->assignVariable( 'sHeading', $this->_sHeading )
+                ->render();
         }
 
         return $sHtml;

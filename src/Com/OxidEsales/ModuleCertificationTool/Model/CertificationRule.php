@@ -31,6 +31,10 @@ class CertificationRule
      * @var float
      */
     private $fFactor;
+    /**
+     * @var array
+     */
+    private $aViolations;
 
     /**
      * @param float $factor
@@ -110,6 +114,22 @@ class CertificationRule
     public function getViolated()
     {
         return $this->bViolated;
+    }
+
+    /**
+     * @return CertificationRuleViolation[]
+     */
+    public function getViolations()
+    {
+        return $this->aViolations;
+    }
+
+    /**
+     * @param CertificationRuleViolation[] $aViolations
+     */
+    public function setViolations( $aViolations )
+    {
+        $this->aViolations = $aViolations;
     }
 
 } 

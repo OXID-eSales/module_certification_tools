@@ -19,12 +19,12 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace Com\OxidEsales\ModuleCertificationTool;
+namespace Com\OxidEsales\ModuleCertificationTool\Model;
 
 /**
  * Class Violation a data holding class for the violations of rules
  */
-class Violation {
+class GeneralViolation {
 
     /**
      * Contains a detailed message for the ruel violation.

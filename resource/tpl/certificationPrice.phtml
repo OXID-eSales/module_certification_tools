@@ -58,23 +58,23 @@
         <tr>
             <td>Basic factor price</td>
             <td>The basic factor price is multiplied by the determined software quality factor.</td>
-            <td>200&euro;</td>
+            <td>119&euro;</td>
         </tr>
         <tr>
             <td>Total factor price</td>
             <td>Multiply basic factor price by the total factor price</td>
             <td><?php echo $data->oCertificationResult->getFactor() * 200 ?>&euro;</td>
         </tr>
-        <tr>
-            <td>Basic price software quality</td>
-            <td>Per certification attempt (or check for attempt or pre-check). 1 feedback cycle included.</td>
-            <td>250€</td>
-        </tr>
-        <tr>
-            <td>Certification flat charge</td>
-            <td>This covers technical code reviewing and module testing based on OXID eSales module certification rules (OXID_Module_Certification_Rules.pdf)</td>
-            <td>960&euro;</td>
-        </tr>
+<!--        <tr>-->
+<!--            <td>Basic price software quality</td>-->
+<!--            <td>Per certification attempt (or check for attempt or pre-check). 1 feedback cycle included.</td>-->
+<!--            <td>250€</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Certification flat charge</td>-->
+<!--            <td>This covers technical code reviewing and module testing based on OXID eSales module certification rules (OXID_Module_Certification_Rules.pdf)</td>-->
+<!--            <td>960&euro;</td>-->
+<!--        </tr>-->
         <tr>
             <td colspan="2"><b>Total Certification Price</b></td>
             <td><b><?php echo $data->oCertificationResult->getPrice() ?>&euro;</b></td>

@@ -37,12 +37,6 @@ class CertificationPriceController
         $this->result = $result;
     }
 
-    /**
-     * The path to the output file of OXMD.
-     *
-     * @var string
-     */
-    protected $_sFilePath = '';
 
     /**
      * Returns the HTML code for the output of the OXMD file.

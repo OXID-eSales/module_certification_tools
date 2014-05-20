@@ -18,7 +18,7 @@
 
 namespace Com\OxidEsales\ModuleCertificationTool\Parser;
 
-use Com\OxidEsales\ModuleCertificationTool\Violation;
+use Com\OxidEsales\ModuleCertificationTool\Model\GeneralViolation;
 
 /**
  * Class ViolationXmlParser class for the application
@@ -43,7 +43,7 @@ class ViolationXmlParser
         $aViolations = array();
         if ( isset( $oXml->failures->failure ) ) {
             foreach ( $oXml->failures->failure as $failure ) {
-                $oViolation = new Violation();
+                $oViolation = new GeneralViolation();
 
                 $oViolation->setMessage( trim( (string)$failure ) );
 
