@@ -21,12 +21,12 @@ if [ ! ${BASEPATH} ] || [ ! ${OUTPUTPATH} ]; then
     echo ""
 fi
 
-# get base output path
+# assamble base output path
 OUTPUTBASEPATH=${BASEPATH}/result
 
-# change to ouput path, clear if needed and create new actual timestamp as name
+# change to ouput path, clear if needed and create output path directory
 cd ${BASEPATH}
-if [ $DELETE ] && [ 'NO'!=$DELETE ]; then
+if [ $DELETE ] && [ 'NO' != $DELETE ]; then
 echo 'delete old results'
     /bin/rm -r ${OUTPUTBASEPATH} > /dev/null
 fi
