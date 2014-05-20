@@ -38,6 +38,11 @@ CLOVER_LOCATION=$CFG_CLOVER_LOCATION
 DELETE_OLD_RUNS=$CFG_DELETE_OLD_RUNS
 PREFIX=$CFG_PREFIX
 
+if [ ! -d "$MODULEPATH" ]; then
+  echo "ERROR: Modulepath incorrect! Please take a look into your config.cfg and edit CFG_MODULEPATH "
+  exit 0;
+fi
+
 # options
 while getopts ":dh" opt
   do
