@@ -22,13 +22,31 @@
 /**
  * Class MdResult class for the application
  */
-class MdResult {
+class MdResult
+{
 
-    public function setViolations( $getViolations )
+    private $aViolations;
+    private $aOverview;
+
+
+    public function getOverview()
     {
+        return $this->aOverview;
     }
 
-    public function setOverview( $getOverview )
+    public function setOverview($aOverview)
     {
+        $this->aOverview = $aOverview;
+    }
+
+
+    public function getViolations()
+    {
+        return $this->aViolations;
+    }
+
+    public function setViolations($aViolations)
+    {
+        $this->aViolations = $aViolations;
     }
 }

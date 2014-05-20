@@ -50,6 +50,21 @@ class MainController {
      * @return $this the controller itself
      */
     public function indexAction() {
+
+        $oMdXmlParser = new MdXmlParser();
+        $oMdResult = $oMdXmlParser->parse($this->_oConfiguration->sMdXmlFile);
+
+        $oViolationXmlParser = new ViolationXmlParser();
+        $aDirectoryViolations = $oViolationXmlParser->parse($this->_oConfiguration->sDirectoryXmlFile);
+        $aGlobalViolations = $oViolationXmlParser->parse($this->_oConfiguration->sGlobalsXmlFile);
+        $aPrefixViolations = $oViolationXmlParser->parse($this->_oConfiguration->sPrefixXmlFile);
+
+        $oModuleCertificationResult = new ModuleCertificationResult();
+        $oModuleCertificationResult->setMdResult($oMdResult);
+        $oModuleCertificationResult->setDirectoryViolations($aDirectoryViolations);
+        $oModuleCertificationResult->setGlobalViolations($aGlobalViolations);
+        $oModuleCertificationResult->setPrefixViolations($aPrefixViolations);
+
         $oView = new View();
         $oView->setTemplate( 'index' );
 

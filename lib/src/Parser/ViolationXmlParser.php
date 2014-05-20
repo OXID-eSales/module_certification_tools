@@ -34,11 +34,11 @@ class ViolationXmlParser
      *
      * @return array violations determined by a generic module
      */
-    public function getViolations( $oXml )
+    public function parseViolations( $oXml )
     {
         $aViolations = array();
         if ( isset( $oXml->failures->failure ) ) {
-            foreach ( $$oXml->failures->failure as $failure ) {
+            foreach ( $oXml->failures->failure as $failure ) {
                 $oViolation = new Violation();
 
                 $oViolation->setMessage( trim( (string)$failure ) );

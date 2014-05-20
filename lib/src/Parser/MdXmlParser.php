@@ -22,22 +22,24 @@
 /**
  * Class MdXmlParser class for the application
  */
-class MdXmlParser {
-
-public function parse($sXmlFileName)
+class MdXmlParser
 {
-    // workaround for simpleXML namespace issue
-    $sData = file_get_contents( $sXmlFileName );
-    $sData = str_replace( '<oxid:', '<', $sData );
-    $sData = str_replace( '</oxid:', '</', $sData );
-    file_put_contents( $sXmlFileName, $sData );
 
-    $oXml = simplexml_load_file( $sXmlFileName );
+    public function parse($sXmlFileName)
+    {
+        // workaround for simpleXML namespace issue
+        $sData = file_get_contents($sXmlFileName);
+        $sData = str_replace('<oxid:', '<', $sData);
+        $sData = str_replace('</oxid:', '</', $sData);
+        file_put_contents($sXmlFileName, $sData);
 
-    return $this->parseXml($oXml);
-}
+        $oXml = simplexml_load_file($sXmlFileName);
 
-    public function parseXml($oXml){
+        return $this->parseXml($oXml);
+    }
+
+    public function parseXml($oXml)
+    {
         $oMdResult = new MdResult();
 
         $oMdResult->setViolations($this->getViolations($oXml));
@@ -51,24 +53,25 @@ public function parse($sXmlFileName)
      *
      * @return array returns all violations of code metrics determind by OXMD
      */
-    public function getViolations($oXml) {
+    public function getViolations($oXml)
+    {
         $aViolations = array();
 
-        foreach( $oXml->file as $oFile ) {
-            $sName = (string) $oFile[ 'name' ];
+        foreach ($oXml->file as $oFile) {
+            $sName = (string)$oFile['name'];
 
-            if (isset($oFile->violation) ){
-                foreach( $oFile->violation as $oViolation ) {
+            if (isset($oFile->violation)) {
+                foreach ($oFile->violation as $oViolation) {
                     $oOutputViolation = new Violation();
 
-                    $oOutputViolation->setFile( $sName )
-                                     ->setType( (string) $oViolation[ 'rule' ] )
-                                     ->addInformation( 'Begin', (int) $oViolation[ 'beginline' ] )
-                                     ->addInformation( 'End', (int) $oViolation[ 'endline' ] )
-                                     ->addInformation( 'Package', (string) $oViolation[ 'package' ] )
-                                     ->addInformation( 'Class', (string) $oViolation[ 'class' ] )
-                                     ->addInformation( 'Method', (string) $oViolation[ 'method' ] )
-                                     ->setMessage( trim( (string) $oViolation ) );
+                    $oOutputViolation->setFile($sName)
+                        ->setType((string)$oViolation['rule'])
+                        ->addInformation('Begin', (int)$oViolation['beginline'])
+                        ->addInformation('End', (int)$oViolation['endline'])
+                        ->addInformation('Package', (string)$oViolation['package'])
+                        ->addInformation('Class', (string)$oViolation['class'])
+                        ->addInformation('Method', (string)$oViolation['method'])
+                        ->setMessage(trim((string)$oViolation));
 
                     $aViolations[] = $oOutputViolation;
                 }
@@ -83,26 +86,27 @@ public function parse($sXmlFileName)
      *
      * @return object summary information of the OXMD XML file
      */
-    public function getOverview($oXml) {
-        $oOverviewData = (object) array( 'sPrice' => null, 'sFactor' => null, 'aViolations' => array() );
+    public function getOverview($oXml)
+    {
+        $oOverviewData = (object)array('sPrice' => null, 'sFactor' => null, 'aViolations' => array());
 
         $oCertification = $oXml->certification;
-        $oOverviewData->sPrice = (string )$oCertification[ 'price' ];
-        $oOverviewData->sFactor = (string) $oCertification[ 'factor' ];
+        $oOverviewData->sPrice = (string )$oCertification['price'];
+        $oOverviewData->sFactor = (string)$oCertification['factor'];
 
-        if (isset($oCertification->rule) ){
-            foreach ( $oCertification->rule as $oRule ) {
-                if ( ((string) $oRule[ 'violated' ]) == 'true' ) {
+        if (isset($oCertification->rule)) {
+            foreach ($oCertification->rule as $oRule) {
+                if (((string)$oRule['violated']) == 'true') {
                     $oViolation = new Violation();
-                    $oViolation->setType( (string) $oRule[ 'name' ] );
-                    $oViolation->addInformation( 'Value', (string) $oRule[ 'value' ] );
-                    $oViolation->addInformation( 'Factor', (string) $oRule[ 'factor' ] );
+                    $oViolation->setType((string)$oRule['name']);
+                    $oViolation->addInformation('Value', (string)$oRule['value']);
+                    $oViolation->addInformation('Factor', (string)$oRule['factor']);
 
                     $aFiles = array();
-                    foreach ( $oRule->file as $oFile ) {
-                        $aFiles[] = (string) $oFile[ 'class' ] . '::' . (string) $oFile[ 'method' ] . ' (' . (string) $oFile[ 'path' ] . ')';
+                    foreach ($oRule->file as $oFile) {
+                        $aFiles[] = (string)$oFile['class'] . '::' . (string)$oFile['method'] . ' (' . (string)$oFile['path'] . ')';
                     }
-                    $oViolation->addInformation( 'Files', $aFiles );
+                    $oViolation->addInformation('Files', $aFiles);
 
                     $oOverviewData->aViolations[] = $oViolation;
                 }

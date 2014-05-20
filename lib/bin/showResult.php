@@ -27,6 +27,11 @@ require_once realpath( __DIR__ . '/../src/View.php');
 require_once realpath( __DIR__ . '/../src/MainController.php');
 require_once realpath( __DIR__ . '/../src/XmlController.php');
 
+require_once realpath( __DIR__ . '/../src/Model/MdResult.php');
+require_once realpath( __DIR__ . '/../src/Model/ModuleCertificationResult.php');
+require_once realpath( __DIR__ . '/../src/Parser/MdXmlParser.php');
+require_once realpath( __DIR__ . '/../src/Parser/ViolationXmlParser.php');
+
 $aConfiguration = array(
     'sModulePath'       => $argv[2],
     'sMdXmlFile'        => $argv[1] . '/oxmd-result.xml',
