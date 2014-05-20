@@ -40,8 +40,6 @@ do
     do
         a=${FILE##*/}
         if [ $PREFIX != ${a:0:${#PREFIX}} ]; then
-            echo $a
-            echo "false"
             echo "<failure>File "${FILE}" in ${MODULEPATH}${DIR} doesnt start with Prefix $PREFIX</failure>"  >> $LOGFILE
             RESULT=warning
         fi
