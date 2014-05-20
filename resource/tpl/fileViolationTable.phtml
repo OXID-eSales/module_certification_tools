@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><?php echo $data->sHeading; ?></h3>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Class</th>
+            <th>Method</th>
+            <th>Line</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ( $data->aViolations as $oViolation ) { ?>
+            <tr>
+                <td><?php echo $oViolation->getClass() ?></td>
+                <td><?php echo $oViolation->getMethod() ?></td>
+                <td><?php echo $oViolation->getBeginLine() ?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>

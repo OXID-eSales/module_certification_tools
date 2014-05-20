@@ -24,6 +24,7 @@ namespace Com\OxidEsales\ModuleCertificationTool\Parser;
 use Com\OxidEsales\ModuleCertificationTool\Model\CertificationResult;
 use Com\OxidEsales\ModuleCertificationTool\Model\CertificationRule;
 use Com\OxidEsales\ModuleCertificationTool\Model\CertificationRuleViolation;
+use Com\OxidEsales\ModuleCertificationTool\Model\FileViolation;
 use Com\OxidEsales\ModuleCertificationTool\Model\MdResult;
 use Com\OxidEsales\ModuleCertificationTool\Violation;
 
@@ -69,7 +70,31 @@ class MdXmlParser
 
         $oCertificationResult->setCertificationRules( $aCertificationRules );
 
+        $aViolations = array();
+        foreach ( $oXml->file as $oFileElement ) {
+            $this->parseFileViolations( $oFileElement, $aViolations );
+        }
+        $oCertificationResult->setViolations( $aViolations );
+
         return $oCertificationResult;
+    }
+
+    public function parseFileViolations( $oFileElement, &$aViolations )
+    {
+        $sFileName = $oFileElement[ 'name' ];
+        foreach ( $oFileElement->violation as $oViolationElement ) {
+            $oFileViolation = new FileViolation();
+            $oFileViolation->setFile( $sFileName );
+            $oFileViolation->setClass( (string)$oViolationElement[ 'class' ] );
+            $oFileViolation->setMethod( (string)$oViolationElement[ 'method' ] );
+            $oFileViolation->setBeginLine( (int)$oViolationElement[ 'beginline' ] );
+            $oFileViolation->setEndLine( (int)$oViolationElement[ 'endline' ] );
+            $oFileViolation->setRule( (string)$oViolationElement[ 'rule' ] );
+            if ( !array_key_exists( $oFileViolation->getRule(), $aViolations ) ) {
+                $aViolations[ $oFileViolation->getRule() ] = array();
+            }
+            $aViolations[ $oFileViolation->getRule() ][ ] = $oFileViolation;
+        }
     }
 
     /**
@@ -90,7 +115,7 @@ class MdXmlParser
         foreach ( $oRuleElement->file as $oFileElement ) {
             $aViolations[ ] = $this->parseFileElement( $oFileElement );
         }
-        $oCertificationRule->setViolations($aViolations);
+        $oCertificationRule->setViolations( $aViolations );
 
         return $oCertificationRule;
     }
