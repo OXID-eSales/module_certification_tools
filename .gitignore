@@ -11,3 +11,6 @@
 
 /output/
 /result/
+/vendor/
+!/vendor/phpmd/oxmd/
+
