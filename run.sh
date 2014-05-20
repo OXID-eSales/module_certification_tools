@@ -87,15 +87,15 @@ ${BASEPATH}/bin/prepareOutputPath.sh $BASEPATH $OUTPUTDIR $DELETE_OLD_RUNS
 ${BASEPATH}/bin/runTestsAndMetrics.sh $MODULEPATH $BASEPATH $OUTPUTDIR $CLOVER_LOCATION
 
 ######################### directory structure check
-${BASEPATH}/bin/directory_structure.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
+${BASEPATH}/bin/directory_structure.sh $MODULEPATH ${BASEPATH}$OUTPUTDIR
 
 ######################### prefix check
-${BASEPATH}/bin/prefix.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR $PREFIX
+${BASEPATH}/bin/prefix.sh $MODULEPATH ${BASEPATH}$OUTPUTDIR $PREFIX
 
 ######################### file check
-${BASEPATH}/bin/globals.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
-${BASEPATH}/bin/method_length.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
+${BASEPATH}/bin/globals.sh $MODULEPATH ${BASEPATH}$OUTPUTDIR
+${BASEPATH}/bin/method_length.sh $MODULEPATH ${BASEPATH}$OUTPUTDIR
 
 ######################### OUTPUT
-php ${BASEPATH}/bin/showResult.php ${BASEPATH}/$OUTPUTDIR $MODULEPATH
+php ${BASEPATH}/bin/showResult.php ${BASEPATH}$OUTPUTDIR $MODULEPATH
 

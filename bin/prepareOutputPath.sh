@@ -5,26 +5,18 @@
 
 # get parameter from command line
 BASEPATH=$1
-OUTPUTPATH=$2
+OUTPUTDIR=$2
 DELETE=$3
 
 # check for required parameters
-if [ ! ${BASEPATH} ] || [ ! ${OUTPUTPATH} ]; then
-    echo "************************************************"
-    echo "|  Module Certification Tool "
-    echo "|  Output Path Preparation "
-    echo "|  by OXID eSALES AG 2014 "
-    echo "************************************************"
-    echo "|  Usage: "
-    echo "|  prepareOutputPath.sh <run.sh script path> <name of output path> "
-    echo "************************************************"
-    echo ""
+if [ ! ${BASEPATH} ] || [ ! ${OUTPUTDIR} ]; then
+    exit 0;
 fi
 
 # assamble base output path
 OUTPUTBASEPATH=${BASEPATH}/result
 
-# change to ouput path, clear if needed and create output path directory
+# change to output path, clear if needed and create output path directory
 cd ${BASEPATH}
 if [ $DELETE ] && [ 'NO' != $DELETE ]; then
     if [ -d "$OUTPUTBASEPATH" ]; then
@@ -33,4 +25,4 @@ if [ $DELETE ] && [ 'NO' != $DELETE ]; then
     fi
 fi
 
-/bin/mkdir -p ${BASEPATH}${OUTPUTPATH}
+/bin/mkdir -p ${BASEPATH}${OUTPUTDIR}
