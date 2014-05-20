@@ -1,13 +1,16 @@
-<h3><?php echo $data->sHeading; ?></h3>
-<table class="table">
-    <thead>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><?php echo $data->sHeading; ?></h3>
+    </div>
+    <table class="table">
+        <thead>
         <tr>
             <th>Class</th>
             <th>Method</th>
             <th>Line</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         <?php foreach ( $data->aViolations as $oViolation ) { ?>
             <tr>
                 <td><?php echo $oViolation->getClass() ?></td>
@@ -15,5 +18,6 @@
                 <td><?php echo $oViolation->getLine() ?></td>
             </tr>
         <?php } ?>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
