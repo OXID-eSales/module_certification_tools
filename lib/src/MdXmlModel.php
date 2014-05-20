@@ -61,10 +61,11 @@ class MdXmlModel {
         foreach( $this->_oXml->file as $oFile ) {
             $sName = (string) $oFile[ 'name' ];
 
-            foreach( $oFile->violation as $oViolation ) {
-                $oOutputViolation = new Violation();
+            if (isset($oFile->violation) ){
+                foreach( $oFile->violation as $oViolation ) {
+                    $oOutputViolation = new Violation();
 
-                $oOutputViolation->setFile( $sName )
+                    $oOutputViolation->setFile( $sName )
                            ->setType( (string) $oViolation[ 'rule' ] )
                            ->addInformation( 'Begin', (int) $oViolation[ 'beginline' ] )
                            ->addInformation( 'End', (int) $oViolation[ 'endline' ] )
@@ -73,7 +74,8 @@ class MdXmlModel {
                            ->addInformation( 'Method', (string) $oViolation[ 'method' ] )
                            ->setMessage( trim( (string) $oViolation ) );
 
-                $aViolations[] = $oOutputViolation;
+                    $aViolations[] = $oOutputViolation;
+                }
             }
         }
 
@@ -92,20 +94,22 @@ class MdXmlModel {
         $oOverviewData->sPrice = (string )$oCertification[ 'price' ];
         $oOverviewData->sFactor = (string) $oCertification[ 'factor' ];
 
-        foreach ( $oCertification->rule as $oRule ) {
-            if ( ((string) $oRule[ 'violated' ]) == 'true' ) {
-                $oViolation = new Violation();
-                $oViolation->setType( (string) $oRule[ 'name' ] );
-                $oViolation->addInformation( 'Value', (string) $oRule[ 'value' ] );
-                $oViolation->addInformation( 'Factor', (string) $oRule[ 'factor' ] );
+        if (isset($oCertification->rule) ){
+            foreach ( $oCertification->rule as $oRule ) {
+                if ( ((string) $oRule[ 'violated' ]) == 'true' ) {
+                    $oViolation = new Violation();
+                    $oViolation->setType( (string) $oRule[ 'name' ] );
+                    $oViolation->addInformation( 'Value', (string) $oRule[ 'value' ] );
+                    $oViolation->addInformation( 'Factor', (string) $oRule[ 'factor' ] );
 
-                $aFiles = array();
-                foreach ( $oRule->file as $oFile ) {
-                    $aFiles[] = (string) $oFile[ 'class' ] . '::' . (string) $oFile[ 'method' ] . ' (' . (string) $oFile[ 'path' ] . ')';
+                    $aFiles = array();
+                    foreach ( $oRule->file as $oFile ) {
+                        $aFiles[] = (string) $oFile[ 'class' ] . '::' . (string) $oFile[ 'method' ] . ' (' . (string) $oFile[ 'path' ] . ')';
+                    }
+                    $oViolation->addInformation( 'Files', $aFiles );
+
+                    $oOverviewData->aViolations[] = $oViolation;
                 }
-                $oViolation->addInformation( 'Files', $aFiles );
-
-                $oOverviewData->aViolations[] = $oViolation;
             }
         }
 
