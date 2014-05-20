@@ -74,6 +74,7 @@ class XmlController {
         $oModel->loadXmlFile( $this->_sXmlFile );
         $oView = new View();
         $aViolations = $oModel->getViolations();
+        $sHtml = "";
         if ( count( $aViolations ) > 0 ) {
             $sHtml = $oView->setTemplate( 'plainTable' )
                            ->assignVariable( 'aViolations', $oModel->getViolations() )
