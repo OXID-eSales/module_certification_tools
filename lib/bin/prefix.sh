@@ -10,10 +10,11 @@ declare RESULT
 declare PREFIX
 declare -a DIRSTOCHECK
 DIRSTOCHECK=(controllers components core models)
-PREFIX=oepl
+
 
 MODULEPATH=$1
 OUTPUTPATH=$2
+PREFIX=$3
 RESULT=success
 
 # logfile creation

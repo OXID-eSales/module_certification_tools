@@ -9,6 +9,7 @@ declare DELETE_OLD_RUNS
 declare BASEPATH
 declare OUTPUTDIR
 declare CLOVER_LOCATION
+declare PREFIX
 
 # getting path information
 pushd . > /dev/null
@@ -35,6 +36,7 @@ OUTPUTDIR=/result/${DATE}
 MODULEPATH=$CFG_MODULEPATH
 CLOVER_LOCATION=$CFG_CLOVER_LOCATION
 DELETE_OLD_RUNS=$CFG_DELETE_OLD_RUNS
+PREFIX=$CFG_PREFIX
 
 # options
 while getopts ":dh" opt
@@ -79,7 +81,7 @@ ${BASEPATH}/lib/bin/runTestsAndMetrics.sh $MODULEPATH $BASEPATH $OUTPUTDIR $CLOV
 ${BASEPATH}/lib/bin/directory_structure.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
 
 ######################### prefix check
-${BASEPATH}/lib/bin/prefix.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
+${BASEPATH}/lib/bin/prefix.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR $PREFIX
 
 ######################### file check
 ${BASEPATH}/lib/bin/globals.sh $MODULEPATH ${BASEPATH}/$OUTPUTDIR
