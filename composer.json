@@ -11,7 +11,8 @@
     ],
     "require": {
         "phpmd/oxmd": "dev-master",
-        "phpmd/phpmd": "dev-master"
+        "phpmd/phpmd": "dev-master",
+        "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
         "psr-0": {

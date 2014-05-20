@@ -24,7 +24,7 @@ if [ ! $CLOVER_LOCATION ]; then
     echo 'No clover.xml file found, try to run tests and generate it'
     CLOVER_LOCATION=${BASEPATH}${OUTPUTDIR}'/clover.xml'
     echo 'execute: phpunit --coverage-clover' ${CLOVER_LOCATION}
-    phpunit --coverage-clover ${CLOVER_LOCATION}
+    $BASEPATH/vendor/bin/phpunit --coverage-clover ${CLOVER_LOCATION}
 fi
 
 cd $BASEPATH;
