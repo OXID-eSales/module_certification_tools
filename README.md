@@ -27,11 +27,10 @@ How to use
 
 ### Preparing system
 
-1. change to `lib/oxmd directory`
+#### On *nix
 
-2. execute `build.sh` to load composer.phar
-
-3. run `php composer.phar install` to install dependencies
+1. Install curl
+2. run `install.sh`
 
 ### Let certification tool run
 

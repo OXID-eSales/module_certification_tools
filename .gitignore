@@ -5,12 +5,6 @@
 /.idea
 
 ## Project specific
-/lib/oxmd/phar-composer.phar
-/lib/oxmd/composer.phar
-/lib/oxmd/vendor/
-
-/output/
+/bin/composer.phar
 /result/
 /vendor/
-!/vendor/phpmd/oxmd/
-
