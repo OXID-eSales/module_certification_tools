@@ -118,7 +118,7 @@ class XmlRenderer extends AbstractRenderer
 
         foreach ($report->getRuleViolations() as $violation) {
             $fileName = $violation->getFileName();
-            
+
             if ($this->fileName !== $fileName) {
                 // Not first file
                 if ($this->fileName !== null) {
@@ -130,25 +130,33 @@ class XmlRenderer extends AbstractRenderer
                 $writer->write('  <file name="' . $fileName . '">' . PHP_EOL);
             }
 
+            $sDescription = $violation->getDescription();
+            $oxActualValue = substr($sDescription,0,strpos($sDescription,'|'));
+            $sDescription = substr($sDescription,(strpos($sDescription,'|')+1));
+            $oxTresholdValue = substr($sDescription,0,strpos($sDescription,'|'));
+            $sDescription = substr($sDescription,(strpos($sDescription,'|')+1));
+
             $rule = $violation->getRule();
 
-            $writer->write('    <violation');
+            $writer->write('<violation' );
             $writer->write(' beginline="' . $violation->getBeginLine() . '"');
             $writer->write(' endline="' . $violation->getEndLine() . '"');
             $writer->write(' rule="' . $rule->getName() . '"');
             $writer->write(' ruleset="' . $rule->getRuleSetName() . '"');
-            
+
             $this->maybeAdd('package', $violation->getNamespaceName());
             $this->maybeAdd('externalInfoUrl', $rule->getExternalInfoUrl());
             $this->maybeAdd('function', $violation->getFunctionName());
             $this->maybeAdd('class', $violation->getClassName());
             $this->maybeAdd('method', $violation->getMethodName());
+            $this->maybeAdd('oxActualValue', $oxActualValue );
+            $this->maybeAdd('oxTresholdValue', $oxTresholdValue );
             //$this->_maybeAdd('variable', $violation->getVariableName());
 
             $writer->write(' priority="' . $rule->getPriority() . '"');
             $writer->write('>' . PHP_EOL);
-            $writer->write('      ' . $violation->getDescription() . PHP_EOL);
-            $writer->write('    </violation>' . PHP_EOL);
+            $writer->write('      ' . $sDescription . PHP_EOL);
+            $writer->write('</violation>' . PHP_EOL);
         }
 
         // Last file and at least one violation
