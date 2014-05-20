@@ -55,3 +55,7 @@ HOW TO USE
 
 LICENSES
 --------
+
+The Module Certification Tool is licensed under a GPLv3 license.
+
+PHPMD and its OXID specific extensions are licensed under a BSD 3-Clause license.
