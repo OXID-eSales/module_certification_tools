@@ -39,7 +39,6 @@ MODULEDIRS=`ls -l --time-style="long-iso" $MODULEPATH | egrep '^d' | awk '{print
 
 for FILE in $MODULEDIRS
 do
-echo $FILE
     if(! in_array ALLOWEDDIRS ${FILE} )
     then
         echo "<failure>Directory \""${FILE}"\" is not allowed</failure>"  >> $LOGFILE
