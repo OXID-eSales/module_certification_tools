@@ -1,9 +1,12 @@
 ## Mac specific
-.DS_Store
+/.DS_Store
 
 ## IDE (PHPStorm) specific
-.idea
+/.idea
 
 ## Project specific
-composer.phar
-vendor/
+/lib/oxmd/phar-composer.phar
+/lib/oxmd/composer.phar
+/lib/oxmd/vendor/
+
+/output/
