@@ -17,6 +17,12 @@ OUTPUTPATH=$2
 PREFIX=$3
 RESULT=success
 
+# check for required parameters
+if [ ! ${PREFIX} ]; then
+    echo "Error: no prefix is set in config file "
+    exit 0;
+fi
+
 # logfile creation
 LOGFILE=$OUTPUTPATH"/prefix.xml"
 if [ -f $LOGFILE ]
