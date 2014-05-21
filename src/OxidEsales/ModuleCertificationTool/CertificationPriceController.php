@@ -46,12 +46,12 @@ class CertificationPriceController
     public function getHtml()
     {
 
-        $oView = new View();
-        $sHtml = $oView->setTemplate( 'certificationPrice' )
+        $view = new View();
+        $html = $view->setTemplate( 'certificationPrice' )
             ->assignVariable( 'oCertificationResult', $this->result )
             ->render();
 
-        return $sHtml;
+        return $html;
     }
 
 }

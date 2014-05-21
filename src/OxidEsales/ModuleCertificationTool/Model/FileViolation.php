@@ -7,65 +7,88 @@ namespace OxidEsales\ModuleCertificationTool\Model;
 class FileViolation
 {
 
-    private $sFileName;
-    private $sClass;
-    private $sMethod;
-    private $iBeginLine;
-    private $iEndLine;
-    private $sRule;
+    /**
+     * @var string
+     */
+    private $fileName;
+
+    /**
+     * @var string
+     */
+
+    private $class;
+    /**
+     * @var string
+     */
+
+    private $method;
+    /**
+     * @var int
+     */
+
+    private $beginLine;
+    /**
+     * @var int
+     */
+
+    private $endLine;
+    /**
+     * @var string
+     */
+    private $rule;
 
     public function getFile()
     {
-        return $this->sFileName;
+        return $this->fileName;
     }
 
-    public function setFile( $sFileName )
+    public function setFile($fileName)
     {
-        $this->sFileName = $sFileName;
+        $this->fileName = $fileName;
     }
 
     public function getClass()
     {
-        return $this->sClass;
+        return $this->class;
     }
 
-    public function setClass( $sClass )
+    public function setClass($class)
     {
-        $this->sClass = $sClass;
+        $this->class = $class;
     }
 
     public function getMethod()
     {
-        return $this->sMethod;
+        return $this->method;
     }
 
-    public function setMethod( $sMethod )
+    public function setMethod($method)
     {
-        $this->sMethod = $sMethod;
+        $this->method = $method;
     }
 
     public function getBeginLine()
     {
-        return $this->iBeginLine;
+        return $this->beginLine;
     }
 
-    public function setBeginLine( $iBeginLine )
+    public function setBeginLine($beginLine)
     {
-        $this->iBeginLine = $iBeginLine;
+        $this->beginLine = $beginLine;
     }
 
-    public function setEndLine( $iEndLine )
+    public function setEndLine($endLine)
     {
-        $this->iEndLine = $iEndLine;
+        $this->endLine = $endLine;
     }
 
     public function getRule()
     {
-        return $this->sRule;
+        return $this->rule;
     }
 
-    public function setRule( $sRule )
+    public function setRule($rule)
     {
-        $this->sRule = $sRule;
+        $this->rule = $rule;
     }
 }

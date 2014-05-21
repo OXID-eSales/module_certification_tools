@@ -27,9 +27,9 @@ namespace OxidEsales\ModuleCertificationTool;
 class CertificationRuleViolationsController
 {
 
-    public function __construct( array $aViolations )
+    public function __construct( array $violations )
     {
-        $this->aViolations = $aViolations;
+        $this->aViolations = $violations;
     }
 
 
@@ -38,19 +38,19 @@ class CertificationRuleViolationsController
      *
      * @var string
      */
-    protected $_sHeading = '';
+    protected $heading = '';
 
 
     /**
      * Sets the heading that should be shown in output.
      *
-     * @param string $sHeading the heading for this XML file.
+     * @param string $heading the heading for this XML file.
      *
      * @return $this the controller ifself
      */
-    public function setHeading( $sHeading )
+    public function setHeading( $heading )
     {
-        $this->_sHeading = $sHeading;
+        $this->heading = $heading;
 
         return $this;
     }
@@ -62,16 +62,16 @@ class CertificationRuleViolationsController
      */
     public function getHtml()
     {
-        $oView = new View();
-        $sHtml = "";
+        $view = new View();
+        $html = "";
         if ( count( $this->aViolations ) > 0 ) {
-            $sHtml = $oView->setTemplate( 'certViolationTable' )
+            $html = $view->setTemplate( 'certViolationTable' )
                 ->assignVariable( 'aViolations', $this->aViolations )
-                ->assignVariable( 'sHeading', $this->_sHeading )
+                ->assignVariable( 'sHeading', $this->heading )
                 ->render();
         }
 
-        return $sHtml;
+        return $html;
     }
 
 } 

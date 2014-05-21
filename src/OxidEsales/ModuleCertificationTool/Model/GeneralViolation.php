@@ -24,45 +24,47 @@ namespace OxidEsales\ModuleCertificationTool\Model;
 /**
  * Class Violation a data holding class for the violations of rules
  */
-class GeneralViolation {
+class GeneralViolation
+{
 
     /**
      * Contains a detailed message for the ruel violation.
      *
      * @var string
      */
-    protected $_sMessage = '';
+    protected $message = '';
 
     /**
      * Contains the type of rule violation.
      *
      * @var string
      */
-    protected $_sType = '';
+    protected $type = '';
 
     /**
      * Contains the file tha violated the rule.
      *
      * @var string
      */
-    protected $_sFile = '';
+    protected $file = '';
 
     /**
      * Contains an array with additional informations.
      *
      * @var array
      */
-    protected $_aInformation = array();
+    protected $additionalInformation = array();
 
     /**
      * Setter for the Message.
      *
-     * @param string $sMessage message to set
+     * @param string $message message to set
      *
      * @return $this the object itself
      */
-    public function setMessage( $sMessage ) {
-        $this->_sMessage = $sMessage;
+    public function setMessage($message)
+    {
+        $this->message = $message;
 
         return $this;
     }
@@ -72,19 +74,21 @@ class GeneralViolation {
      *
      * @return string the stored message
      */
-    public function getMessage() {
-        return $this->_sMessage;
+    public function getMessage()
+    {
+        return $this->message;
     }
 
     /**
      * Setter for violation type.
      *
-     * @param string $sType the type to set.
+     * @param string $type the type to set.
      *
      * @return $this the object itself
      */
-    public function setType( $sType ) {
-        $this->_sType = $sType;
+    public function setType($type)
+    {
+        $this->type = $type;
 
         return $this;
     }
@@ -94,19 +98,21 @@ class GeneralViolation {
      *
      * @return string the type of violation
      */
-    public function getType() {
-        return $this->_sType;
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**
      * Setter for the violating file.
      *
-     * @param string $sFile the file that violates the rule
+     * @param string $file the file that violates the rule
      *
      * @return $this the object itself
      */
-    public function setFile( $sFile ) {
-        $this->_sFile = $sFile;
+    public function setFile($file)
+    {
+        $this->file = $file;
 
         return $this;
     }
@@ -116,20 +122,22 @@ class GeneralViolation {
      *
      * @return string the file that violates the rule
      */
-    public function getFile() {
-        return $this->_sFile;
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**
      * Adds special information to the violation object.
      *
-     * @param string $sType the type of additional information
-     * @param mixed $xInformation the information to be stored
+     * @param string $type the type of additional information
+     * @param mixed $information the information to be stored
      *
      * @return $this the object itself
      */
-    public function addInformation( $sType, $xInformation ) {
-        $this->_aInformation[ $sType ] = $xInformation;
+    public function addInformation($type, $information)
+    {
+        $this->additionalInformation[$type] = $information;
 
         return $this;
     }
@@ -137,12 +145,13 @@ class GeneralViolation {
     /**
      * Gets additional information for a special information type.
      *
-     * @param string $sType the type of additional information to get
+     * @param string $type the type of additional information to get
      *
      * @return mixed the stored additional information
      */
-    public function getInformation( $sType ) {
-        return $this->_aInformation[ $sType ];
+    public function getInformation($type)
+    {
+        return $this->additionalInformation[$type];
     }
 
 }

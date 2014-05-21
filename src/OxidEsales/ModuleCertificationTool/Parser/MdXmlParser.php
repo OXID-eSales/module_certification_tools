@@ -34,103 +34,103 @@ use OxidEsales\ModuleCertificationTool\Violation;
 class MdXmlParser
 {
 
-    public function parse( $sXmlFileName )
+    public function parse( $xmlFileName )
     {
         // workaround for simpleXML namespace issue
-        $sData = file_get_contents( $sXmlFileName );
-        $sData = str_replace( '<oxid:', '<', $sData );
-        $sData = str_replace( '</oxid:', '</', $sData );
-        file_put_contents( $sXmlFileName, $sData );
+        $xmlString = file_get_contents( $xmlFileName );
+        $xmlString = str_replace( '<oxid:', '<', $xmlString );
+        $xmlString = str_replace( '</oxid:', '</', $xmlString );
+        file_put_contents( $xmlFileName, $xmlString );
 
-        $oXml = simplexml_load_file( $sXmlFileName );
+        $xml = simplexml_load_file( $xmlFileName );
 
-        return $this->parseXml( $oXml );
+        return $this->parseXml( $xml );
     }
 
     /**
-     * @param $oXml
+     * @param $xml
      * @return CertificationResult
      */
-    public function parseXml( $oXml )
+    public function parseXml( $xml )
     {
-        $oCertificationResult = new CertificationResult();
+        $certificationResult = new CertificationResult();
 
-        $oCertification = $oXml->certification;
-        $oCertificationResult->setPrice( (string )$oCertification[ 'price' ] );
-        $oCertificationResult->setFactor( (float)$oCertification[ 'factor' ] );
+        $certificationElement = $xml->certification;
+        $certificationResult->setPrice( (string )$certificationElement[ 'price' ] );
+        $certificationResult->setFactor( (float)$certificationElement[ 'factor' ] );
 
-        $aCertificationRules = array();
+        $certificationRules = array();
 
-        if ( isset( $oCertification->rule ) ) {
-            foreach ( $oCertification->rule as $oRuleElement ) {
+        if ( isset( $certificationElement->rule ) ) {
+            foreach ( $certificationElement->rule as $oRuleElement ) {
                 $oCertificationRule = $this->parseCertificationRule( $oRuleElement );
-                $aCertificationRules[ $oCertificationRule->getName() ] = $oCertificationRule;
+                $certificationRules[ $oCertificationRule->getName() ] = $oCertificationRule;
             }
         }
 
-        $oCertificationResult->setCertificationRules( $aCertificationRules );
+        $certificationResult->setCertificationRules( $certificationRules );
 
-        $aViolations = array();
-        foreach ( $oXml->file as $oFileElement ) {
-            $this->parseFileViolations( $oFileElement, $aViolations );
+        $fileViolations = array();
+        foreach ( $xml->file as $fileElement ) {
+            $this->parseFileViolations( $fileElement, $fileViolations );
         }
-        $oCertificationResult->setViolations( $aViolations );
+        $certificationResult->setViolations( $fileViolations );
 
-        return $oCertificationResult;
+        return $certificationResult;
     }
 
-    public function parseFileViolations( $oFileElement, &$aViolations )
+    public function parseFileViolations( $fileElement, &$fileViolations )
     {
-        $sFileName = $oFileElement[ 'name' ];
-        foreach ( $oFileElement->violation as $oViolationElement ) {
-            $oFileViolation = new FileViolation();
-            $oFileViolation->setFile( $sFileName );
-            $oFileViolation->setClass( (string)$oViolationElement[ 'class' ] );
-            $oFileViolation->setMethod( (string)$oViolationElement[ 'method' ] );
-            $oFileViolation->setBeginLine( (int)$oViolationElement[ 'beginline' ] );
-            $oFileViolation->setEndLine( (int)$oViolationElement[ 'endline' ] );
-            $oFileViolation->setRule( (string)$oViolationElement[ 'rule' ] );
-            if ( !array_key_exists( $oFileViolation->getRule(), $aViolations ) ) {
-                $aViolations[ $oFileViolation->getRule() ] = array();
+        $sFileName = $fileElement[ 'name' ];
+        foreach ( $fileElement->violation as $violationElement ) {
+            $fileViolation = new FileViolation();
+            $fileViolation->setFile( $sFileName );
+            $fileViolation->setClass( (string)$violationElement[ 'class' ] );
+            $fileViolation->setMethod( (string)$violationElement[ 'method' ] );
+            $fileViolation->setBeginLine( (int)$violationElement[ 'beginline' ] );
+            $fileViolation->setEndLine( (int)$violationElement[ 'endline' ] );
+            $fileViolation->setRule( (string)$violationElement[ 'rule' ] );
+            if ( !array_key_exists( $fileViolation->getRule(), $fileViolations ) ) {
+                $fileViolations[ $fileViolation->getRule() ] = array();
             }
-            $aViolations[ $oFileViolation->getRule() ][ ] = $oFileViolation;
+            $fileViolations[ $fileViolation->getRule() ][ ] = $fileViolation;
         }
     }
 
     /**
-     * @param $oRuleElement
+     * @param $ruleElement
      * @return CertificationRule
      */
-    public function parseCertificationRule( $oRuleElement )
+    public function parseCertificationRule( $ruleElement )
     {
 
-        $oCertificationRule = new CertificationRule();
+        $certificationRule = new CertificationRule();
 
-        $oCertificationRule->setName( (string)$oRuleElement[ 'name' ] );
-        $oCertificationRule->setViolated( (bool)$oRuleElement[ 'violated' ] );
-        $oCertificationRule->setValue( (int)$oRuleElement[ 'value' ] );
-        $oCertificationRule->setFactor( (float)$oRuleElement[ 'factor' ] );
+        $certificationRule->setName( (string)$ruleElement[ 'name' ] );
+        $certificationRule->setViolated( (bool)$ruleElement[ 'violated' ] );
+        $certificationRule->setValue( (int)$ruleElement[ 'value' ] );
+        $certificationRule->setFactor( (float)$ruleElement[ 'factor' ] );
 
-        $aViolations = array();
-        foreach ( $oRuleElement->file as $oFileElement ) {
-            $aViolations[ ] = $this->parseFileElement( $oFileElement );
+        $violations = array();
+        foreach ( $ruleElement->file as $fileElement ) {
+            $violations[ ] = $this->parseFileElement( $fileElement );
         }
-        $oCertificationRule->setViolations( $aViolations );
+        $certificationRule->setViolations( $violations );
 
-        return $oCertificationRule;
+        return $certificationRule;
     }
 
-    public function parseFileElement( $oFileElement )
+    public function parseFileElement( $fileElement )
     {
-        $oCertificationRuleViolation = new CertificationRuleViolation();
+        $certificationRuleViolation = new CertificationRuleViolation();
 
-        $oCertificationRuleViolation->setClass( (string)$oFileElement[ 'class' ] );
-        $oCertificationRuleViolation->setFile( (string)$oFileElement[ 'file' ] );
-        $oCertificationRuleViolation->setMethod( (string)$oFileElement[ 'method' ] );
-        $oCertificationRuleViolation->setLine( (int)$oFileElement[ 'line' ] );
-        $oCertificationRuleViolation->setNamespace( (string)$oFileElement[ 'namespace' ] );
+        $certificationRuleViolation->setClass( (string)$fileElement[ 'class' ] );
+        $certificationRuleViolation->setFile( (string)$fileElement[ 'file' ] );
+        $certificationRuleViolation->setMethod( (string)$fileElement[ 'method' ] );
+        $certificationRuleViolation->setLine( (int)$fileElement[ 'line' ] );
+        $certificationRuleViolation->setNamespace( (string)$fileElement[ 'namespace' ] );
 
-        return $oCertificationRuleViolation;
+        return $certificationRuleViolation;
     }
 
     /**
@@ -138,18 +138,18 @@ class MdXmlParser
      *
      * @return array returns all violations of code metrics determind by OXMD
      */
-    public function getViolations( $oXml )
+    public function getViolations( $xml )
     {
-        $aViolations = array();
+        $violations = array();
 
-        foreach ( $oXml->file as $oFile ) {
+        foreach ( $xml->file as $oFile ) {
             $sName = (string)$oFile[ 'name' ];
 
             if ( isset( $oFile->violation ) ) {
                 foreach ( $oFile->violation as $oViolation ) {
-                    $oOutputViolation = new Violation();
+                    $outputViolation = new Violation();
 
-                    $oOutputViolation->setFile( $sName )
+                    $outputViolation->setFile( $sName )
                         ->setType( (string)$oViolation[ 'rule' ] )
                         ->addInformation( 'Begin', (int)$oViolation[ 'beginline' ] )
                         ->addInformation( 'End', (int)$oViolation[ 'endline' ] )
@@ -158,12 +158,12 @@ class MdXmlParser
                         ->addInformation( 'Method', (string)$oViolation[ 'method' ] )
                         ->setMessage( trim( (string)$oViolation ) );
 
-                    $aViolations[ ] = $oOutputViolation;
+                    $violations[ ] = $outputViolation;
                 }
             }
         }
 
-        return $aViolations;
+        return $violations;
     }
 
     /**
@@ -171,38 +171,38 @@ class MdXmlParser
      *
      * @return object summary information of the OXMD XML file
      */
-    public function getOverview( $oXml )
+    public function getOverview( $xml )
     {
-        $aViolations = array();
-        $oOverviewData = (object)array( 'sPrice' => null, 'sFactor' => null, 'aViolations' => array() );
+        $violations = array();
+        $overviewData = (object)array( 'sPrice' => null, 'sFactor' => null, 'aViolations' => array() );
 
-        $oCertification = $oXml->certification;
-        $oOverviewData->sPrice = (string )$oCertification[ 'price' ];
-        $oOverviewData->sFactor = (string)$oCertification[ 'factor' ];
+        $certification = $xml->certification;
+        $overviewData->sPrice = (string )$certification[ 'price' ];
+        $overviewData->sFactor = (string)$certification[ 'factor' ];
 
-        if ( isset( $oCertification->rule ) ) {
-            foreach ( $oCertification->rule as $oRule ) {
-                $oViolation = new Violation();
-                $oViolation->setViolated( ( (string)$oRule[ 'violated' ] ) == 'true' );
-                $oViolation->setType( (string)$oRule[ 'name' ] );
-                $oViolation->addInformation( 'Value', (string)$oRule[ 'value' ] );
-                $oViolation->addInformation( 'Factor', (string)$oRule[ 'factor' ] );
+        if ( isset( $certification->rule ) ) {
+            foreach ( $certification->rule as $ruleElement ) {
+                $violation = new Violation();
+                $violation->setViolated( ( (string)$ruleElement[ 'violated' ] ) == 'true' );
+                $violation->setType( (string)$ruleElement[ 'name' ] );
+                $violation->addInformation( 'Value', (string)$ruleElement[ 'value' ] );
+                $violation->addInformation( 'Factor', (string)$ruleElement[ 'factor' ] );
 
-                $aViolations[ $oViolation->getType() ] = $oViolation;
+                $violations[ $violation->getType() ] = $violation;
 
-                $aFiles = array();
-                foreach ( $oRule->file as $oFile ) {
-                    $aFiles[ ] = (string)$oFile[ 'class' ] . '::' . (string)$oFile[ 'method' ] . ' (' . (string)$oFile[ 'path' ] . ')';
+                $files = array();
+                foreach ( $ruleElement->file as $oFile ) {
+                    $files[ ] = (string)$oFile[ 'class' ] . '::' . (string)$oFile[ 'method' ] . ' (' . (string)$oFile[ 'path' ] . ')';
                 }
-                $oViolation->addInformation( 'Files', $aFiles );
+                $violation->addInformation( 'Files', $files );
 
-                $oOverviewData->aViolations[ ] = $oViolation;
+                $overviewData->aViolations[ ] = $violation;
             }
         }
 
-        var_dump( $aViolations );
+        var_dump( $violations );
 
-        return $oOverviewData;
+        return $overviewData;
     }
 
 }

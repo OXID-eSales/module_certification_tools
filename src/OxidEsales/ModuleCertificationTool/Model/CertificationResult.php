@@ -10,29 +10,29 @@ class CertificationResult
     /**
      * @var float
      */
-    private $fFactor;
+    private $factor;
 
     /**
      * @var float
      */
-    private $fPrice;
+    private $price;
 
     /**
      * @var array()
      */
-    private $aCertificationRules;
+    private $certificationRules;
 
     /**
      * @var array()
      */
-    private $aViolations;
+    private $violations;
 
     /**
-     * @param array $aCertificationRules
+     * @param array $certificationRules
      */
-    public function setCertificationRules( $aCertificationRules )
+    public function setCertificationRules($certificationRules)
     {
-        $this->aCertificationRules = $aCertificationRules;
+        $this->certificationRules = $certificationRules;
     }
 
     /**
@@ -40,20 +40,20 @@ class CertificationResult
      */
     public function getCertificationRules()
     {
-        return $this->aCertificationRules;
+        return $this->certificationRules;
     }
 
-    public function getCertificationRule( $sName )
+    public function getCertificationRule($name)
     {
-        return $this->aCertificationRules[ $sName ];
+        return $this->certificationRules[$name];
     }
 
     /**
-     * @param float $fFactor
+     * @param float $factor
      */
-    public function setFactor( $fFactor )
+    public function setFactor($factor)
     {
-        $this->fFactor = $fFactor;
+        $this->factor = $factor;
     }
 
     /**
@@ -61,15 +61,15 @@ class CertificationResult
      */
     public function getFactor()
     {
-        return $this->fFactor;
+        return $this->factor;
     }
 
     /**
-     * @param float $fPrice
+     * @param float $price
      */
-    public function setPrice( $fPrice )
+    public function setPrice($price)
     {
-        $this->fPrice = $fPrice;
+        $this->price = $price;
     }
 
     /**
@@ -77,17 +77,17 @@ class CertificationResult
      */
     public function getPrice()
     {
-        return $this->fPrice;
+        return $this->price;
     }
 
     public function getViolations()
     {
-        return $this->aViolations;
+        return $this->violations;
     }
 
-    public function setViolations( $aViolations )
+    public function setViolations($violations)
     {
-        $this->aViolations = $aViolations;
+        $this->violations = $violations;
     }
 
 
