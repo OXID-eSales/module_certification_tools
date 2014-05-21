@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Com\OxidEsales\ModuleCertificationTool\Model;
+namespace OxidEsales\ModuleCertificationTool\Model;
 
 
 class CertificationRule
@@ -10,38 +10,38 @@ class CertificationRule
     /**
      * @var bool
      */
-    private $bViolated;
+    private $violated;
 
     /**
      * @var string
      */
-    private $sName;
+    private $name;
 
     /**
      * @var int
      */
-    private $iThreshold;
+    private $threshold;
 
     /**
      * @var int
      */
-    private $iValue;
+    private $value;
 
     /**
      * @var float
      */
-    private $fFactor;
+    private $factor;
     /**
      * @var array
      */
-    private $aViolations;
+    private $violations;
 
     /**
      * @param float $factor
      */
-    public function setFactor( $factor )
+    public function setFactor($factor)
     {
-        $this->fFactor = $factor;
+        $this->factor = $factor;
     }
 
     /**
@@ -49,15 +49,15 @@ class CertificationRule
      */
     public function getFactor()
     {
-        return $this->fFactor;
+        return $this->factor;
     }
 
     /**
      * @param string $name
      */
-    public function setName( $name )
+    public function setName($name)
     {
-        $this->sName = $name;
+        $this->name = $name;
     }
 
     /**
@@ -65,15 +65,15 @@ class CertificationRule
      */
     public function getName()
     {
-        return $this->sName;
+        return $this->name;
     }
 
     /**
      * @param int $threshold
      */
-    public function setThreshold( $threshold )
+    public function setThreshold($threshold)
     {
-        $this->iThreshold = $threshold;
+        $this->threshold = $threshold;
     }
 
     /**
@@ -81,15 +81,15 @@ class CertificationRule
      */
     public function getThreshold()
     {
-        return $this->iThreshold;
+        return $this->threshold;
     }
 
     /**
      * @param int $value
      */
-    public function setValue( $value )
+    public function setValue($value)
     {
-        $this->iValue = $value;
+        $this->value = $value;
     }
 
     /**
@@ -97,15 +97,15 @@ class CertificationRule
      */
     public function getValue()
     {
-        return $this->iValue;
+        return $this->value;
     }
 
     /**
      * @param boolean $violated
      */
-    public function setViolated( $violated )
+    public function setViolated($violated)
     {
-        $this->bViolated = $violated;
+        $this->violated = $violated;
     }
 
     /**
@@ -113,7 +113,7 @@ class CertificationRule
      */
     public function getViolated()
     {
-        return $this->bViolated;
+        return $this->violated;
     }
 
     /**
@@ -121,15 +121,15 @@ class CertificationRule
      */
     public function getViolations()
     {
-        return $this->aViolations;
+        return $this->violations;
     }
 
     /**
      * @param CertificationRuleViolation[] $aViolations
      */
-    public function setViolations( $aViolations )
+    public function setViolations($aViolations)
     {
-        $this->aViolations = $aViolations;
+        $this->violations = $aViolations;
     }
 
 } 

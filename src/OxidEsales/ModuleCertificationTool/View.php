@@ -19,55 +19,57 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace Com\OxidEsales\ModuleCertificationTool;
+namespace OxidEsales\ModuleCertificationTool;
 
 /**
  * Class View class for handling the template files
  */
-class View {
+class View
+{
 
     /**
      * Contain the nme of the template corresponding to the view object.
      *
      * @var string
      */
-    protected $_sTemplate = '';
+    protected $template = '';
 
     /**
      * Contains all assigned variables.
      *
      * @var array
      */
-    protected $_aVariables = array();
+    protected $variables = array();
 
     /**
      * The file name extension of the template files.
      *
      * @var string
      */
-    protected $_sTemplateExtension = 'phtml';
+    protected $templateExtension = 'phtml';
 
     /**
      * The path of the directory containing the template files.
      *
      * @var string
      */
-    protected $_sTemplateDirectory = null;
+    protected $templateDirectory = null;
 
     public function  __construct()
     {
-        $this->_sTemplateDirectory = realpath( __DIR__ . '/../../../../resource/tpl/');
+        $this->templateDirectory = realpath(__DIR__ . '/../../../resource/tpl/');
     }
 
     /**
      * Set the template for this view object.
      *
-     * @param string $sTemplate name of the template
+     * @param string $template name of the template
      *
      * @return $this the view object itself
      */
-    public function setTemplate( $sTemplate ) {
-        $this->_sTemplate = $sTemplate;
+    public function setTemplate($template)
+    {
+        $this->template = $template;
 
         return $this;
     }
@@ -75,13 +77,14 @@ class View {
     /**
      * Assigns a variable to the template.
      *
-     * @param string $sVariableName name of the assigned variable
-     * @param mixed $xVariableContent data containing the assigned variable
+     * @param string $variableName name of the assigned variable
+     * @param mixed $variableContent data containing the assigned variable
      *
      * @return $this the view object itself
      */
-    public function assignVariable( $sVariableName, $xVariableContent ) {
-        $this->_aVariables[ $sVariableName ] = $xVariableContent;
+    public function assignVariable($variableName, $variableContent)
+    {
+        $this->variables[$variableName] = $variableContent;
 
         return $this;
     }
@@ -91,14 +94,15 @@ class View {
      *
      * @return string the rendered HTML code
      */
-    public function render() {
-        $data = (object) $this->_aVariables;
+    public function render()
+    {
+        $data = (object)$this->variables;
         ob_start();
-        $sFilepath = $this->_sTemplateDirectory . '/' . $this->_sTemplate . '.' . $this->_sTemplateExtension;
-        include $sFilepath;
-        $sOutput = ob_get_contents();
+        $filePath = $this->templateDirectory . '/' . $this->template . '.' . $this->templateExtension;
+        include $filePath;
+        $output = ob_get_contents();
         ob_end_clean();
 
-        return $sOutput;
+        return $output;
     }
 }

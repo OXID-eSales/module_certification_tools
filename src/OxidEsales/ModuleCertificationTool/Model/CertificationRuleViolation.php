@@ -1,42 +1,43 @@
 <?php
 
 
-namespace Com\OxidEsales\ModuleCertificationTool\Model;
+namespace OxidEsales\ModuleCertificationTool\Model;
 
 
-class CertificationRuleViolation {
+class CertificationRuleViolation
+{
 
     /**
      * @var string
      */
-    private $sFile;
+    private $file;
 
     /**
      * @var int
      */
-    private $iLine;
+    private $line;
 
     /**
      * @var string
      */
-    private $sClass;
+    private $class;
 
     /**
      * @var string
      */
-    private $sMethod;
+    private $method;
 
     /**
      * @var string
      */
-    private $sNamespace;
+    private $namespace;
 
     /**
      * @param string $class
      */
-    public function setClass( $class )
+    public function setClass($class)
     {
-        $this->sClass = $class;
+        $this->class = $class;
     }
 
     /**
@@ -44,15 +45,15 @@ class CertificationRuleViolation {
      */
     public function getClass()
     {
-        return $this->sClass;
+        return $this->class;
     }
 
     /**
      * @param string $file
      */
-    public function setFile( $file )
+    public function setFile($file)
     {
-        $this->sFile = $file;
+        $this->file = $file;
     }
 
     /**
@@ -60,15 +61,15 @@ class CertificationRuleViolation {
      */
     public function getFile()
     {
-        return $this->sFile;
+        return $this->file;
     }
 
     /**
      * @param int $line
      */
-    public function setLine( $line )
+    public function setLine($line)
     {
-        $this->iLine = $line;
+        $this->line = $line;
     }
 
     /**
@@ -76,15 +77,15 @@ class CertificationRuleViolation {
      */
     public function getLine()
     {
-        return $this->iLine;
+        return $this->line;
     }
 
     /**
      * @param string $method
      */
-    public function setMethod( $method )
+    public function setMethod($method)
     {
-        $this->sMethod = $method;
+        $this->method = $method;
     }
 
     /**
@@ -92,15 +93,15 @@ class CertificationRuleViolation {
      */
     public function getMethod()
     {
-        return $this->sMethod;
+        return $this->method;
     }
 
     /**
      * @param string $namespace
      */
-    public function setNamespace( $namespace )
+    public function setNamespace($namespace)
     {
-        $this->sNamespace = $namespace;
+        $this->namespace = $namespace;
     }
 
     /**
@@ -108,9 +109,8 @@ class CertificationRuleViolation {
      */
     public function getNamespace()
     {
-        return $this->sNamespace;
+        return $this->namespace;
     }
 
 
-
-} 
+}

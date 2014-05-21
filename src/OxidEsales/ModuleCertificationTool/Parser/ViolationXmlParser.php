@@ -16,9 +16,9 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace Com\OxidEsales\ModuleCertificationTool\Parser;
+namespace OxidEsales\ModuleCertificationTool\Parser;
 
-use Com\OxidEsales\ModuleCertificationTool\Model\GeneralViolation;
+use OxidEsales\ModuleCertificationTool\Model\GeneralViolation;
 
 /**
  * Class ViolationXmlParser class for the application
@@ -28,9 +28,9 @@ class ViolationXmlParser
 
     public function parse( $xmlFileName )
     {
-        $oXml = simplexml_load_file( $xmlFileName );
+        $xml = simplexml_load_file( $xmlFileName );
 
-        return $this->parseViolations( $oXml );
+        return $this->parseViolations( $xml );
     }
 
     /**
@@ -38,19 +38,19 @@ class ViolationXmlParser
      *
      * @return array violations determined by a generic module
      */
-    public function parseViolations( $oXml )
+    public function parseViolations( $xml )
     {
-        $aViolations = array();
-        if ( isset( $oXml->failures->failure ) ) {
-            foreach ( $oXml->failures->failure as $failure ) {
+        $violations = array();
+        if ( isset( $xml->failures->failure ) ) {
+            foreach ( $xml->failures->failure as $failureElement ) {
                 $oViolation = new GeneralViolation();
 
-                $oViolation->setMessage( trim( (string)$failure ) );
+                $oViolation->setMessage( trim( (string)$failureElement ) );
 
-                $aViolations[ ] = $oViolation;
+                $violations[ ] = $oViolation;
             }
         }
 
-        return $aViolations;
+        return $violations;
     }
 }

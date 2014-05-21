@@ -14,7 +14,7 @@ TESTPATH=${MODULEPATH}/tests/
 
 if [ $CLOVER_LOCATION ] && [ ! -f $CLOVER_LOCATION ]
 then
-    echo "Clover file ${CLOVER_LOCATION} do not exist."
+    echo "Clover file ${CLOVER_LOCATION} does not exist."
     echo "Quit without running metrics"
     exit 0;
 fi

@@ -19,38 +19,39 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace Com\OxidEsales\ModuleCertificationTool;
+namespace OxidEsales\ModuleCertificationTool;
 
 /**
- * Class CertificationRuleViolationsController controller class for handling XML output file of generic check modules
+ * Class XmlController controller class for handling XML output file of generic check modules
  */
-class CertificationRuleViolationsController
+class GenericChecksController
 {
-
-    public function __construct( array $aViolations )
-    {
-        $this->aViolations = $aViolations;
-    }
-
 
     /**
      * Contains the Heading should be shown in output.
      *
      * @var string
      */
-    protected $_sHeading = '';
+    protected $heading = '';
+
+    protected $violations;
+
+    public function __construct(array $violations)
+    {
+        $this->violations = $violations;
+    }
 
 
     /**
      * Sets the heading that should be shown in output.
      *
-     * @param string $sHeading the heading for this XML file.
+     * @param string $heading the heading for this XML file.
      *
      * @return $this the controller ifself
      */
-    public function setHeading( $sHeading )
+    public function setHeading($heading)
     {
-        $this->_sHeading = $sHeading;
+        $this->heading = $heading;
 
         return $this;
     }
@@ -62,16 +63,16 @@ class CertificationRuleViolationsController
      */
     public function getHtml()
     {
-        $oView = new View();
-        $sHtml = "";
-        if ( count( $this->aViolations ) > 0 ) {
-            $sHtml = $oView->setTemplate( 'certViolationTable' )
-                ->assignVariable( 'aViolations', $this->aViolations )
-                ->assignVariable( 'sHeading', $this->_sHeading )
+        $view = new View();
+        $html = "";
+        if (count($this->violations) > 0) {
+            $html = $view->setTemplate('genericViolationList')
+                ->assignVariable('aViolations', $this->violations)
+                ->assignVariable('sHeading', $this->heading)
                 ->render();
         }
 
-        return $sHtml;
+        return $html;
     }
 
 } 
