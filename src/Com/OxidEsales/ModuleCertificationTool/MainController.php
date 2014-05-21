@@ -76,18 +76,27 @@ class MainController
 
         $oView->assignVariable('sCertificationResult', $sMdHtml);
 
-        $aCertViolationHtmls = array();
-        foreach ($oCertificationResult->getCertificationRules() as $ruleName => $certificationRule) {
-            /* @var \Com\OxidEsales\ModuleCertificationTool\Model\CertificationRule $certificationRule */
-            if ($certificationRule->getViolated()) {
-                $aViolations = $certificationRule->getViolations();
-                $oCertViolationsController = new CertificationRuleViolationsController($aViolations);
-                $oCertViolationsController->setHeading($ruleName);
-                $aCertViolationHtmls[] = $oCertViolationsController->getHtml();
-            }
+//        $aCertViolationHtmls = array();
+//        foreach ($oCertificationResult->getCertificationRules() as $ruleName => $certificationRule) {
+//            /* @var \Com\OxidEsales\ModuleCertificationTool\Model\CertificationRule $certificationRule */
+//            if ($certificationRule->getViolated()) {
+//                $aViolations = $certificationRule->getViolations();
+//                $oCertViolationsController = new CertificationRuleViolationsController($aViolations);
+//                $oCertViolationsController->setHeading($ruleName);
+//                $aCertViolationHtmls[] = $oCertViolationsController->getHtml();
+//            }
+//        }
+//
+//        $oView->assignVariable('aCertViolations', $aCertViolationHtmls);
+
+        $aFileViolationHtmls = array();
+        foreach ($oCertificationResult->getViolations() as $ruleName => $aViolations) {
+            $oCertViolationsController = new FileViolationsController($aViolations);
+            $oCertViolationsController->setHeading($ruleName);
+            $aFileViolationHtmls[] = $oCertViolationsController->getHtml();
         }
 
-        $oView->assignVariable('aCertViolations', $aCertViolationHtmls);
+        $oView->assignVariable('aFileViolations', $aFileViolationHtmls);
 
         $oXmlController = new GenericChecksController( $aDirectoryViolations );
         $sDirectoriesHtml = $oXmlController->setHeading( 'Directories' )->getHtml();

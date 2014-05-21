@@ -23,6 +23,11 @@ class CertificationResult
     private $aCertificationRules;
 
     /**
+     * @var array()
+     */
+    private $aViolations;
+
+    /**
      * @param array $aCertificationRules
      */
     public function setCertificationRules( $aCertificationRules )
@@ -73,6 +78,16 @@ class CertificationResult
     public function getPrice()
     {
         return $this->fPrice;
+    }
+
+    public function getViolations()
+    {
+        return $this->aViolations;
+    }
+
+    public function setViolations( $aViolations )
+    {
+        $this->aViolations = $aViolations;
     }
 
 

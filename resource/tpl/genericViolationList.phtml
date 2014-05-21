@@ -1,8 +1,12 @@
-<h3><?php echo $data->sHeading; ?></h3>
-<div>
-    <?php foreach ( $data->aViolations as $oViolation ) { ?>
-        <ul>
-            <li ><?php echo $oViolation->getMessage(); ?></li>
-        </ul>
-    <?php } ?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><?php echo $data->sHeading; ?></h3>
+    </div>
+    <div class="panel-body">
+        <?php foreach ( $data->aViolations as $oViolation ) { ?>
+            <ul>
+                <li ><?php echo $oViolation->getMessage(); ?></li>
+            </ul>
+        <?php } ?>
+    </div>
 </div>
