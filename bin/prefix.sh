@@ -33,10 +33,10 @@ touch $LOGFILE
 
 for DIR in ${DIRSTOCHECK[@]}
 do
-    if [ ! -d ${MODULEPATH}${DIR} ]; then
+    if [ ! -d ${MODULEPATH}"/"${DIR} ]; then
         continue
     fi
-    for FILE in $(find ${MODULEPATH}${DIR} -type f -name *.php -not -iwholename 'test')
+    for FILE in $(find ${MODULEPATH}"/"${DIR} -type f -name *.php -not -iwholename 'test')
     do
         a=${FILE##*/}
         if [ $PREFIX != ${a:0:${#PREFIX}} ]; then

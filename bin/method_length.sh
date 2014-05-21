@@ -29,10 +29,10 @@ touch $LOGFILE
 
 for DIR in ${DIRSTOCHECK[@]}
 do
-    if [ ! -d ${MODULEPATH}${DIR} ]; then
+    if [ ! -d ${MODULEPATH}"/"${DIR} ]; then
         continue
     fi
-    for FILE in $(find ${MODULEPATH}${DIR} -type f -name *.php -not -iwholename 'test' )
+    for FILE in $(find ${MODULEPATH}"/"${DIR} -type f -name *.php -not -iwholename 'test' )
     do
         POINTER=0
         LINESOFOCCURENCE=`grep -n "public function \|public static function \|protected function \|private function " $FILE |cut -f1 -d:`
