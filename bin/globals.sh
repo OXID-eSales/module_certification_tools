@@ -16,7 +16,7 @@ RESULT=success
 LOGFILE=$OUTPUTPATH"/globals.xml"
 if [ -f $LOGFILE ]
 then
-rm $LOGFILE
+    rm $LOGFILE
 fi
 touch $LOGFILE
 
@@ -30,8 +30,6 @@ done
 echo "</failures>"  >> $LOGFILE
 echo "</result>"  >> $LOGFILE
 
-
-# Beginning
 echo "<failures>" | cat - $LOGFILE > temp && mv temp $LOGFILE
 echo "<result type=\"$RESULT\">" | cat - $LOGFILE > temp && mv temp $LOGFILE
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" | cat - $LOGFILE > temp && mv temp $LOGFILE
