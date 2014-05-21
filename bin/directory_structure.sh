@@ -35,13 +35,18 @@ rm $LOGFILE
 fi
 touch $LOGFILE
 
-MODULEDIRS=`ls -l --time-style="long-iso" $MODULEPATH | egrep '^d' | awk '{print $8}'`
-
-for FILE in $MODULEDIRS
-do
-    if(! in_array ALLOWEDDIRS ${FILE} )
+for MODULEDIR in $(find $MODULEPATH -maxdepth 1 -type d )
+ do
+DIR=${MODULEDIR:${#MODULEPATH}}
+if [ ! $DIR ]; then
+ continue
+fi
+if [ ${DIR:0:1} == "/" ]; then
+DIR=${DIR: 1}
+fi
+    if(! in_array ALLOWEDDIRS ${DIR} )
     then
-        echo "<failure>Directory \""${FILE}"\" is not allowed</failure>"  >> $LOGFILE
+        echo "<failure>Directory \""${DIR}"\" is not allowed</failure>"  >> $LOGFILE
         RESULT=warning
     fi
 done
@@ -53,4 +58,3 @@ echo "</result>"  >> $LOGFILE
 echo "<failures>" | cat - $LOGFILE > temp && mv temp $LOGFILE
 echo "<result type=\"$RESULT\">" | cat - $LOGFILE > temp && mv temp $LOGFILE
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" | cat - $LOGFILE > temp && mv temp $LOGFILE
-
