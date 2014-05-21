@@ -30,6 +30,6 @@ $aConfiguration = array(
     'sOutputFile'       => $argv[1] . '/report.html'
 );
 
-$oController = new \Com\OxidEsales\ModuleCertificationTool\MainController();
+$oController = new OxidEsales\ModuleCertificationTool\MainController();
 $oController->setConfiguration( $aConfiguration )->indexAction();
 

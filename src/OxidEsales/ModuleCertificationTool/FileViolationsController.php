@@ -19,7 +19,7 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace Com\OxidEsales\ModuleCertificationTool;
+namespace OxidEsales\ModuleCertificationTool;
 
 /**
  * Class CertificationRuleViolationsController controller class for handling XML output file of generic check modules

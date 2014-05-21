@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Com\OxidEsales\ModuleCertificationTool\Model;
+namespace OxidEsales\ModuleCertificationTool\Model;
 
 
 class CertificationResult

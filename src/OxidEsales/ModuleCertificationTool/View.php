@@ -19,12 +19,13 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace Com\OxidEsales\ModuleCertificationTool;
+namespace OxidEsales\ModuleCertificationTool;
 
 /**
  * Class View class for handling the template files
  */
-class View {
+class View
+{
 
     /**
      * Contain the nme of the template corresponding to the view object.
@@ -56,7 +57,7 @@ class View {
 
     public function  __construct()
     {
-        $this->_sTemplateDirectory = realpath( __DIR__ . '/../../../../resource/tpl/');
+        $this->_sTemplateDirectory = realpath(__DIR__ . '/../../../resource/tpl/');
     }
 
     /**
@@ -66,7 +67,8 @@ class View {
      *
      * @return $this the view object itself
      */
-    public function setTemplate( $sTemplate ) {
+    public function setTemplate($sTemplate)
+    {
         $this->_sTemplate = $sTemplate;
 
         return $this;
@@ -80,8 +82,9 @@ class View {
      *
      * @return $this the view object itself
      */
-    public function assignVariable( $sVariableName, $xVariableContent ) {
-        $this->_aVariables[ $sVariableName ] = $xVariableContent;
+    public function assignVariable($sVariableName, $xVariableContent)
+    {
+        $this->_aVariables[$sVariableName] = $xVariableContent;
 
         return $this;
     }
@@ -91,8 +94,9 @@ class View {
      *
      * @return string the rendered HTML code
      */
-    public function render() {
-        $data = (object) $this->_aVariables;
+    public function render()
+    {
+        $data = (object)$this->_aVariables;
         ob_start();
         $sFilepath = $this->_sTemplateDirectory . '/' . $this->_sTemplate . '.' . $this->_sTemplateExtension;
         include $sFilepath;

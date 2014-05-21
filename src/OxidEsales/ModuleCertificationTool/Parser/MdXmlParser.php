@@ -19,14 +19,14 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace Com\OxidEsales\ModuleCertificationTool\Parser;
+namespace OxidEsales\ModuleCertificationTool\Parser;
 
-use Com\OxidEsales\ModuleCertificationTool\Model\CertificationResult;
-use Com\OxidEsales\ModuleCertificationTool\Model\CertificationRule;
-use Com\OxidEsales\ModuleCertificationTool\Model\CertificationRuleViolation;
-use Com\OxidEsales\ModuleCertificationTool\Model\FileViolation;
-use Com\OxidEsales\ModuleCertificationTool\Model\MdResult;
-use Com\OxidEsales\ModuleCertificationTool\Violation;
+use OxidEsales\ModuleCertificationTool\Model\CertificationResult;
+use OxidEsales\ModuleCertificationTool\Model\CertificationRule;
+use OxidEsales\ModuleCertificationTool\Model\CertificationRuleViolation;
+use OxidEsales\ModuleCertificationTool\Model\FileViolation;
+use OxidEsales\ModuleCertificationTool\Model\MdResult;
+use OxidEsales\ModuleCertificationTool\Violation;
 
 /**
  * Class MdXmlParser class for the application

@@ -19,10 +19,10 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace Com\OxidEsales\ModuleCertificationTool;
+namespace OxidEsales\ModuleCertificationTool;
 
-use Com\OxidEsales\ModuleCertificationTool\Model\CertificationResult;
-use Com\OxidEsales\ModuleCertificationTool\Model\ModuleCertificationResult;
+use OxidEsales\ModuleCertificationTool\Model\CertificationResult;
+use OxidEsales\ModuleCertificationTool\Model\ModuleCertificationResult;
 
 /**
  * Class CertificationPriceController controller class to handle the output of the OXMD module
