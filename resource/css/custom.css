@@ -1,16 +1,3 @@
-/*h1, h2, h3 {*/
-    /*text-align: center;*/
-/*}*/
-
-/*.result-table {*/
-    /*margin: 50px;*/
-/*}*/
-
-/*.result-table ul li.overflow-right {*/
-    /*direction: rtl;*/
-    /*overflow-x: hidden;*/
-/*}*/
-
-/*.result-table ul li.highlighted-cell {*/
-    /*background-color: #EEEEEE;*/
-/*}*/
+body {
+    padding-top: 60px;
+}

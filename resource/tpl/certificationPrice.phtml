@@ -2,6 +2,9 @@
     <h2>Certification Price</h2>
 </div>
 
+<div class="alert alert-info">Please note that the listed price is only an estimate. The actual price depends on the
+manual investigation of your module and might differ significantly.</div>
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Metrics</h3>
@@ -42,7 +45,7 @@
             <td class="text-right"><?php echo $data->oCertificationResult->getCertificationRule('Cyclomatic Complexity')->getFactor() ?></td>
         </tr>
         <tr>
-            <td colspan="3"></td>
+            <td colspan="3"><b>Total Factor</b></td>
             <td class="text-right"><b><?php echo $data->oCertificationResult->getFactor() ?></b></td>
         </tr>
         </tbody>
@@ -65,12 +68,12 @@
         <tr>
             <td>Basic factor price</td>
             <td>The basic factor price is multiplied by the determined software quality factor.</td>
-            <td class="text-right">119&euro;</td>
+            <td class="text-right">119,00&euro;</td>
         </tr>
         <tr>
             <td>Total factor price</td>
             <td>Multiply basic factor price by the total factor price</td>
-            <td class="text-right"><?php echo $data->oCertificationResult->getFactor() * 200 ?>&euro;</td>
+            <td class="text-right"><?php echo number_format($data->oCertificationResult->getFactor() * 200, 2, ',', '.') ?>&euro;</td>
         </tr>
         <!--        <tr>-->
         <!--            <td>Basic price software quality</td>-->
@@ -84,7 +87,7 @@
         <!--        </tr>-->
         <tr>
             <td colspan="2"><b>Total Certification Price</b></td>
-            <td class="text-right"><b><?php echo $data->oCertificationResult->getPrice() ?>&euro;</b></td>
+            <td class="text-right"><b><?php echo number_format($data->oCertificationResult->getPrice(), 2, ',', '.') ?>&euro;</b></td>
         </tr>
         </tbody>
     </table>
