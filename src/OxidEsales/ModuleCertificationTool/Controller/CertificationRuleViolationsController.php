@@ -19,17 +19,19 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace OxidEsales\ModuleCertificationTool;
+namespace OxidEsales\ModuleCertificationTool\Controller;
+
+use OxidEsales\ModuleCertificationTool\View;
 
 /**
  * Class CertificationRuleViolationsController controller class for handling XML output file of generic check modules
  */
-class FileViolationsController
+class CertificationRuleViolationsController
 {
 
     public function __construct( array $violations )
     {
-        $this->violations = $violations;
+        $this->aViolations = $violations;
     }
 
 
@@ -64,9 +66,9 @@ class FileViolationsController
     {
         $view = new View();
         $html = "";
-        if ( count( $this->violations ) > 0 ) {
-            $html = $view->setTemplate( 'fileViolationTable' )
-                ->assignVariable( 'aViolations', $this->violations )
+        if ( count( $this->aViolations ) > 0 ) {
+            $html = $view->setTemplate( 'certViolationTable' )
+                ->assignVariable( 'aViolations', $this->aViolations )
                 ->assignVariable( 'sHeading', $this->heading )
                 ->render();
         }

@@ -19,13 +19,21 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace OxidEsales\ModuleCertificationTool;
+namespace OxidEsales\ModuleCertificationTool\Controller;
+
+use OxidEsales\ModuleCertificationTool\View;
 
 /**
- * Class XmlController controller class for handling XML output file of generic check modules
+ * Class CertificationRuleViolationsController controller class for handling XML output file of generic check modules
  */
-class GenericChecksController
+class FileViolationsController
 {
+
+    public function __construct( array $violations )
+    {
+        $this->violations = $violations;
+    }
+
 
     /**
      * Contains the Heading should be shown in output.
@@ -33,13 +41,6 @@ class GenericChecksController
      * @var string
      */
     protected $heading = '';
-
-    protected $violations;
-
-    public function __construct(array $violations)
-    {
-        $this->violations = $violations;
-    }
 
 
     /**
@@ -49,7 +50,7 @@ class GenericChecksController
      *
      * @return $this the controller ifself
      */
-    public function setHeading($heading)
+    public function setHeading( $heading )
     {
         $this->heading = $heading;
 
@@ -65,10 +66,10 @@ class GenericChecksController
     {
         $view = new View();
         $html = "";
-        if (count($this->violations) > 0) {
-            $html = $view->setTemplate('genericViolationList')
-                ->assignVariable('aViolations', $this->violations)
-                ->assignVariable('sHeading', $this->heading)
+        if ( count( $this->violations ) > 0 ) {
+            $html = $view->setTemplate( 'fileViolationTable' )
+                ->assignVariable( 'aViolations', $this->violations )
+                ->assignVariable( 'sHeading', $this->heading )
                 ->render();
         }
 

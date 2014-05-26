@@ -19,11 +19,12 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace OxidEsales\ModuleCertificationTool;
+namespace OxidEsales\ModuleCertificationTool\Controller;
 
 use OxidEsales\ModuleCertificationTool\Model\ModuleCertificationResult;
 use OxidEsales\ModuleCertificationTool\Parser\MdXmlParser;
 use OxidEsales\ModuleCertificationTool\Parser\ViolationXmlParser;
+use OxidEsales\ModuleCertificationTool\View;
 
 /**
  * Class MainController main controller class for the application
