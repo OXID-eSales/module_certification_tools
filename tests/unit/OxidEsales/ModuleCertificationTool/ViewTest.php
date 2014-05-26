@@ -21,6 +21,8 @@
 
 namespace OxidEsales\ModuleCertificationTool;
 
+use PHPUnit_Framework_TestCase;
+
 class ViewTest extends PHPUnit_Framework_TestCase {
 
-} 
+}

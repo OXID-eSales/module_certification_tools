@@ -21,6 +21,8 @@
 
 namespace OxidEsales\ModuleCertificationTool\Parser;
 
+use PHPUnit_Framework_TestCase;
+
 class MdXmlParserTest extends PHPUnit_Framework_TestCase {
 
-} 
+}

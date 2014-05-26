@@ -21,6 +21,8 @@
 
 namespace OxidEsales\ModuleCertificationTool\Model;
 
+use PHPUnit_Framework_TestCase;
+
 class CertificationRuleViolationTest extends PHPUnit_Framework_TestCase {
 
-} 
+}

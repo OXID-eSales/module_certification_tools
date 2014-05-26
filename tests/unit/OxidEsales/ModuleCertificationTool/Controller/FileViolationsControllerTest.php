@@ -21,6 +21,8 @@
 
 namespace OxidEsales\ModuleCertificationTool\Controller;
 
+use PHPUnit_Framework_TestCase;
+
 class FileViolationsControllerTest extends PHPUnit_Framework_TestCase {
 
-} 
+}
