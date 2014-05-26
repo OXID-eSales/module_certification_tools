@@ -67,14 +67,15 @@ class oeCertificationDemoDefaultTest extends PHPUnit_Framework_TestCase
 
     /**
      * Method test second tree of getBySelection method.
+     * Commented, to lower code coverage
      *
      * @return null
      */
-//    public function testCallBySelectionWithB()
-//    {
-//        $oTest = new oeCertificationDemoDefault();
-//        $oTest->getBySelection( 'b' );
-//    }
+    public function testCallBySelectionWithB()
+    {
+        $oTest = new oeCertificationDemoDefault();
+        //        $oTest->getBySelection( 'b' );
+    }
 
     /**
      * Method test third tree of getBySelection method.
@@ -89,12 +90,13 @@ class oeCertificationDemoDefaultTest extends PHPUnit_Framework_TestCase
 
     /**
      * Method test fourth tree of getBySelection method.
+     * Commented, to lower code coverage
      *
      * @return null
      */
-    //    public function testCallBySelectionWithDifferent()
-    //    {
-    //        $oTest = new oeCertificationDemoDefault();
-    //        $oTest->getBySelection( 'x' );
-    //    }
+    public function testCallBySelectionWithDifferent()
+    {
+        $oTest = new oeCertificationDemoDefault();
+        //            $oTest->getBySelection( 'x' );
+    }
 }
