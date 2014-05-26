@@ -23,7 +23,7 @@ namespace OxidEsales\ModuleCertificationTool\Controller;
 
 use OxidEsales\ModuleCertificationTool\Model\ModuleCertificationResult;
 use OxidEsales\ModuleCertificationTool\Parser\MdXmlParser;
-use OxidEsales\ModuleCertificationTool\Parser\ViolationXmlParser;
+use OxidEsales\ModuleCertificationTool\Parser\GenericViolationXmlParser;
 use OxidEsales\ModuleCertificationTool\View;
 
 /**
@@ -64,7 +64,7 @@ class MainController
         $mdXmlParser = new MdXmlParser();
         $certificationResult = $mdXmlParser->parse( $this->configuration->sMdXmlFile );
 
-        $violationXmlParser = new ViolationXmlParser();
+        $violationXmlParser = new GenericViolationXmlParser();
         $directoryViolations = $violationXmlParser->parse( $this->configuration->sDirectoryXmlFile );
         $globalViolations = $violationXmlParser->parse( $this->configuration->sGlobalsXmlFile );
         $prefixViolations = $violationXmlParser->parse( $this->configuration->sPrefixXmlFile );

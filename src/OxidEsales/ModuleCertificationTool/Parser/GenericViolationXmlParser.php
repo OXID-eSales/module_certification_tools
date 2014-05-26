@@ -18,12 +18,12 @@
 
 namespace OxidEsales\ModuleCertificationTool\Parser;
 
-use OxidEsales\ModuleCertificationTool\Model\GeneralViolation;
+use OxidEsales\ModuleCertificationTool\Model\GenericViolation;
 
 /**
  * Class ViolationXmlParser class for the application
  */
-class ViolationXmlParser
+class GenericViolationXmlParser
 {
 
     public function parse( $xmlFileName )
@@ -43,7 +43,7 @@ class ViolationXmlParser
         $violations = array();
         if ( isset( $xml->failures->failure ) ) {
             foreach ( $xml->failures->failure as $failureElement ) {
-                $oViolation = new GeneralViolation();
+                $oViolation = new GenericViolation();
 
                 $oViolation->setMessage( trim( (string)$failureElement ) );
 

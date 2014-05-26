@@ -24,7 +24,7 @@ namespace OxidEsales\ModuleCertificationTool\Model;
 /**
  * Class Violation a data holding class for the violations of rules
  */
-class GeneralViolation
+class GenericViolation
 {
 
     /**
