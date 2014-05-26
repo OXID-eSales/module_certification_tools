@@ -33,7 +33,7 @@ manual investigation of your module and might differ significantly.</div>
         </tr>
         <tr>
             <td>NPath Complexity</td>
-            <td>HThe NPATH metric computes the number of possible execution paths through a function. It takes into account the nesting of conditional statements and multi-part boolean expressions (e.g., A && B, C || D, etc.).
+            <td>The NPATH metric computes the number of possible execution paths through a function. It takes into account the nesting of conditional statements and multi-part boolean expressions (e.g., A && B, C || D, etc.).
                 A NPATH Complexity over 200 is a good candidate for a closer decomposition.</td>
             <td class="text-right"><?php echo $data->oCertificationResult->getCertificationRule('NPath Complexity')->getValue() ?></td>
             <td class="text-right"><?php echo $data->oCertificationResult->getCertificationRule('NPath Complexity')->getFactor() ?></td>

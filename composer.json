@@ -1,17 +1,9 @@
 {
     "name": "oxid/modulecertificationtool",
     "license": "GPL-3.0",
-    "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [
-        {
-            "url": "https://github.com/OXID-eSales/oxmd.git",
-            "type": "git"
-        }
-    ],
     "require": {
-        "phpmd/oxmd": "dev-master",
-        "phpmd/phpmd": "dev-master",
+        "phpmd/oxmd": "1.0.*",
         "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
