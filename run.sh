@@ -22,11 +22,11 @@ BASEPATH=`pwd`;
 popd  > /dev/null
 
 # loading config file
-if [ ! -f "$BASEPATH""/config.cfg" ]; then
+if [ ! -f "${BASEPATH}/config.cfg" ]; then
   echo " ! ERROR: config file is not found, stops executing"
-  exit
+  exit 0;
 fi
-. "$BASEPATH""/config.cfg"
+.  "${BASEPATH}/config.cfg"
 
 ############insert here functionality to determine the path of output directory
 DATE=$(/bin/date +%Y%m%d%H%M%S)
@@ -42,7 +42,7 @@ if [ ${MODULEPATH: -1} == "/" ]; then
     MODULEPATH=${MODULEPATH%?}
 fi
 
-if [ ! -d "$MODULEPATH" ]; then
+if [ ! -d ${MODULEPATH} ]; then
   echo "ERROR: Modulepath incorrect! Please take a look into your config.cfg and edit CFG_MODULEPATH "
   exit 0;
 fi
@@ -66,22 +66,31 @@ while getopts ":dh" opt
         echo "|  h) show helping information "
         echo "************************************************"
         echo ""
+        exit 0
         ;;
       "?")
         echo "Invalid option $OPTARG"
+        exit 0
         ;;
       ":")
         echo "option $OPTARG requires an argument"
+        exit 0
         ;;
       *)
       # Should not occur
         echo "Unknown error while processing options"
+        exit 0
         ;;
     esac
   done
 
 ######################### Directory Cleaning
 ${BASEPATH}/bin/prepareOutputPath.sh $BASEPATH $OUTPUTDIR $DELETE_OLD_RUNS
+if [[ $? -eq 5 ]]; then
+    echo "Error in result path handling"
+    echo "Quit without running metrics"
+    exit 0;
+fi
 
 ######################### Run tests and oxmd for metrics
 ${BASEPATH}/bin/runTestsAndMetrics.sh $MODULEPATH $BASEPATH $OUTPUTDIR $CLOVER_LOCATION

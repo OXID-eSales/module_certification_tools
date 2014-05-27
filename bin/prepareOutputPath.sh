@@ -10,7 +10,7 @@ DELETE=$3
 
 # check for required parameters
 if [ ! ${BASEPATH} ] || [ ! ${OUTPUTDIR} ]; then
-    exit 0;
+    exit 5;
 fi
 
 # assamble base output path

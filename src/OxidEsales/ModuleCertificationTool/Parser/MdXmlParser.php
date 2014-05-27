@@ -38,6 +38,9 @@ class MdXmlParser
     {
         // workaround for simpleXML namespace issue
         $xmlString = file_get_contents( $xmlFileName );
+        if(empty($xmlString)){
+            return '';
+        }
         $xmlString = str_replace( '<oxid:', '<', $xmlString );
         $xmlString = str_replace( '</oxid:', '</', $xmlString );
         file_put_contents( $xmlFileName, $xmlString );
