@@ -56,14 +56,16 @@ class MainController
      */
     public function indexAction()
     {
+        $parserController = new ParserController();
+        $parserController->cleanUpXmlFile( $this->configuration->sMdXmlFile );
 
         $mdXmlParser         = new MdXmlParser();
-        $certificationResult = $mdXmlParser->parse( $this->configuration->sMdXmlFile );
+        $certificationResult = $mdXmlParser->parse( $parserController->getXmlObjectFromFile( $this->configuration->sMdXmlFile ) );
 
         $violationXmlParser  = new GenericViolationXmlParser();
-        $directoryViolations = $violationXmlParser->parse( $this->configuration->sDirectoryXmlFile );
-        $globalViolations    = $violationXmlParser->parse( $this->configuration->sGlobalsXmlFile );
-        $prefixViolations    = $violationXmlParser->parse( $this->configuration->sPrefixXmlFile );
+        $directoryViolations = $violationXmlParser->parse( $parserController->getXmlObjectFromFile( $this->configuration->sDirectoryXmlFile ) );
+        $globalViolations    = $violationXmlParser->parse( $parserController->getXmlObjectFromFile( $this->configuration->sGlobalsXmlFile ) );
+        $prefixViolations    = $violationXmlParser->parse( $parserController->getXmlObjectFromFile( $this->configuration->sPrefixXmlFile ) );
 
         $view = new View();
         $view->setTemplate( 'index' );

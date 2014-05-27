@@ -16,34 +16,34 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace OxidEsales\ModuleCertificationTool\Parser;
+namespace OxidEsales\ModuleCertificationTool\Controller;
 
-use OxidEsales\ModuleCertificationTool\Model\GenericViolation;
-
-/**
- * Class ViolationXmlParser class for the application
- */
-class GenericViolationXmlParser
-{
+class ParserController {
 
     /**
-     * Returns the violations from the XML output file.
+     * @param $xmlFileName
      *
-     * @return array violations determined by a generic module
+     * @return \SimpleXMLElement
      */
-    public function parse( $xml )
-    {
-        $violations = array();
-        if ( isset( $xml->failures->failure ) ) {
-            foreach ( $xml->failures->failure as $failureElement ) {
-                $oViolation = new GenericViolation();
+    public function getXmlObjectFromFile( $xmlFileName ) {
+        $oXml = simplexml_load_file( $xmlFileName );
 
-                $oViolation->setMessage( trim( (string)$failureElement ) );
-
-                $violations[ ] = $oViolation;
-            }
-        }
-
-        return $violations;
+        return $oXml;
     }
-}
+
+    /**
+     * @param $xmlFileName
+     *
+     * @return $this
+     */
+    public function cleanUpXmlFile( $xmlFileName ) {
+        // workaround for simpleXML namespace issue
+        $xmlString = file_get_contents( $xmlFileName );
+        $xmlString = str_replace( '<oxid:', '<', $xmlString );
+        $xmlString = str_replace( '</oxid:', '</', $xmlString );
+        file_put_contents( $xmlFileName, $xmlString );
+
+        return $this;
+    }
+
+} 

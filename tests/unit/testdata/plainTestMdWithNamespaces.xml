@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pmd xmlns:oxid="http://wiki.oxidforge.org/Certification/Modules" oxid:version="1.0.0" version="2.0.0-beta.7" timestamp="2014-05-14T16:25:36+02:00">
-  <certification factor="1" price="30">
-    <rule name="Code Coverage" threshold="90" value="0" factor="30" violated="true">
-      <file path="test.php" line="1" namespace="+global" class="testClass" method="testMethod" />
-    </rule>
-  </certification>
+  <oxid:certification factor="1" price="30">
+    <oxid:rule name="Code Coverage" threshold="90" value="0" factor="30" violated="true">
+      <oxid:file path="test.php" line="1" namespace="+global" class="testClass" method="testMethod" />
+    </oxid:rule>
+  </oxid:certification>
 </pmd>

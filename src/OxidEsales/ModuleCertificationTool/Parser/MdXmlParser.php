@@ -34,27 +34,11 @@ use OxidEsales\ModuleCertificationTool\Violation;
 class MdXmlParser
 {
 
-    public function parse( $xmlFileName )
-    {
-        // workaround for simpleXML namespace issue
-        $xmlString = file_get_contents( $xmlFileName );
-        if(empty($xmlString)){
-            return '';
-        }
-        $xmlString = str_replace( '<oxid:', '<', $xmlString );
-        $xmlString = str_replace( '</oxid:', '</', $xmlString );
-        file_put_contents( $xmlFileName, $xmlString );
-
-        $xml = simplexml_load_file( $xmlFileName );
-
-        return $this->parseXml( $xml );
-    }
-
     /**
      * @param $xml
      * @return CertificationResult
      */
-    public function parseXml( $xml )
+    public function parse( $xml )
     {
         $certificationResult = new CertificationResult();
 
@@ -82,7 +66,11 @@ class MdXmlParser
         return $certificationResult;
     }
 
-    public function parseFileViolations( $fileElement, &$fileViolations )
+    /**
+     * @param $fileElement
+     * @param $fileViolations
+     */
+    private function parseFileViolations( $fileElement, &$fileViolations )
     {
         $sFileName = $fileElement[ 'name' ];
         foreach ( $fileElement->violation as $violationElement ) {
@@ -104,7 +92,7 @@ class MdXmlParser
      * @param $ruleElement
      * @return CertificationRule
      */
-    public function parseCertificationRule( $ruleElement )
+    private function parseCertificationRule( $ruleElement )
     {
 
         $certificationRule = new CertificationRule();
@@ -123,7 +111,11 @@ class MdXmlParser
         return $certificationRule;
     }
 
-    public function parseFileElement( $fileElement )
+    /**
+     * @param $fileElement
+     * @return CertificationRuleViolation
+     */
+    private function parseFileElement( $fileElement )
     {
         $certificationRuleViolation = new CertificationRuleViolation();
 
@@ -139,6 +131,7 @@ class MdXmlParser
     /**
      * Get all violations of code metrics from the OXMD XML file.
      *
+     * @param $xml
      * @return array returns all violations of code metrics determind by OXMD
      */
     public function getViolations( $xml )
