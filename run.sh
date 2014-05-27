@@ -86,6 +86,11 @@ while getopts ":dh" opt
 
 ######################### Directory Cleaning
 ${BASEPATH}/bin/prepareOutputPath.sh $BASEPATH $OUTPUTDIR $DELETE_OLD_RUNS
+if [[ $? -eq 5 ]]; then
+    echo "Error in result path handling"
+    echo "Quit without running metrics"
+    exit 0;
+fi
 
 ######################### Run tests and oxmd for metrics
 ${BASEPATH}/bin/runTestsAndMetrics.sh $MODULEPATH $BASEPATH $OUTPUTDIR $CLOVER_LOCATION
