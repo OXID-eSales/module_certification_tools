@@ -166,43 +166,4 @@ class MdXmlParser
         return $violations;
     }
 
-    /**
-     * Returns a summary object with the important results of OXMD.
-     *
-     * @return object summary information of the OXMD XML file
-     */
-    public function getOverview( $xml )
-    {
-        $violations = array();
-        $overviewData = (object)array( 'sPrice' => null, 'sFactor' => null, 'aViolations' => array() );
-
-        $certification = $xml->certification;
-        $overviewData->sPrice = (string )$certification[ 'price' ];
-        $overviewData->sFactor = (string)$certification[ 'factor' ];
-
-        if ( isset( $certification->rule ) ) {
-            foreach ( $certification->rule as $ruleElement ) {
-                $violation = new Violation();
-                $violation->setViolated( ( (string)$ruleElement[ 'violated' ] ) == 'true' );
-                $violation->setType( (string)$ruleElement[ 'name' ] );
-                $violation->addInformation( 'Value', (string)$ruleElement[ 'value' ] );
-                $violation->addInformation( 'Factor', (string)$ruleElement[ 'factor' ] );
-
-                $violations[ $violation->getType() ] = $violation;
-
-                $files = array();
-                foreach ( $ruleElement->file as $oFile ) {
-                    $files[ ] = (string)$oFile[ 'class' ] . '::' . (string)$oFile[ 'method' ] . ' (' . (string)$oFile[ 'path' ] . ')';
-                }
-                $violation->addInformation( 'Files', $files );
-
-                $overviewData->aViolations[ ] = $violation;
-            }
-        }
-
-        var_dump( $violations );
-
-        return $overviewData;
-    }
-
 }

@@ -25,4 +25,18 @@ use PHPUnit_Framework_TestCase;
 
 class MainControllerTest extends PHPUnit_Framework_TestCase {
 
+/*    public function testIndexAction() {
+        $aConfiguration = array(
+            'sModulePath'       => __DIR__ . '../../../../demoModule',
+            'sMdXmlFile'        => __DIR__ . '/oxmd-result.xml',
+            'sDirectoryXmlFile' => __DIR__ . '/directory.xml',
+            'sGlobalsXmlFile'   => __DIR__ . '/globals.xml',
+            'sPrefixXmlFile'    => __DIR__ . '/prefix.xml',
+            'sOutputFile'       => __DIR__ . '/report.html'
+        );
+
+        $oController = new MainController();
+        $oController->setConfiguration( $aConfiguration )->indexAction();
+    }*/
+
 }
