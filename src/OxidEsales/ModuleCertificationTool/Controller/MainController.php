@@ -72,10 +72,12 @@ class MainController
         $view = new View();
         $view->setTemplate( 'index' );
 
-        $oController = new CertificationPriceController( $certificationResult );
-        $sMdHtml = $oController->getHtml();
+        $fileViolationHtmls = array( 'Error while processing clover xml: file not found' );
+        $sMdHtml = "";
+        if(!(empty($certificationResult))){
+            $oController = new CertificationPriceController( $certificationResult );
+            $sMdHtml = $oController->getHtml();
 
-        $view->assignVariable('sCertificationResult', $sMdHtml);
 
 //        $aCertViolationHtmls = array();
 //        foreach ($oCertificationResult->getCertificationRules() as $ruleName => $certificationRule) {
@@ -90,13 +92,15 @@ class MainController
 //
 //        $oView->assignVariable('aCertViolations', $aCertViolationHtmls);
 
-        $fileViolationHtmls = array();
-        foreach ($certificationResult->getViolations() as $ruleName => $fileViolations) {
-            $fileViolationsController = new FileViolationsController($fileViolations);
-            $fileViolationsController->setHeading($ruleName);
-            $fileViolationHtmls[] = $fileViolationsController->getHtml();
-        }
+//            $fileViolationHtmls = array();
+            foreach ($certificationResult->getViolations() as $ruleName => $fileViolations) {
+                $fileViolationsController = new FileViolationsController($fileViolations);
+                $fileViolationsController->setHeading($ruleName);
+                $fileViolationHtmls[] = $fileViolationsController->getHtml();
+            }
 
+        }
+        $view->assignVariable('sCertificationResult', $sMdHtml);
         $view->assignVariable('aFileViolations', $fileViolationHtmls);
 
         $genericChecksController = new GenericChecksController( $directoryViolations );
