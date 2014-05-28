@@ -24,7 +24,7 @@ namespace OxidEsales\ModuleCertificationTool\Model;
 use OxidEsales\ModuleCertificationTool\View;
 
 /**
- * Class CertificationRuleViolations controller class for handling XML output file of generic check modules
+ * Class CertificationRuleViolations class for handling XML output file of generic check modules
  */
 class CertificationRuleViolations
 {
