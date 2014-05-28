@@ -37,6 +37,14 @@ class CertificationPrice
         $this->result = $result;
     }
 
+    /**
+     * @return \OxidEsales\ModuleCertificationTool\Result\CertificationResult
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+
 
     /**
      * Returns the HTML code for the output of the OXMD file.
@@ -48,7 +56,7 @@ class CertificationPrice
 
         $view = new View();
         $html = $view->setTemplate( 'certificationPrice' )
-            ->assignVariable( 'oCertificationResult', $this->result )
+            ->assignVariable( 'oCertificationResult', $this->getResult() )
             ->render();
 
         return $html;

@@ -24,33 +24,72 @@ namespace OxidEsales\ModuleCertificationTool\Model;
 use OxidEsales\ModuleCertificationTool\View;
 
 /**
- * Class CertificationRuleViolations class for handling XML output file of generic check modules
+ * Class Violation class for handling XML output file of generic check modules
  */
-class CertificationRuleViolations
+class Violation
 {
 
-    public function __construct( array $violations )
-    {
-        $this->aViolations = $violations;
-    }
 
+    /**
+     * Contains the Vialations should be shown in output.
+     *
+     * @var array
+     */
+    private $violations;
 
     /**
      * Contains the Heading should be shown in output.
      *
      * @var string
      */
-    protected $heading = '';
+    private $heading = '';
 
+    /**
+     * Contains the template for output.
+     *
+     * @var string
+     */
+    private $template = '';
+
+    public function __construct(array $violations, $template)
+    {
+        $this->violations = $violations;
+        $this->template = $template;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getViolations()
+    {
+        return $this->violations;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeading()
+    {
+        return $this->heading;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
 
     /**
      * Sets the heading that should be shown in output.
      *
      * @param string $heading the heading for this XML file.
      *
-     * @return $this the controller ifself
+     * @return $this the controller itself
      */
-    public function setHeading( $heading )
+    public function setHeading($heading)
     {
         $this->heading = $heading;
 
@@ -66,10 +105,10 @@ class CertificationRuleViolations
     {
         $view = new View();
         $html = "";
-        if ( count( $this->aViolations ) > 0 ) {
-            $html = $view->setTemplate( 'certViolationTable' )
-                ->assignVariable( 'aViolations', $this->aViolations )
-                ->assignVariable( 'sHeading', $this->heading )
+        if (count($this->getViolations) > 0) {
+            $html = $view->setTemplate($this->getTemplate())
+                         ->assignVariable( 'aViolations', $this->getViolations() )
+                         ->assignVariable( 'sHeading', $this->getHeading() )
                 ->render();
         }
 

@@ -19,8 +19,7 @@
 namespace OxidEsales\ModuleCertificationTool\Controller;
 
 use OxidEsales\ModuleCertificationTool\Model\CertificationPrice;
-use OxidEsales\ModuleCertificationTool\Model\FileViolations;
-use OxidEsales\ModuleCertificationTool\Model\GenericChecks;
+use OxidEsales\ModuleCertificationTool\Model\Violation;
 use OxidEsales\ModuleCertificationTool\Parser\MdXmlParser;
 use OxidEsales\ModuleCertificationTool\Parser\GenericViolationXmlParser;
 use OxidEsales\ModuleCertificationTool\View;
@@ -78,7 +77,7 @@ class MainController
             $sMdHtml     = $oCertificationPrice->getHtml();
 
             foreach ( $certificationResult->getViolations() as $ruleName => $fileViolations ) {
-                $fileViolations = new FileViolations( $fileViolations );
+                $fileViolations = new Violation( $fileViolations, 'fileViolationTable' );
                 $fileViolations->setHeading( $ruleName );
                 $fileViolationHtmls[ ] = $fileViolations->getHtml();
             }
@@ -89,13 +88,13 @@ class MainController
         $view->assignVariable( 'sCertificationResult', $sMdHtml );
         $view->assignVariable( 'aFileViolations', $fileViolationHtmls );
 
-        $genericChecks = new GenericChecks( $directoryViolations );
+        $genericChecks = new Violation( $directoryViolations, 'genericViolationList' );
         $directoriesHtml         = $genericChecks->setHeading( 'Directories' )->getHtml();
 
-        $genericChecks = new GenericChecks( $globalViolations );
+        $genericChecks = new Violation( $globalViolations, 'genericViolationList' );
         $globalsHtml             = $genericChecks->setHeading( 'Globals' )->getHtml();
 
-        $genericChecks = new GenericChecks( $prefixViolations );
+        $genericChecks = new Violation( $prefixViolations, 'genericViolationList' );
         $prefixedHtml            = $genericChecks->setHeading( 'Prefixes' )->getHtml();
 
         $view->assignVariable(
