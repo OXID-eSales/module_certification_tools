@@ -55,9 +55,17 @@ class View
      */
     protected $templateDirectory = null;
 
+
     public function  __construct()
     {
-        $this->templateDirectory = realpath(__DIR__ . '/../../../resource/tpl/');
+        $this->templateDirectory = realpath(__DIR__ .
+                                            DIRECTORY_SEPARATOR . '..' .
+                                            DIRECTORY_SEPARATOR . '..' .
+                                            DIRECTORY_SEPARATOR . '..' .
+                                            DIRECTORY_SEPARATOR . 'resource' .
+                                            DIRECTORY_SEPARATOR . 'tpl' .
+                                            DIRECTORY_SEPARATOR
+        );
     }
 
     /**
@@ -96,9 +104,11 @@ class View
      */
     public function render()
     {
+        // Data is used in template file, so do not remove here
         $data = (object)$this->variables;
+
         ob_start();
-        $filePath = $this->templateDirectory . '/' . $this->template . '.' . $this->templateExtension;
+        $filePath = $this->templateDirectory . $this->template . '.' . $this->templateExtension;
         include $filePath;
         $output = ob_get_contents();
         ob_end_clean();
