@@ -71,7 +71,7 @@ class MainController
         $view = new View();
         $view->setTemplate( 'index' );
 
-        $fileViolationHtmls = array( 'Error while processing clover xml: file not found' );
+        $fileViolationHtmls = array();
         $sMdHtml            = "";
         if ( !( empty( $certificationResult ) ) ) {
             $oCertificationPrice = new CertificationPrice( $certificationResult );
@@ -82,6 +82,9 @@ class MainController
                 $fileViolations->setHeading( $ruleName );
                 $fileViolationHtmls[ ] = $fileViolations->getHtml();
             }
+        }
+        if ( empty($fileViolationHtmls) ){
+            $fileViolationHtmls = array( 'Error while processing clover xml: file not found' );
         }
         $view->assignVariable( 'sCertificationResult', $sMdHtml );
         $view->assignVariable( 'aFileViolations', $fileViolationHtmls );
