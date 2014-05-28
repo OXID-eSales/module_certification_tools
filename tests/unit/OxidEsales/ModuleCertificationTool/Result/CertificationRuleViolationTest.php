@@ -19,10 +19,10 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace OxidEsales\ModuleCertificationTool\Model;
+namespace OxidEsales\ModuleCertificationTool\Result;
 
 use PHPUnit_Framework_TestCase;
 
-class GenericViolationTest extends PHPUnit_Framework_TestCase {
+class CertificationRuleViolationTest extends PHPUnit_Framework_TestCase {
 
 }
