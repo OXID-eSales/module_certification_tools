@@ -21,8 +21,7 @@
 
 namespace OxidEsales\ModuleCertificationTool\Model;
 
-use OxidEsales\ModuleCertificationTool\Model\CertificationResult;
-use OxidEsales\ModuleCertificationTool\Model\ModuleCertificationResult;
+use OxidEsales\ModuleCertificationTool\Result\CertificationResult;
 use OxidEsales\ModuleCertificationTool\View;
 
 /**
