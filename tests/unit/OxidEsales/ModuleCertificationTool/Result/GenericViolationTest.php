@@ -80,10 +80,30 @@ class GenericViolationTest extends PHPUnit_Framework_TestCase
 
         $violation = new GenericViolation();
         $infoType  = 'type';
-        $addInfo  = $violation->getInformation( $infoType );
+        $addInfo   = $violation->getInformation( $infoType );
         $violation->addInformation( $infoType, $addInformation );
 
         $this->assertEmpty( $addInfo );
         $this->assertEquals( $addInformation, $violation->getInformation( $infoType ) );
+    }
+
+    /**
+     * Set up test environment
+     *
+     * @return null
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+    }
+
+    /**
+     * Tear down test environment
+     *
+     * @return null
+     */
+    protected function tearDown()
+    {
+        parent::tearDown();
     }
 }
