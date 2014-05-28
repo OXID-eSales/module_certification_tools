@@ -25,10 +25,25 @@ use PHPUnit_Framework_TestCase;
 
 class GenericViolationXmlParserTest extends PHPUnit_Framework_TestCase {
 
+    public function testXmlCreator() {
+        $testObject = new MdXmlParser();
+        $xml = $testObject->getXmlObjectFromFile( 'unit/testdata/plainTestMdNoNamespaces.xml' );
+        $this->assertInstanceOf( '\\SimpleXMLElement', $xml );
+    }
+
+    public function testXmlCreator_FileNotFound() {
+        $this->setExpectedException( '\Exception' );
+        $testObject = new MdXmlParser();
+        $testObject->getXmlObjectFromFile( 'unit/testdata/blablubb.###' );
+    }
+
     public function test() {
-        $sXml = '<?xml version="1.0" encoding="UTF-8"?><result type="warning"><failures><failure>Test</failure></failures></result>';
+        $xml = '<?xml version="1.0" encoding="UTF-8"?><result type="warning"><failures><failure>Test</failure></failures></result>';
+        $testObject = new GenericViolationXmlParser();
+        $violationList = $testObject->parse( simplexml_load_string( $xml ) );
 
-
-
+        $this->assertEquals( 1, count( $violationList ) );
+        $this->assertInstanceOf( '\\OxidEsales\\ModuleCertificationTool\\Result\\GenericViolation', $violationList[ 0 ] );
+        $this->assertEquals( 'Test', $violationList[ 0 ]->getMessage() );
     }
 }
