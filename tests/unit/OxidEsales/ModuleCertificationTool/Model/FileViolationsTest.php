@@ -19,10 +19,10 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace OxidEsales\ModuleCertificationTool\Controller;
+namespace OxidEsales\ModuleCertificationTool\Model;
 
 use PHPUnit_Framework_TestCase;
 
-class CertificationPriceControllerTest extends PHPUnit_Framework_TestCase {
+class FileViolationsTest extends PHPUnit_Framework_TestCase {
 
 }
