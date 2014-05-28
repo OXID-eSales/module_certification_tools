@@ -1,70 +1,78 @@
 <?php
 /**
  *    This file is part of the OXID module certification tool
- *
  *    The OXID module certification tool is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
  *    the Free Software Foundation, either version 3 of the License, or
  *    (at your option) any later version.
- *
  *    The OXID module certification tool is distributed in the hope that it will be useful,
  *    but WITHOUT ANY WARRANTY; without even the implied warranty of
  *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *    GNU General Public License for more details.
- *
  *    For further details, see <http://www.gnu.org/licenses/>.
  *
- * @link      http://www.oxid-esales.com
- * @package   OXID module certification tool
+ * @link          http://www.oxid-esales.com
+ * @package       OXID module certification tool
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-
 namespace OxidEsales\ModuleCertificationTool\Result;
 
-
+/**
+ * Class CertificationRule: This class is a data container holding information about violations that occur,
+ * name of rule, threshold, actual value und factor for price calculation.
+ *
+ * @package OxidEsales\ModuleCertificationTool\Result
+ */
 class CertificationRule
 {
 
     /**
-     * @var bool
+     * @var bool Flag that shows if a violation occur.
      */
-    private $violated;
+    private $violated = false;
 
     /**
-     * @var string
+     * @var string Name of rule
      */
-    private $name;
+    private $name = '';
 
     /**
-     * @var int
+     * @var int Max allowed value for rule
      */
-    private $threshold;
+    private $threshold = null;
 
     /**
-     * @var int
+     * @var int Actual value for rule
      */
-    private $value;
+    private $value = null;
 
     /**
-     * @var float
+     * @var float Factor to multiply base price with
      */
-    private $factor;
-    /**
-     * @var array
-     */
-    private $violations;
+    private $factor = 1;
 
     /**
-     * @param float $factor
+     * @var array Array of violations
      */
-    public function setFactor($factor)
+    private $violations = array();
+
+    /**
+     * Set the factor to multiply base price with.
+     *
+     * @param float $factor The factor
+     *
+     * @return null
+     */
+    public function setFactor( $factor )
     {
         $this->factor = $factor;
     }
 
     /**
-     * @return float
+     * Get the factor.
+     *
+     * @return float Factor
      */
     public function getFactor()
     {
@@ -72,15 +80,21 @@ class CertificationRule
     }
 
     /**
-     * @param string $name
+     * Set the name of certification rule.
+     *
+     * @param string $name Certification rule name.
+     *
+     * @return null
      */
-    public function setName($name)
+    public function setName( $name )
     {
         $this->name = $name;
     }
 
     /**
-     * @return string
+     * Get the name of certification rule.
+     *
+     * @return string $name Certification rule name.
      */
     public function getName()
     {
@@ -88,15 +102,21 @@ class CertificationRule
     }
 
     /**
-     * @param int $threshold
+     * Set the threshold for this current rule.
+     *
+     * @param int $threshold Max allowed value for rule
+     *
+     * @return null
      */
-    public function setThreshold($threshold)
+    public function setThreshold( $threshold )
     {
         $this->threshold = $threshold;
     }
 
     /**
-     * @return int
+     * Get the threshold for this rule.
+     *
+     * @return int Max allowed value
      */
     public function getThreshold()
     {
@@ -104,15 +124,21 @@ class CertificationRule
     }
 
     /**
-     * @param int $value
+     * Set the current value for this rule.
+     *
+     * @param int $value Actual value
+     *
+     * @return null
      */
-    public function setValue($value)
+    public function setValue( $value )
     {
         $this->value = $value;
     }
 
     /**
-     * @return int
+     * Get the actual value for this rule.
+     *
+     * @return int Actual value.
      */
     public function getValue()
     {
@@ -120,15 +146,21 @@ class CertificationRule
     }
 
     /**
-     * @param boolean $violated
+     * Set the flag to true if rule is violated.
+     *
+     * @param boolean $violated.
+     *
+     * @return null
      */
-    public function setViolated($violated)
+    public function setViolated( $violated )
     {
         $this->violated = $violated;
     }
 
     /**
-     * @return boolean
+     * Get information if a violation occur.
+     *
+     * @return boolean True if there was a violation.
      */
     public function getViolated()
     {
@@ -136,6 +168,8 @@ class CertificationRule
     }
 
     /**
+     * Get all violations.
+     *
      * @return CertificationRuleViolation[]
      */
     public function getViolations()
@@ -144,11 +178,14 @@ class CertificationRule
     }
 
     /**
+     * Set all violations.
+     *
      * @param CertificationRuleViolation[] $aViolations
+     *
+     * @return null
      */
-    public function setViolations($aViolations)
+    public function setViolations( $aViolations )
     {
         $this->violations = $aViolations;
     }
-
 }
