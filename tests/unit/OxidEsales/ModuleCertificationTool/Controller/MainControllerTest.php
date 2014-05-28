@@ -22,21 +22,46 @@
 namespace OxidEsales\ModuleCertificationTool\Controller;
 
 use PHPUnit_Framework_TestCase;
+use OxidEsales\ModuleCertificationTool\Controller\MainController;
 
-class MainControllerTest extends PHPUnit_Framework_TestCase {
+class MainControllerTest extends PHPUnit_Framework_TestCase
+{
 
-/*    public function testIndexAction() {
+    /**
+     * Tests the getter of violations.
+     *
+     * @return null
+     */
+    public function testSetConfiguration(){
         $aConfiguration = array(
-            'sModulePath'       => __DIR__ . '../../../../demoModule',
-            'sMdXmlFile'        => __DIR__ . '/oxmd-result.xml',
-            'sDirectoryXmlFile' => __DIR__ . '/directory.xml',
-            'sGlobalsXmlFile'   => __DIR__ . '/globals.xml',
-            'sPrefixXmlFile'    => __DIR__ . '/prefix.xml',
-            'sOutputFile'       => __DIR__ . '/report.html'
+            'sModulePath'      => '/var/www/htdocs/',
+            'sMdXmlFile'       => '/var/www/htdocs/oxmd-result.xml',
+            'sOutputFile'      => '/var/www/htdocs/report.html',
+            'aAdditionalTests' => array( 'Directories' => '/var/www/htdocs/directory.xml',
+                                         'Globals'     => '/var/www/htdocs/globals.xml',
+                                         'Prefixes'    => '/var/www/htdocs/prefix.xml' )
         );
 
         $oController = new MainController();
-        $oController->setConfiguration( $aConfiguration )->indexAction();
-    }*/
+        $returnObject = $oController->setConfiguration( $aConfiguration );
+        $this->assertInstanceOf('OxidEsales\ModuleCertificationTool\Controller\MainController', $returnObject);
+
+    }
+
+
+    public function testIndexAction() {
+        $aConfiguration = array(
+            'sModulePath'      => '/var/www/htdocs/',
+            'sMdXmlFile'       => '/var/www/htdocs/oxmd-result.xml',
+            'sOutputFile'      => '/var/www/htdocs/report.html',
+            'aAdditionalTests' => array( 'Directories' => '/var/www/htdocs/directory.xml',
+                                         'Globals'     => '/var/www/htdocs/globals.xml',
+                                         'Prefixes'    => '/var/www/htdocs/prefix.xml' )
+        );
+
+        $oController = new MainController();
+        $returnObject = $oController->setConfiguration( $aConfiguration )->indexAction();
+        $this->assertInstanceOf('OxidEsales\ModuleCertificationTool\Controller\MainController', $returnObject);
+    }
 
 }
