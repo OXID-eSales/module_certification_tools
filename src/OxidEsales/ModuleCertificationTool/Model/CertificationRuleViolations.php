@@ -19,14 +19,14 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace OxidEsales\ModuleCertificationTool\Controller;
+namespace OxidEsales\ModuleCertificationTool\Model;
 
 use OxidEsales\ModuleCertificationTool\View;
 
 /**
- * Class CertificationRuleViolationsController controller class for handling XML output file of generic check modules
+ * Class CertificationRuleViolations controller class for handling XML output file of generic check modules
  */
-class CertificationRuleViolationsController
+class CertificationRuleViolations
 {
 
     public function __construct( array $violations )
@@ -76,4 +76,4 @@ class CertificationRuleViolationsController
         return $html;
     }
 
-} 
+}

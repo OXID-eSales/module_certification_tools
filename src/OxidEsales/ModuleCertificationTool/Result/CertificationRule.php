@@ -20,7 +20,7 @@
  */
 
 
-namespace OxidEsales\ModuleCertificationTool\Model;
+namespace OxidEsales\ModuleCertificationTool\Result;
 
 
 class CertificationRule

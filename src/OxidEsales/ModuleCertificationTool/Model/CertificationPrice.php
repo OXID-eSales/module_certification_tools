@@ -19,16 +19,16 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace OxidEsales\ModuleCertificationTool\Controller;
+namespace OxidEsales\ModuleCertificationTool\Model;
 
 use OxidEsales\ModuleCertificationTool\Model\CertificationResult;
 use OxidEsales\ModuleCertificationTool\Model\ModuleCertificationResult;
 use OxidEsales\ModuleCertificationTool\View;
 
 /**
- * Class CertificationPriceController controller class to handle the output of the OXMD module
+ * Class CertificationPrice controller class to handle the output of the OXMD module
  */
-class CertificationPriceController
+class CertificationPrice
 {
 
     private $result;

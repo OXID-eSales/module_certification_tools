@@ -21,18 +21,42 @@
 
 namespace OxidEsales\ModuleCertificationTool\Parser;
 
-use OxidEsales\ModuleCertificationTool\Model\CertificationResult;
-use OxidEsales\ModuleCertificationTool\Model\CertificationRule;
-use OxidEsales\ModuleCertificationTool\Model\CertificationRuleViolation;
-use OxidEsales\ModuleCertificationTool\Model\FileViolation;
-use OxidEsales\ModuleCertificationTool\Model\MdResult;
-use OxidEsales\ModuleCertificationTool\Violation;
+use OxidEsales\ModuleCertificationTool\Result\CertificationResult;
+use OxidEsales\ModuleCertificationTool\Result\CertificationRule;
+use OxidEsales\ModuleCertificationTool\Result\CertificationRuleViolation;
+use OxidEsales\ModuleCertificationTool\Result\FileViolation;
 
 /**
  * Class MdXmlParser class for the application
  */
 class MdXmlParser
 {
+
+    /**
+     * @param $xmlFileName
+     *
+     * @return \SimpleXMLElement
+     */
+    public function getXmlObjectFromFile( $xmlFileName ) {
+        $oXml = simplexml_load_file( $xmlFileName );
+
+        return $oXml;
+    }
+
+    /**
+     * @param $xmlFileName
+     *
+     * @return $this
+     */
+    public function cleanUpXmlFile( $xmlFileName ) {
+        // workaround for simpleXML namespace issue
+        $xmlString = file_get_contents( $xmlFileName );
+        $xmlString = str_replace( '<oxid:', '<', $xmlString );
+        $xmlString = str_replace( '</oxid:', '</', $xmlString );
+        file_put_contents( $xmlFileName, $xmlString );
+
+        return $this;
+    }
 
     /**
      * @param $xml

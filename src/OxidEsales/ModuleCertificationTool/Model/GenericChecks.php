@@ -19,14 +19,14 @@
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
-namespace OxidEsales\ModuleCertificationTool\Controller;
+namespace OxidEsales\ModuleCertificationTool\Model;
 
 use OxidEsales\ModuleCertificationTool\View;
 
 /**
- * Class XmlController controller class for handling XML output file of generic check modules
+ * Class GenericChecks class for handling XML output file of generic check modules
  */
-class GenericChecksController
+class GenericChecks
 {
 
     /**
@@ -77,4 +77,4 @@ class GenericChecksController
         return $html;
     }
 
-} 
+}

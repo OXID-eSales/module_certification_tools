@@ -18,6 +18,9 @@
 
 namespace OxidEsales\ModuleCertificationTool\Controller;
 
+use OxidEsales\ModuleCertificationTool\Model\CertificationPrice;
+use OxidEsales\ModuleCertificationTool\Model\FileViolations;
+use OxidEsales\ModuleCertificationTool\Model\GenericChecks;
 use OxidEsales\ModuleCertificationTool\Parser\MdXmlParser;
 use OxidEsales\ModuleCertificationTool\Parser\GenericViolationXmlParser;
 use OxidEsales\ModuleCertificationTool\View;
@@ -56,16 +59,14 @@ class MainController
      */
     public function indexAction()
     {
-        $parserController = new ParserController();
-        $parserController->cleanUpXmlFile( $this->configuration->sMdXmlFile );
-
         $mdXmlParser         = new MdXmlParser();
-        $certificationResult = $mdXmlParser->parse( $parserController->getXmlObjectFromFile( $this->configuration->sMdXmlFile ) );
+        $mdXmlParser->cleanUpXmlFile( $this->configuration->sMdXmlFile );
+        $certificationResult = $mdXmlParser->parse( $mdXmlParser->getXmlObjectFromFile( $this->configuration->sMdXmlFile ) );
 
         $violationXmlParser  = new GenericViolationXmlParser();
-        $directoryViolations = $violationXmlParser->parse( $parserController->getXmlObjectFromFile( $this->configuration->sDirectoryXmlFile ) );
-        $globalViolations    = $violationXmlParser->parse( $parserController->getXmlObjectFromFile( $this->configuration->sGlobalsXmlFile ) );
-        $prefixViolations    = $violationXmlParser->parse( $parserController->getXmlObjectFromFile( $this->configuration->sPrefixXmlFile ) );
+        $directoryViolations = $violationXmlParser->parse( $violationXmlParser->getXmlObjectFromFile( $this->configuration->sDirectoryXmlFile ) );
+        $globalViolations    = $violationXmlParser->parse( $violationXmlParser->getXmlObjectFromFile( $this->configuration->sGlobalsXmlFile ) );
+        $prefixViolations    = $violationXmlParser->parse( $violationXmlParser->getXmlObjectFromFile( $this->configuration->sPrefixXmlFile ) );
 
         $view = new View();
         $view->setTemplate( 'index' );
@@ -73,26 +74,26 @@ class MainController
         $fileViolationHtmls = array( 'Error while processing clover xml: file not found' );
         $sMdHtml            = "";
         if ( !( empty( $certificationResult ) ) ) {
-            $oController = new CertificationPriceController( $certificationResult );
-            $sMdHtml     = $oController->getHtml();
+            $oCertificationPrice = new CertificationPrice( $certificationResult );
+            $sMdHtml     = $oCertificationPrice->getHtml();
 
             foreach ( $certificationResult->getViolations() as $ruleName => $fileViolations ) {
-                $fileViolationsController = new FileViolationsController( $fileViolations );
-                $fileViolationsController->setHeading( $ruleName );
-                $fileViolationHtmls[ ] = $fileViolationsController->getHtml();
+                $fileViolations = new FileViolations( $fileViolations );
+                $fileViolations->setHeading( $ruleName );
+                $fileViolationHtmls[ ] = $fileViolations->getHtml();
             }
         }
         $view->assignVariable( 'sCertificationResult', $sMdHtml );
         $view->assignVariable( 'aFileViolations', $fileViolationHtmls );
 
-        $genericChecksController = new GenericChecksController( $directoryViolations );
-        $directoriesHtml         = $genericChecksController->setHeading( 'Directories' )->getHtml();
+        $genericChecks = new GenericChecks( $directoryViolations );
+        $directoriesHtml         = $genericChecks->setHeading( 'Directories' )->getHtml();
 
-        $genericChecksController = new GenericChecksController( $globalViolations );
-        $globalsHtml             = $genericChecksController->setHeading( 'Globals' )->getHtml();
+        $genericChecks = new GenericChecks( $globalViolations );
+        $globalsHtml             = $genericChecks->setHeading( 'Globals' )->getHtml();
 
-        $genericChecksController = new GenericChecksController( $prefixViolations );
-        $prefixedHtml            = $genericChecksController->setHeading( 'Prefixes' )->getHtml();
+        $genericChecks = new GenericChecks( $prefixViolations );
+        $prefixedHtml            = $genericChecks->setHeading( 'Prefixes' )->getHtml();
 
         $view->assignVariable(
              'aGenericChecks',
