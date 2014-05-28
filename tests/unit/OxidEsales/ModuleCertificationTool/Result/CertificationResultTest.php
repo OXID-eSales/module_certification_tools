@@ -20,6 +20,11 @@ namespace OxidEsales\ModuleCertificationTool\Result;
 
 use PHPUnit_Framework_TestCase;
 
+/**
+ * Class CertificationResultTest
+ *
+ * @package OxidEsales\ModuleCertificationTool\Result
+ */
 class CertificationResultTest extends PHPUnit_Framework_TestCase
 {
     /**
