@@ -40,6 +40,7 @@ class GenericViolationXmlParser
     /**
      * Returns the violations from the XML output file.
      *
+     * @param $xml
      * @return array violations determined by a generic module
      */
     public function parse( $xml )

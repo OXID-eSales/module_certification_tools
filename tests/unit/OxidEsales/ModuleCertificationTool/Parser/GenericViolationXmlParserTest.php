@@ -25,4 +25,10 @@ use PHPUnit_Framework_TestCase;
 
 class GenericViolationXmlParserTest extends PHPUnit_Framework_TestCase {
 
+    public function test() {
+        $sXml = '<?xml version="1.0" encoding="UTF-8"?><result type="warning"><failures><failure>Test</failure></failures></result>';
+
+
+
+    }
 }

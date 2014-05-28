@@ -31,13 +31,20 @@ use OxidEsales\ModuleCertificationTool\Result\FileViolation;
  */
 class MdXmlParser
 {
-
     /**
      * @param $xmlFileName
      *
      * @return \SimpleXMLElement
+     * @throws \Exception
      */
     public function getXmlObjectFromFile( $xmlFileName ) {
+        if ( !is_file( $xmlFileName ) ) {
+            throw new \Exception( 'file ' . $xmlFileName . ' was not found' );
+        }
+        if ( !is_readable( $xmlFileName ) ) {
+            throw new \Exception( 'file ' . $xmlFileName . ' is not readable' );
+        }
+
         $oXml = simplexml_load_file( $xmlFileName );
 
         return $oXml;
@@ -47,22 +54,32 @@ class MdXmlParser
      * @param $xmlFileName
      *
      * @return $this
+     * @throws \Exception
      */
     public function cleanUpXmlFile( $xmlFileName ) {
         // workaround for simpleXML namespace issue
+        if ( !is_file( $xmlFileName ) ) {
+            throw new \Exception( 'file ' . $xmlFileName . ' was not found' );
+        }
+        if ( !is_readable( $xmlFileName ) ) {
+            throw new \Exception( 'file ' . $xmlFileName . ' is not readable' );
+        }
+
         $xmlString = file_get_contents( $xmlFileName );
         $xmlString = str_replace( '<oxid:', '<', $xmlString );
         $xmlString = str_replace( '</oxid:', '</', $xmlString );
+
         file_put_contents( $xmlFileName, $xmlString );
 
         return $this;
     }
 
     /**
-     * @param $xml
+     * @param \SimpleXMLElement $xml
+     *
      * @return CertificationResult
      */
-    public function parse( $xml )
+    public function parse( \SimpleXMLElement $xml )
     {
         $certificationResult = new CertificationResult();
 
@@ -83,7 +100,7 @@ class MdXmlParser
 
         $fileViolations = array();
         foreach ( $xml->file as $fileElement ) {
-            $this->parseFileViolations( $fileElement, $fileViolations );
+            $fileViolations = $this->parseFileViolations( $fileElement, $fileViolations );
         }
         $certificationResult->setViolations( $fileViolations );
 
@@ -93,8 +110,10 @@ class MdXmlParser
     /**
      * @param $fileElement
      * @param $fileViolations
+     *
+     * @return array
      */
-    private function parseFileViolations( $fileElement, &$fileViolations )
+    private function parseFileViolations( $fileElement, $fileViolations )
     {
         $sFileName = $fileElement[ 'name' ];
         foreach ( $fileElement->violation as $violationElement ) {
@@ -110,10 +129,13 @@ class MdXmlParser
             }
             $fileViolations[ $fileViolation->getRule() ][ ] = $fileViolation;
         }
+
+        return $fileViolations;
     }
 
     /**
      * @param $ruleElement
+     *
      * @return CertificationRule
      */
     private function parseCertificationRule( $ruleElement )
@@ -137,6 +159,7 @@ class MdXmlParser
 
     /**
      * @param $fileElement
+     *
      * @return CertificationRuleViolation
      */
     private function parseFileElement( $fileElement )
@@ -151,39 +174,4 @@ class MdXmlParser
 
         return $certificationRuleViolation;
     }
-
-    /**
-     * Get all violations of code metrics from the OXMD XML file.
-     *
-     * @param $xml
-     * @return array returns all violations of code metrics determind by OXMD
-     */
-    public function getViolations( $xml )
-    {
-        $violations = array();
-
-        foreach ( $xml->file as $oFile ) {
-            $sName = (string)$oFile[ 'name' ];
-
-            if ( isset( $oFile->violation ) ) {
-                foreach ( $oFile->violation as $oViolation ) {
-                    $outputViolation = new Violation();
-
-                    $outputViolation->setFile( $sName )
-                        ->setType( (string)$oViolation[ 'rule' ] )
-                        ->addInformation( 'Begin', (int)$oViolation[ 'beginline' ] )
-                        ->addInformation( 'End', (int)$oViolation[ 'endline' ] )
-                        ->addInformation( 'Package', (string)$oViolation[ 'package' ] )
-                        ->addInformation( 'Class', (string)$oViolation[ 'class' ] )
-                        ->addInformation( 'Method', (string)$oViolation[ 'method' ] )
-                        ->setMessage( trim( (string)$oViolation ) );
-
-                    $violations[ ] = $outputViolation;
-                }
-            }
-        }
-
-        return $violations;
-    }
-
 }
