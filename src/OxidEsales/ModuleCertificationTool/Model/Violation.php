@@ -105,7 +105,7 @@ class Violation
     {
         $view = new View();
         $html = "";
-        if (count($this->getViolations) > 0) {
+        if (count($this->getViolations()) > 0) {
             $html = $view->setTemplate($this->getTemplate())
                          ->assignVariable( 'aViolations', $this->getViolations() )
                          ->assignVariable( 'sHeading', $this->getHeading() )
