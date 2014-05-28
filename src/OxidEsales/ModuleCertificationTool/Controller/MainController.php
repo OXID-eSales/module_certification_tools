@@ -102,7 +102,7 @@ class MainController
     {
         $genericHtml=array();
         $violationXmlParser = new GenericViolationXmlParser();
-        foreach(  $this->configuration->aAdditionalTests AS $header => $file ){
+        foreach(  $this->configuration->aAdditionalTests as $header => $file ){
             $violation = $violationXmlParser->parse( $violationXmlParser->getXmlObjectFromFile( $file ) );
             $genericCheck        = new Violation( $violation, 'genericViolationList' );
             $genericHtml[]       = $genericCheck->setHeading( $header )->getHtml();
