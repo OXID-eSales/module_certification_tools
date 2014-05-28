@@ -58,54 +58,67 @@ class MainController
      */
     public function indexAction()
     {
-        $mdXmlParser         = new MdXmlParser();
-        $mdXmlParser->cleanUpXmlFile( $this->configuration->sMdXmlFile );
-        $certificationResult = $mdXmlParser->parse( $mdXmlParser->getXmlObjectFromFile( $this->configuration->sMdXmlFile ) );
-
-        $violationXmlParser  = new GenericViolationXmlParser();
-        $directoryViolations = $violationXmlParser->parse( $violationXmlParser->getXmlObjectFromFile( $this->configuration->sDirectoryXmlFile ) );
-        $globalViolations    = $violationXmlParser->parse( $violationXmlParser->getXmlObjectFromFile( $this->configuration->sGlobalsXmlFile ) );
-        $prefixViolations    = $violationXmlParser->parse( $violationXmlParser->getXmlObjectFromFile( $this->configuration->sPrefixXmlFile ) );
-
         $view = new View();
         $view->setTemplate( 'index' );
 
-        $fileViolationHtmls = array();
-        $sMdHtml            = "";
-        if ( !( empty( $certificationResult ) ) ) {
-            $oCertificationPrice = new CertificationPrice( $certificationResult );
-            $sMdHtml     = $oCertificationPrice->getHtml();
+        $fileViolationHtmls  = array( 'Error while processing clover xml: file not found' );
+        $sMdHtml             = "";
 
-            foreach ( $certificationResult->getViolations() as $ruleName => $fileViolations ) {
-                $fileViolations = new Violation( $fileViolations, 'fileViolationTable' );
-                $fileViolations->setHeading( $ruleName );
-                $fileViolationHtmls[ ] = $fileViolations->getHtml();
-            }
-        }
-        if ( empty($fileViolationHtmls) ){
-            $fileViolationHtmls = array( 'Error while processing clover xml: file not found' );
+        $certificationResult = $this->parseMd();
+        if ( !( empty( $certificationResult ) ) ) {
+            $sMdHtml            = $this->getPrice( $certificationResult );
+            $fileViolationHtmls = $this->getFileViolations( $certificationResult );
         }
         $view->assignVariable( 'sCertificationResult', $sMdHtml );
         $view->assignVariable( 'aFileViolations', $fileViolationHtmls );
 
-        $genericChecks = new Violation( $directoryViolations, 'genericViolationList' );
-        $directoriesHtml         = $genericChecks->setHeading( 'Directories' )->getHtml();
-
-        $genericChecks = new Violation( $globalViolations, 'genericViolationList' );
-        $globalsHtml             = $genericChecks->setHeading( 'Globals' )->getHtml();
-
-        $genericChecks = new Violation( $prefixViolations, 'genericViolationList' );
-        $prefixedHtml            = $genericChecks->setHeading( 'Prefixes' )->getHtml();
-
-        $view->assignVariable(
-             'aGenericChecks',
-             array( $directoriesHtml, $globalsHtml, $prefixedHtml )
-        );
+        $genericHtml = $this->parseGeneric();
+        $view->assignVariable( 'aGenericChecks', $genericHtml );
 
         $html = $view->render();
 
         file_put_contents( $this->configuration->sOutputFile, $html );
 
         return $this;
+    }
+
+    private function getPrice( $certificationResult )
+    {
+        $oCertificationPrice = new CertificationPrice( $certificationResult );
+
+        return $oCertificationPrice->getHtml();
+    }
+
+    private function parseMd()
+    {
+        $mdXmlParser = new MdXmlParser();
+        $mdXmlParser->cleanUpXmlFile( $this->configuration->sMdXmlFile );
+        $certificationResult = $mdXmlParser->parse( $mdXmlParser->getXmlObjectFromFile( $this->configuration->sMdXmlFile ) );
+
+        return $certificationResult;
+    }
+
+    private function parseGeneric()
+    {
+        $genericHtml=array();
+        $violationXmlParser = new GenericViolationXmlParser();
+        foreach(  $this->configuration->aAdditionalTests AS $header => $file ){
+            $violation = $violationXmlParser->parse( $violationXmlParser->getXmlObjectFromFile( $file ) );
+            $genericCheck        = new Violation( $violation, 'genericViolationList' );
+            $genericHtml[]       = $genericCheck->setHeading( $header )->getHtml();
+        }
+        return $genericHtml;
+    }
+
+    private function getFileViolations( $certificationResult )
+    {
+        $fileViolationHtmls = array();
+        foreach ( $certificationResult->getViolations() as $ruleName => $fileViolations ) {
+            $fileViolations = new Violation( $fileViolations, 'fileViolationTable' );
+            $fileViolations->setHeading( $ruleName );
+            $fileViolationHtmls[ ] = $fileViolations->getHtml();
+        }
+
+        return $fileViolationHtmls;
     }
 }
