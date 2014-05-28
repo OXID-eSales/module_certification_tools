@@ -28,5 +28,7 @@ $aConfiguration = array(
 );
 
 $oController = new OxidEsales\ModuleCertificationTool\Controller\MainController();
-$oController->setConfiguration( $aConfiguration )->indexAction();
+$oController
+    ->setConfiguration( $aConfiguration )
+    ->indexAction();
 
