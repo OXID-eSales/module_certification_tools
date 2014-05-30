@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<pmd xmlns:oxid="http://wiki.oxidforge.org/Certification/Modules" oxid:version="1.0.0" version="2.0.0-beta.7" timestamp="2014-05-14T16:21:37+02:00">
-  <file name="/htdocs/efire/module/evilController.php">
-    <violation beginline="17" endline="26" rule="Coverage" ruleset="Oxid Certification Rules" package="+global" externalInfoUrl="http://phpmd.org/rules/coverage.html#coverage" class="evilController" method="evilAction" priority="3">
-      Method evilController::evilAction has a Code Coverage of 0%, this metric should at least be a 90%.
-    </violation>
-  </file>
-
-  <certification factor="4" price="120">
+<pmd xmlns:oxid="http://wiki.oxidforge.org/Certification/Modules" oxid:version="1.0.0" version="2.0.0-beta.7" timestamp="2014-05-14T16:25:36+02:00">
+  <certification factor="816048850.5" price="163209770219">
     <rule name="Code Coverage" threshold="90" value="0" factor="30" violated="true">
-      <file path="/htdocs/efire/module/evilClass.php" line="21" namespace="+global" class="evilClass" method="evilMethod" />
+      <file path="/htdocs/efire/eplmodule/oe/oepl/controllers/admin/oeplArticleFilterListController.php" line="21" namespace="+global" class="oeplArticleFilterListController" method="listArticleFilter" />
+    </rule>
+    <rule name="C.R.A.P Index" threshold="30" value="1806" factor="178.6" violated="true">
+      <file path="/htdocs/efire/eplmodule/oe/oepl/controllers/admin/oeplCampaignController.php" line="275" namespace="+global" class="oeplCampaignController" method="_assignSelectedRecurrence" />
+      <file path="/htdocs/efire/eplmodule/oe/oepl/tests/libs/vfsStream/vfsStreamWrapper.php" line="221" namespace="bovigo_vfs" class="vfsStreamWrapper" method="stream_open" />
+      <file path="/htdocs/efire/eplmodule/oe/oepl/tests/unit/dbMaintenance.php" line="34" namespace="+global" class="dbMaintenance" method="restoreDB" />
+    </rule>
+    <rule name="NPath Complexity" threshold="200" value="390625" factor="3905.25" violated="true">
+      <file path="/htdocs/efire/eplmodule/oe/oepl/tests/MC_Metrics.php" line="57" namespace="+global" class="Metrics" method="_readFunction" />
+    </rule>
+    <rule name="Cyclomatic Complexity" threshold="4" value="42" factor="39" violated="true">
+      <file path="/htdocs/efire/eplmodule/oe/oepl/controllers/admin/oeplCampaignController.php" line="275" namespace="+global" class="oeplCampaignController" method="_assignSelectedRecurrence" />
+      <file path="/htdocs/efire/eplmodule/oe/oepl/tests/libs/vfsStream/vfsStreamWrapper.php" line="221" namespace="bovigo_vfs" class="vfsStreamWrapper" method="stream_open" />
+      <file path="/htdocs/efire/eplmodule/oe/oepl/tests/unit/dbMaintenance.php" line="34" namespace="+global" class="dbMaintenance" method="restoreDB" />
     </rule>
   </certification>
 </pmd>

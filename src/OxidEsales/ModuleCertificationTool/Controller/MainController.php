@@ -55,6 +55,7 @@ class MainController
      * Main Action for running the application.
      *
      * @return $this the controller itself
+     * @throws \Exception
      */
     public function indexAction()
     {
@@ -63,6 +64,10 @@ class MainController
 
         $fileViolationHtmls  = array( 'Error while processing clover xml: file not found' );
         $sMdHtml             = "";
+
+        if ( !is_dir( $this->configuration->sModulePath ) || !is_readable( $this->configuration->sModulePath ) ) {
+            throw new \Exception( 'no module found in ' . $this->configuration->sModulePath );
+        }
 
         $certificationResult = $this->parseMd();
         if ( !( empty( $certificationResult ) ) ) {
@@ -77,7 +82,9 @@ class MainController
 
         $html = $view->render();
 
-        file_put_contents( $this->configuration->sOutputFile, $html );
+        if ( false === file_put_contents( $this->configuration->sOutputFile, $html ) ) {
+            throw new \Exception( 'error while writing ' . $this->configuration->sOutputFile );
+        }
 
         return $this;
     }

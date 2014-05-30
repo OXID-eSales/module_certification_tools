@@ -119,7 +119,6 @@ manual investigation of your module and might differ significantly.</div>
         </tbody>
     </table>
 </div>
-
 EOF;
 
 

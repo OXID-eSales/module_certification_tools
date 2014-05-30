@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result type="warning">
+<failures>
+<failure>Directory licenses is not allowed</failure>
+<failure>Directory model is not allowed</failure>
+</failures>
+</result>

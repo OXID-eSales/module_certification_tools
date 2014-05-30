@@ -63,9 +63,9 @@ class View
                                             DIRECTORY_SEPARATOR . '..' .
                                             DIRECTORY_SEPARATOR . '..' .
                                             DIRECTORY_SEPARATOR . 'resource' .
-                                            DIRECTORY_SEPARATOR . 'tpl' .
-                                            DIRECTORY_SEPARATOR
-        );
+                                            DIRECTORY_SEPARATOR . 'tpl'
+
+        ) . DIRECTORY_SEPARATOR;
     }
 
     /**
@@ -107,11 +107,15 @@ class View
         // Data is used in template file, so do not remove here
         $data = (object)$this->variables;
 
-        ob_start();
         $filePath = $this->templateDirectory . $this->template . '.' . $this->templateExtension;
-        include $filePath;
-        $output = ob_get_contents();
-        ob_end_clean();
+        if ( is_file( $filePath ) && is_readable( $filePath ) ) {
+            ob_start();
+            include $filePath;
+            $output = ob_get_contents();
+            ob_end_clean();
+        } else {
+            throw new \Exception( 'template ' . $this->template . ' not found' );
+        }
 
         return $output;
     }

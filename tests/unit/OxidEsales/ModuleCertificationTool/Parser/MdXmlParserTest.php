@@ -52,7 +52,7 @@ class MdXmlParserTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testParsing() {
-        $xml = simplexml_load_file( 'unit/testdata/oxmd-result.xml' );
+        $xml = simplexml_load_file( 'unit/testdata/oxmd-result_short.xml' );
         $testObject = new MdXmlParser();
         $violationList = $testObject->parse( $xml );
 

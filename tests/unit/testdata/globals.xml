@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result type="failure">
+<failures>
+<failure>File /htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/core/oeplCom.php uses global variables</failure>
+<failure>File /htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/core/service/toServer/oeplAjaxEndpoint.php uses global variables</failure>
+<failure>File /htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/model/oeplXmlTemplate.php uses global variables</failure>
+<failure>File /htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/tests/integration/core/service/Integration_oeplcomTest.php uses global variables</failure>
+<failure>File /htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/tests/unit/core/Unit_oeplcomTest.php uses global variables</failure>
+<failure>File /htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/tests/unit/model/Unit_oeplXmlTemplateTest.php uses global variables</failure>
+<failure>File /htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/tests/unit/OxidCommand.php uses global variables</failure>
+<failure>File /htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/tests/unit/OxidTestCase.php uses global variables</failure>
+<failure>File /htdocs/efire/testshops/EE_5_0_5/modules/oe/oepl/tests/unit/test_utils.php uses global variables</failure>
+</failures>
+</result>
