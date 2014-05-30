@@ -107,9 +107,9 @@ class Violation
         $html = "";
         if (count($this->getViolations()) > 0) {
             $html = $view->setTemplate($this->getTemplate())
-                         ->assignVariable( 'aViolations', $this->getViolations() )
-                         ->assignVariable( 'sHeading', $this->getHeading() )
-                ->render();
+                         ->assignVariable( 'violations', $this->getViolations() )
+                         ->assignVariable( 'heading', $this->getHeading() )
+                         ->render();
         }
 
         return $html;

@@ -63,27 +63,27 @@ class MainController
         $view->setTemplate( 'index' );
 
         $fileViolationHtmls  = array( 'Error while processing clover xml: file not found' );
-        $sMdHtml             = "";
+        $mdHtml              = "";
 
-        if ( !is_dir( $this->configuration->sModulePath ) || !is_readable( $this->configuration->sModulePath ) ) {
-            throw new \Exception( 'no module found in ' . $this->configuration->sModulePath );
+        if ( !is_dir( $this->configuration->modulePath ) || !is_readable( $this->configuration->modulePath ) ) {
+            throw new \Exception( 'no module found in ' . $this->configuration->modulePath );
         }
 
         $certificationResult = $this->parseMd();
         if ( !( empty( $certificationResult ) ) ) {
-            $sMdHtml            = $this->getPrice( $certificationResult );
+            $mdHtml             = $this->getPrice( $certificationResult );
             $fileViolationHtmls = $this->getFileViolations( $certificationResult );
         }
-        $view->assignVariable( 'sCertificationResult', $sMdHtml );
-        $view->assignVariable( 'aFileViolations', $fileViolationHtmls );
+        $view->assignVariable( 'certificationResult', $mdHtml );
+        $view->assignVariable( 'fileViolations', $fileViolationHtmls );
 
         $genericHtml = $this->parseGeneric();
-        $view->assignVariable( 'aGenericChecks', $genericHtml );
+        $view->assignVariable( 'genericChecks', $genericHtml );
 
         $html = $view->render();
 
-        if ( false === file_put_contents( $this->configuration->sOutputFile, $html ) ) {
-            throw new \Exception( 'error while writing ' . $this->configuration->sOutputFile );
+        if ( false === file_put_contents( $this->configuration->outputFile, $html ) ) {
+            throw new \Exception( 'error while writing ' . $this->configuration->outputFile );
         }
 
         return $this;
@@ -91,16 +91,16 @@ class MainController
 
     private function getPrice( $certificationResult )
     {
-        $oCertificationPrice = new CertificationPrice( $certificationResult );
+        $certificationPrice = new CertificationPrice( $certificationResult );
 
-        return $oCertificationPrice->getHtml();
+        return $certificationPrice->getHtml();
     }
 
     private function parseMd()
     {
         $mdXmlParser = new MdXmlParser();
-        $mdXmlParser->cleanUpXmlFile( $this->configuration->sMdXmlFile );
-        $certificationResult = $mdXmlParser->parse( $mdXmlParser->getXmlObjectFromFile( $this->configuration->sMdXmlFile ) );
+        $mdXmlParser->cleanUpXmlFile( $this->configuration->mdXmlFile );
+        $certificationResult = $mdXmlParser->parse( $mdXmlParser->getXmlObjectFromFile( $this->configuration->mdXmlFile ) );
 
         return $certificationResult;
     }
@@ -109,7 +109,7 @@ class MainController
     {
         $genericHtml=array();
         $violationXmlParser = new GenericViolationXmlParser();
-        foreach(  $this->configuration->aAdditionalTests as $header => $file ){
+        foreach(  $this->configuration->additionalTests as $header => $file ){
             $violation = $violationXmlParser->parse( $violationXmlParser->getXmlObjectFromFile( $file ) );
             $genericCheck        = new Violation( $violation, 'genericViolationList' );
             $genericHtml[]       = $genericCheck->setHeading( $header )->getHtml();

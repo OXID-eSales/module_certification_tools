@@ -179,13 +179,12 @@ class CertificationRule
 
     /**
      * Set all violations.
-     *
-     * @param CertificationRuleViolation[] $aViolations
-     *
+
+     * @param CertificationRuleViolation[] $violations
      * @return null
      */
-    public function setViolations( $aViolations )
+    public function setViolations( $violations )
     {
-        $this->violations = $aViolations;
+        $this->violations = $violations;
     }
 }

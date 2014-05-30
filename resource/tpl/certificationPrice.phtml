@@ -22,31 +22,31 @@ manual investigation of your module and might differ significantly.</div>
         <tr>
             <td>Code Coverage</td>
             <td>Has to be > 90%. Values below result in manual work when testing.</td>
-            <td class="text-right"><?php echo $data->oCertificationResult->getCertificationRule('Code Coverage')->getValue() ?>%</td>
-            <td class="text-right"><?php echo $data->oCertificationResult->getCertificationRule('Code Coverage')->getFactor() ?></td>
+            <td class="text-right"><?php echo $data->certificationResult->getCertificationRule('Code Coverage')->getValue() ?>%</td>
+            <td class="text-right"><?php echo $data->certificationResult->getCertificationRule('Code Coverage')->getFactor() ?></td>
         </tr>
         <tr>
             <td>C.R.A.P Index</td>
             <td>The Change Risk Analysis and Predictions (CRAP) index of a function or method uses cyclomatic complexity and code coverage from automated tests to help estimate the effort and risk associated with maintaining legacy code. A CRAP index over 30 is a good indicator of crappy code.</td>
-            <td class="text-right"><?php echo $data->oCertificationResult->getCertificationRule('C.R.A.P Index')->getValue() ?></td>
-            <td class="text-right"><?php echo $data->oCertificationResult->getCertificationRule('C.R.A.P Index')->getFactor() ?></td>
+            <td class="text-right"><?php echo $data->certificationResult->getCertificationRule('C.R.A.P Index')->getValue() ?></td>
+            <td class="text-right"><?php echo $data->certificationResult->getCertificationRule('C.R.A.P Index')->getFactor() ?></td>
         </tr>
         <tr>
             <td>NPath Complexity</td>
             <td>The NPATH metric computes the number of possible execution paths through a function. It takes into account the nesting of conditional statements and multi-part boolean expressions (e.g., A && B, C || D, etc.).
                 A NPATH Complexity over 200 is a good candidate for a closer decomposition.</td>
-            <td class="text-right"><?php echo $data->oCertificationResult->getCertificationRule('NPath Complexity')->getValue() ?></td>
-            <td class="text-right"><?php echo $data->oCertificationResult->getCertificationRule('NPath Complexity')->getFactor() ?></td>
+            <td class="text-right"><?php echo $data->certificationResult->getCertificationRule('NPath Complexity')->getValue() ?></td>
+            <td class="text-right"><?php echo $data->certificationResult->getCertificationRule('NPath Complexity')->getFactor() ?></td>
         </tr>
         <tr>
             <td>Cyclomatic Complexity</td>
             <td>Checks cyclomatic complexity against a specified limit. The complexity is measured by the number of if, while, do, for, ?:, catch, switch, case  statements, and operators && and || (plus one) in the body of a constructor, method, static initializer, or instance initializer. It is a measure of the minimum number of possible paths through the source and therefore the number of required tests. Generally 1-4 is considered good, 5-7 ok, 8-10 consider re-factoring, and 11+ re-factor now!</td>
-            <td class="text-right"><?php echo $data->oCertificationResult->getCertificationRule('Cyclomatic Complexity')->getValue() ?></td>
-            <td class="text-right"><?php echo $data->oCertificationResult->getCertificationRule('Cyclomatic Complexity')->getFactor() ?></td>
+            <td class="text-right"><?php echo $data->certificationResult->getCertificationRule('Cyclomatic Complexity')->getValue() ?></td>
+            <td class="text-right"><?php echo $data->certificationResult->getCertificationRule('Cyclomatic Complexity')->getFactor() ?></td>
         </tr>
         <tr>
             <td colspan="3"><b>Total Factor</b></td>
-            <td class="text-right"><b><?php echo $data->oCertificationResult->getFactor() ?></b></td>
+            <td class="text-right"><b><?php echo $data->certificationResult->getFactor() ?></b></td>
         </tr>
         </tbody>
     </table>
@@ -73,7 +73,7 @@ manual investigation of your module and might differ significantly.</div>
         <tr>
             <td>Total factor price</td>
             <td>Multiply basic factor price by the total factor price</td>
-            <td class="text-right"><?php echo number_format($data->oCertificationResult->getFactor() * 200, 2, ',', '.') ?>&euro;</td>
+            <td class="text-right"><?php echo number_format($data->certificationResult->getFactor() * 200, 2, ',', '.') ?>&euro;</td>
         </tr>
         <!--        <tr>-->
         <!--            <td>Basic price software quality</td>-->
@@ -87,7 +87,7 @@ manual investigation of your module and might differ significantly.</div>
         <!--        </tr>-->
         <tr>
             <td colspan="2"><b>Total Certification Price</b></td>
-            <td class="text-right"><b><?php echo number_format($data->oCertificationResult->getPrice(), 2, ',', '.') ?>&euro;</b></td>
+            <td class="text-right"><b><?php echo number_format($data->certificationResult->getPrice(), 2, ',', '.') ?>&euro;</b></td>
         </tr>
         </tbody>
     </table>

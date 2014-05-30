@@ -65,8 +65,8 @@ class CertificationPrice
 
         $view = new View();
         $html = $view->setTemplate( 'certificationPrice' )
-            ->assignVariable( 'oCertificationResult', $this->getResult() )
-            ->render();
+                     ->assignVariable( 'certificationResult', $this->getResult() )
+                     ->render();
 
         return $html;
     }

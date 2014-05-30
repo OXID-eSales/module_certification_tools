@@ -101,6 +101,7 @@ class View
      * Reeturns the HTML code after rendering.
      *
      * @return string the rendered HTML code
+     * @throws \Exception
      */
     public function render()
     {

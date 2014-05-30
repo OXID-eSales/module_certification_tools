@@ -18,17 +18,17 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-$aConfiguration = array(
-    'sModulePath'      => $argv[ 2 ],
-    'sMdXmlFile'       => $argv[ 1 ] . '/oxmd-result.xml',
-    'sOutputFile'      => $argv[ 1 ] . '/report.html',
-    'aAdditionalTests' => array( 'Directories' => $argv[ 1 ] . '/directory.xml',
-                                 'Globals'     => $argv[ 1 ] . '/globals.xml',
-                                 'Prefixes'    => $argv[ 1 ] . '/prefix.xml' )
+$configuration = array(
+    'modulePath'      => $argv[ 2 ],
+    'mdXmlFile'       => $argv[ 1 ] . '/oxmd-result.xml',
+    'outputFile'      => $argv[ 1 ] . '/report.html',
+    'additionalTests' => array( 'Directories' => $argv[ 1 ] . '/directory.xml',
+                                'Globals'     => $argv[ 1 ] . '/globals.xml',
+                                'Prefixes'    => $argv[ 1 ] . '/prefix.xml' )
 );
 
-$oController = new OxidEsales\ModuleCertificationTool\Controller\MainController();
-$oController
-    ->setConfiguration( $aConfiguration )
+$controller = new OxidEsales\ModuleCertificationTool\Controller\MainController();
+$controller
+    ->setConfiguration( $configuration )
     ->indexAction();
 

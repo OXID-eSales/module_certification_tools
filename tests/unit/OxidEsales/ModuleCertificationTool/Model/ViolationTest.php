@@ -122,7 +122,7 @@ class ViolationTest extends PHPUnit_Framework_TestCase
                 </tbody>
     </table>
 </div>';
-        $this->assertEquals( $violation->getHtml(), $html );
+        $this->assertEquals( $html, $violation->getHtml() );
     }
 
     private function getTestViolations()

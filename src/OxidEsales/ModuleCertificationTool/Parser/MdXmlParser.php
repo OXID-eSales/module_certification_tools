@@ -45,9 +45,9 @@ class MdXmlParser
             throw new \Exception( 'file ' . $xmlFileName . ' is not readable' );
         }
 
-        $oXml = simplexml_load_file( $xmlFileName );
+        $xml = simplexml_load_file( $xmlFileName );
 
-        return $oXml;
+        return $xml;
     }
 
     /**
@@ -90,9 +90,9 @@ class MdXmlParser
         $certificationRules = array();
 
         if ( isset( $certificationElement->rule ) ) {
-            foreach ( $certificationElement->rule as $oRuleElement ) {
-                $oCertificationRule = $this->parseCertificationRule( $oRuleElement );
-                $certificationRules[ $oCertificationRule->getName() ] = $oCertificationRule;
+            foreach ( $certificationElement->rule as $ruleElement ) {
+                $certificationRule = $this->parseCertificationRule( $ruleElement );
+                $certificationRules[ $certificationRule->getName() ] = $certificationRule;
             }
         }
 

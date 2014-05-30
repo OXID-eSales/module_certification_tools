@@ -1,11 +1,11 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title"><?php echo $data->sHeading; ?></h3>
+        <h3 class="panel-title"><?php echo $data->heading; ?></h3>
     </div>
     <div class="panel-body">
-        <?php foreach ( $data->aViolations as $oViolation ) { ?>
+        <?php foreach ( $data->violations as $violation ) { ?>
             <ul>
-                <li ><?php echo $oViolation->getMessage(); ?></li>
+                <li ><?php echo $violation->getMessage(); ?></li>
             </ul>
         <?php } ?>
     </div>

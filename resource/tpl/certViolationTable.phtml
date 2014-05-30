@@ -11,11 +11,11 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach ( $data->aViolations as $oViolation ) { ?>
+        <?php foreach ( $data->violations as $violation ) { ?>
             <tr>
-                <td><?php echo $oViolation->getClass() ?></td>
-                <td><?php echo $oViolation->getMethod() ?></td>
-                <td><?php echo $oViolation->getLine() ?></td>
+                <td><?php echo $violation->getClass() ?></td>
+                <td><?php echo $violation->getMethod() ?></td>
+                <td><?php echo $violation->getLine() ?></td>
             </tr>
         <?php } ?>
         </tbody>

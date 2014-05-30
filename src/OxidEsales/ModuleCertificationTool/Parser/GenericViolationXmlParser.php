@@ -32,9 +32,9 @@ class GenericViolationXmlParser
      * @return \SimpleXMLElement
      */
     public function getXmlObjectFromFile( $xmlFileName ) {
-        $oXml = simplexml_load_file( $xmlFileName );
+        $xml = simplexml_load_file( $xmlFileName );
 
-        return $oXml;
+        return $xml;
     }
 
     /**
@@ -48,11 +48,11 @@ class GenericViolationXmlParser
         $violations = array();
         if ( isset( $xml->failures->failure ) ) {
             foreach ( $xml->failures->failure as $failureElement ) {
-                $oViolation = new GenericViolation();
+                $violation = new GenericViolation();
 
-                $oViolation->setMessage( trim( (string)$failureElement ) );
+                $violation->setMessage( trim( (string)$failureElement ) );
 
-                $violations[ ] = $oViolation;
+                $violations[ ] = $violation;
             }
         }
 

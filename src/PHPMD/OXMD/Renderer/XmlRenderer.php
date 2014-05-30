@@ -130,11 +130,11 @@ class XmlRenderer extends AbstractRenderer
                 $writer->write('  <file name="' . $fileName . '">' . PHP_EOL);
             }
 
-            $sDescription = $violation->getDescription();
-            $oxActualValue = substr($sDescription,0,strpos($sDescription,'|'));
-            $sDescription = substr($sDescription,(strpos($sDescription,'|')+1));
-            $oxTresholdValue = substr($sDescription,0,strpos($sDescription,'|'));
-            $sDescription = substr($sDescription,(strpos($sDescription,'|')+1));
+            $description = $violation->getDescription();
+            $oxActualValue = substr($description,0,strpos($description,'|'));
+            $description = substr($description,(strpos($description,'|')+1));
+            $oxTresholdValue = substr($description,0,strpos($description,'|'));
+            $description = substr($description,(strpos($description,'|')+1));
 
             $rule = $violation->getRule();
 
@@ -155,7 +155,7 @@ class XmlRenderer extends AbstractRenderer
 
             $writer->write(' priority="' . $rule->getPriority() . '"');
             $writer->write('>' . PHP_EOL);
-            $writer->write('      ' . $sDescription . PHP_EOL);
+            $writer->write('      ' . $description . PHP_EOL);
             $writer->write('</violation>' . PHP_EOL);
         }
 
