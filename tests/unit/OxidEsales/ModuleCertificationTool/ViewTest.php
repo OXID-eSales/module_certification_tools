@@ -68,7 +68,7 @@ class ViewTest extends PHPUnit_Framework_TestCase
                 <div class="page-header">
                     <h2>Violations</h2>
                 </div>
-    <!--            -->    <!--                -->    <!--            -->                            </div>
+                            </div>
 
             <div id="checks">
                 <div class="page-header">
@@ -84,9 +84,9 @@ EOF;
     public function testRendering() {
         $testObject = new View();
         $html = $testObject->setTemplate( 'index' )
-                           ->assignVariable( 'sCertificationResult', 'Test' )
-                           ->assignVariable( 'aFileViolations', array() )
-                           ->assignVariable( 'aGenericChecks', array() )
+                           ->assignVariable( 'certificationResult', 'Test' )
+                           ->assignVariable( 'fileViolations', array() )
+                           ->assignVariable( 'genericChecks', array() )
                            ->render();
 
         $this->assertEquals( $this->htmlOutput, $html );

@@ -37,16 +37,13 @@
         <div class="container">
 
             <div id="price">
-                <?php echo $data->sCertificationResult ?>
+                <?php echo $data->certificationResult ?>
             </div>
 
             <div id="violations">
                 <div class="page-header">
                     <h2>Violations</h2>
                 </div>
-    <!--            --><?php //foreach ( $data->aCertViolations as $aCertViolation ) { ?>
-    <!--                --><?php //echo $aCertViolation; ?>
-    <!--            --><?php //} ?>
                 <?php foreach ( $data->fileViolations as $fileViolation ) { ?>
                     <?php echo $fileViolation; ?>
                 <?php } ?>
