@@ -21,15 +21,18 @@ namespace OxidEsales\ModuleCertificationTool\Parser;
 use OxidEsales\ModuleCertificationTool\Result\GenericViolation;
 
 /**
- * Class ViolationXmlParser class for the application
+ * Class ViolationXmlParser: Class for parsing the generic XML files into violation objects.
+ *
+ * @package OxidEsales\ModuleCertificationTool\Parser
  */
 class GenericViolationXmlParser
 {
-
     /**
-     * @param $xmlFileName
+     * Loads a XML file into am SimpleXML object.
      *
-     * @return \SimpleXMLElement
+     * @param $xmlFileName The name of the XML file.
+     *
+     * @return \SimpleXMLElement The SimpleXML object representing the XML file
      */
     public function getXmlObjectFromFile( $xmlFileName ) {
         $xml = simplexml_load_file( $xmlFileName );
@@ -40,8 +43,8 @@ class GenericViolationXmlParser
     /**
      * Returns the violations from the XML output file.
      *
-     * @param $xml
-     * @return array violations determined by a generic module
+     * @param $xml SimpleXML object from the XML output file
+     * @return array Violations determined by a generic module
      */
     public function parse( $xml )
     {

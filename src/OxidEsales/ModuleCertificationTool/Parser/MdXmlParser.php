@@ -27,14 +27,18 @@ use OxidEsales\ModuleCertificationTool\Result\CertificationRuleViolation;
 use OxidEsales\ModuleCertificationTool\Result\FileViolation;
 
 /**
- * Class MdXmlParser class for the application
+ * Class MdXmlParser: Class for parsing the xml result files from OXMD.
+ *
+ * @package OxidEsales\ModuleCertificationTool\Parser
  */
 class MdXmlParser
 {
     /**
-     * @param $xmlFileName
+     * Loads a XML file into a XML object.
      *
-     * @return \SimpleXMLElement
+     * @param $xmlFileName Name of the XML file
+     *
+     * @return \SimpleXMLElement XML object
      * @throws \Exception
      */
     public function getXmlObjectFromFile( $xmlFileName ) {
@@ -51,9 +55,11 @@ class MdXmlParser
     }
 
     /**
-     * @param $xmlFileName
+     * Removes namespace stuff from a XML file to prevent SimpleXML issues.
      *
-     * @return $this
+     * @param $xmlFileName The name of the XML file
+     *
+     * @return $this The object itself
      * @throws \Exception
      */
     public function cleanUpXmlFile( $xmlFileName ) {
@@ -75,9 +81,11 @@ class MdXmlParser
     }
 
     /**
-     * @param \SimpleXMLElement $xml
+     * Parses a XML object into a certification result object.
      *
-     * @return CertificationResult
+     * @param \SimpleXMLElement $xml The XML object
+     *
+     * @return CertificationResult The parsed data
      */
     public function parse( \SimpleXMLElement $xml )
     {
@@ -108,10 +116,12 @@ class MdXmlParser
     }
 
     /**
-     * @param $fileElement
-     * @param $fileViolations
+     * Parses the violations of a single file into a violation array.
      *
-     * @return array
+     * @param $fileElement XML element of the file
+     * @param $fileViolations Already existig violations
+     *
+     * @return array Violation array
      */
     private function parseFileViolations( $fileElement, $fileViolations )
     {
@@ -134,9 +144,11 @@ class MdXmlParser
     }
 
     /**
-     * @param $ruleElement
+     * Parses a XML rule element into a rule object.
      *
-     * @return CertificationRule
+     * @param $ruleElement XML rule element
+     *
+     * @return CertificationRule Rule object
      */
     private function parseCertificationRule( $ruleElement )
     {
@@ -158,9 +170,11 @@ class MdXmlParser
     }
 
     /**
-     * @param $fileElement
+     * Parses a XML file element into a rule violation object
      *
-     * @return CertificationRuleViolation
+     * @param $fileElement XML file element
+     *
+     * @return CertificationRuleViolation Rule violation object
      */
     private function parseFileElement( $fileElement )
     {

@@ -26,18 +26,20 @@ use OxidEsales\ModuleCertificationTool\View;
 
 /**
  * Class CertificationPrice class to handle the output of the OXMD module
+ *
+ * @package OxidEsales\ModuleCertificationTool\Model
  */
 class CertificationPrice
 {
     /**
-     * @var \OxidEsales\ModuleCertificationTool\Result\CertificationResult  Certification result object
+     * @var \OxidEsales\ModuleCertificationTool\Result\CertificationResult Certification result object.
      */
     private $result;
 
     /**
      * Create  instance and set the certification result object.
      *
-     * @param CertificationResult $result The result object to set.
+     * @param CertificationResult $result The result object to set
      */
     public function __construct( CertificationResult $result )
     {

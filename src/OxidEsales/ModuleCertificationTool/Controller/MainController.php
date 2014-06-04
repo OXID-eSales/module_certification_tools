@@ -25,24 +25,24 @@ use OxidEsales\ModuleCertificationTool\Parser\GenericViolationXmlParser;
 use OxidEsales\ModuleCertificationTool\View;
 
 /**
- * Class MainController main controller class for the application
+ * Class MainController: The main controller class for the application.
+ *
+ * @package OxidEsales\ModuleCertificationTool\Controller
  */
 class MainController
 {
 
     /**
-     * Contains als the configuration values for the application.
-     *
-     * @var object
+     * @var object Contains als the configuration values for the application.
      */
     protected $configuration;
 
     /**
      * Fills the configuration object of the class with given values.
      *
-     * @param array $configuration array with all the configuration values
+     * @param array $configuration Array with all the configuration values
      *
-     * @return $this the controller itself
+     * @return $this The controller itself
      */
     public function setConfiguration( $configuration )
     {
@@ -54,7 +54,7 @@ class MainController
     /**
      * Main Action for running the application.
      *
-     * @return $this the controller itself
+     * @return $this The controller itself
      * @throws \Exception
      */
     public function indexAction()
@@ -89,6 +89,13 @@ class MainController
         return $this;
     }
 
+    /**
+     * Gets the price form a certification result object.
+     *
+     * @param $certificationResult The certification result object
+     *
+     * @return string The price as string
+     */
     private function getPrice( $certificationResult )
     {
         $certificationPrice = new CertificationPrice( $certificationResult );
@@ -96,6 +103,11 @@ class MainController
         return $certificationPrice->getHtml();
     }
 
+    /**
+     * Parses the OXMD XML file into a certification result object.
+     *
+     * @return \OxidEsales\ModuleCertificationTool\Result\CertificationResult The certification result object
+     */
     private function parseMd()
     {
         $mdXmlParser = new MdXmlParser();
@@ -105,6 +117,11 @@ class MainController
         return $certificationResult;
     }
 
+    /**
+     * Parses the generic XML files into an array of violation objects.
+     *
+     * @return array Array of violation objects
+     */
     private function parseGeneric()
     {
         $genericHtml=array();
@@ -117,6 +134,13 @@ class MainController
         return $genericHtml;
     }
 
+    /**
+     * Parses the file violations from the OXMD file into an array of violation objects.
+     *
+     * @param $certificationResult The data object of the OXMD file
+     *
+     * @return array The file violations
+     */
     private function getFileViolations( $certificationResult )
     {
         $fileViolationHtmls = array();

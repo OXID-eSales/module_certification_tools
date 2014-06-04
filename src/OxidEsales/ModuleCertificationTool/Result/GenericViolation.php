@@ -22,45 +22,39 @@
 namespace OxidEsales\ModuleCertificationTool\Result;
 
 /**
- * Class Violation a data holding class for the violations of rules
+ * Class Violation: A data holding class for the violations of rules.
+ *
+ * @package OxidEsales\ModuleCertificationTool\Result
  */
 class GenericViolation
 {
 
     /**
-     * Contains a detailed message for the rule violation.
-     *
-     * @var string
+     * @var string Contains a detailed message for the rule violation.
      */
     protected $message = '';
 
     /**
-     * Contains the type of rule violation.
-     *
-     * @var string
+     * @var string Contains the type of rule violation.
      */
     protected $type = '';
 
     /**
-     * Contains the file tha violated the rule.
-     *
-     * @var string
+     * @var string Contains the file tha violated the rule.
      */
     protected $file = '';
 
     /**
-     * Contains an array with additional informations.
-     *
-     * @var array
+     * @var array Contains an array with additional informations.
      */
     protected $additionalInformation = array();
 
     /**
      * Setter for the Message.
      *
-     * @param string $message message to set
+     * @param string $message Message to set
      *
-     * @return $this the object itself
+     * @return $this The object itself
      */
     public function setMessage($message)
     {
@@ -72,7 +66,7 @@ class GenericViolation
     /**
      * Getter for the message.
      *
-     * @return string the stored message
+     * @return string The stored message
      */
     public function getMessage()
     {
@@ -82,9 +76,9 @@ class GenericViolation
     /**
      * Setter for violation type.
      *
-     * @param string $type the type to set.
+     * @param string $type The type to set.
      *
-     * @return $this the object itself
+     * @return $this The object itself
      */
     public function setType($type)
     {
@@ -96,7 +90,7 @@ class GenericViolation
     /**
      * Getter for the violation type.
      *
-     * @return string the type of violation
+     * @return string The type of violation
      */
     public function getType()
     {
@@ -106,9 +100,9 @@ class GenericViolation
     /**
      * Setter for the violating file.
      *
-     * @param string $file the file that violates the rule
+     * @param string $file The file that violates the rule
      *
-     * @return $this the object itself
+     * @return $this The object itself
      */
     public function setFile($file)
     {
@@ -120,7 +114,7 @@ class GenericViolation
     /**
      * Getter for the violating file.
      *
-     * @return string the file that violates the rule
+     * @return string The file that violates the rule
      */
     public function getFile()
     {
@@ -130,10 +124,10 @@ class GenericViolation
     /**
      * Adds special information to the violation object.
      *
-     * @param string $type the type of additional information
-     * @param mixed $information the information to be stored
+     * @param string $type The type of additional information
+     * @param mixed $information The information to be stored
      *
-     * @return $this the object itself
+     * @return $this The object itself
      */
     public function addInformation($type, $information)
     {
@@ -145,9 +139,9 @@ class GenericViolation
     /**
      * Gets additional information for a special information type.
      *
-     * @param string $type the type of additional information to get
+     * @param string $type The type of additional information to get
      *
-     * @return mixed the stored additional information
+     * @return mixed The stored additional information
      */
     public function getInformation($type)
     {

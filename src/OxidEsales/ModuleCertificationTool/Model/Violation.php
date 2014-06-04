@@ -24,42 +24,43 @@ namespace OxidEsales\ModuleCertificationTool\Model;
 use OxidEsales\ModuleCertificationTool\View;
 
 /**
- * Class Violation class for handling XML output file of generic check modules
+ * Class Violation: Class for handling XML output file of generic check modules.
+ *
+ * @package OxidEsales\ModuleCertificationTool\Model
  */
 class Violation
 {
-
-
     /**
-     * Contains the Vialations should be shown in output.
-     *
-     * @var array
+     * @var array Contains the Vialations should be shown in output.
      */
     private $violations;
 
     /**
-     * Contains the Heading should be shown in output.
-     *
-     * @var string
+     * @var string Contains the Heading should be shown in output.
      */
     private $heading = '';
 
     /**
-     * Contains the template for output.
-     *
-     * @var string
+     * @var string Contains the template for output.
      */
     private $template = '';
 
+    /**
+     * The constructor of the class.
+     *
+     * @param array $violations Violation array for the model
+     * @param string $template Corresponding HTML template
+     */
     public function __construct(array $violations, $template)
     {
         $this->violations = $violations;
         $this->template = $template;
     }
 
-
     /**
-     * @return array
+     * Gets the injected violations.
+     *
+     * @return array The injected violations
      */
     public function getViolations()
     {
@@ -67,7 +68,9 @@ class Violation
     }
 
     /**
-     * @return string
+     * Gets the heading that should be shown in output.
+     *
+     * @return string The heading for this XML file
      */
     public function getHeading()
     {
@@ -75,7 +78,9 @@ class Violation
     }
 
     /**
-     * @return string
+     * Gets the corresponding template for the XML file.
+     *
+     * @return string The name of the corresponding template
      */
     public function getTemplate()
     {
@@ -85,9 +90,9 @@ class Violation
     /**
      * Sets the heading that should be shown in output.
      *
-     * @param string $heading the heading for this XML file.
+     * @param string $heading The heading for this XML file
      *
-     * @return $this the controller itself
+     * @return $this The controller itself
      */
     public function setHeading($heading)
     {
@@ -99,7 +104,7 @@ class Violation
     /**
      * Returns the rendered HTML code with the information from the checker module.
      *
-     * @return string the HTML output corresponding to the XML file output of the module
+     * @return string The HTML output corresponding to the XML file output of the module
      */
     public function getHtml()
     {

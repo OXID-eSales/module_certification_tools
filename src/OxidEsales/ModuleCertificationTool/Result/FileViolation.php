@@ -27,40 +27,39 @@ class FileViolation
 {
 
     /**
-     * @var string
+     * @var string The filename containing the class with the violation.
      */
     private $fileName;
 
     /**
-     * @var string
+     * @var string The class containing the violation.
      */
-
     private $class;
-    /**
-     * @var string
-     */
 
+    /**
+     * @var string The mothod containing the violation.
+     */
     private $method;
-    /**
-     * @var int
-     */
 
+    /**
+     * @var int The first line of the method containing the violation.
+     */
     private $beginLine;
-    /**
-     * @var int
-     */
 
+    /**
+     * @var int The last line of the method containing the violation.
+     */
     private $endLine;
 
     /**
-     * @var string
+     * @var string The rule that has been violated.
      */
     private $rule;
 
     /**
-     * Get the file name where violation occur.
+     * Get the file name where the violation occurs.
      *
-     * @return string
+     * @return string The file name for the class that violates the rule
      */
     public function getFile()
     {
@@ -68,9 +67,9 @@ class FileViolation
     }
 
     /**
-     * Set the file name where´a violation occur
+     * Set the file name where the violation occurs.
      *
-     * @param string $fileName
+     * @param string $fileName The file name for the class that violates the rule
      *
      * @return null
      */
@@ -80,9 +79,9 @@ class FileViolation
     }
 
     /**
-     * Get the class name where violation occur.
+     * Get the class name where the violation occurs.
      *
-     * @return string
+     * @return string The name of the class that violates the rule
      */
     public function getClass()
     {
@@ -90,9 +89,9 @@ class FileViolation
     }
 
     /**
-     * Set the class name where violation occur.
+     * Set the class name where the violation occurs.
      *
-     * @param string $class Name of class violation occur.
+     * @param string $class The name of the class that violates the rule
      *
      * @return null
      */
@@ -102,9 +101,9 @@ class FileViolation
     }
 
     /**
-     * Get the method name where violation occur.
+     * Get the method name where the violation occurs.
      *
-     * @return string
+     * @return string The name of the method that violates the rule
      */
     public function getMethod()
     {
@@ -112,9 +111,9 @@ class FileViolation
     }
 
     /**
-     * Set the method name where violation occur.
+     * Set the method name where the violation occurs.
      *
-     * @param string $method Name of method violation occur.
+     * @param string $method The name of the method that violates the rule
      *
      * @return null
      */
@@ -124,9 +123,9 @@ class FileViolation
     }
 
     /**
-     * Get the line number where violation start.
+     * Get the line number where violation starts.
      *
-     * @return string
+     * @return string Number of first line of the violation
      */
     public function getBeginLine()
     {
@@ -136,7 +135,7 @@ class FileViolation
     /**
      * Set the line number where violation starts.
      *
-     * @param string $beginLine Number of first line violation occur.
+     * @param string $beginLine Number of first line of the violation
      *
      * @return null
      */
@@ -148,7 +147,7 @@ class FileViolation
     /**
      * Get the line number where violation ends.
      *
-     * @return string
+     * @return string Number of last line of the violation
      */
     public function getEndLine()
     {
@@ -158,7 +157,7 @@ class FileViolation
     /**
      * Set the line number where violation ends.
      *
-     * @param string $endLine Number of last line violation occur.
+     * @param string $endLine Number of last line of the violation
      *
      * @return null
      */
@@ -168,9 +167,9 @@ class FileViolation
     }
 
     /**
-     * Get the violated rule name.
+     * Get the rule the has been violated.
      *
-     * @return string
+     * @return string The rule Name
      */
     public function getRule()
     {
@@ -178,7 +177,7 @@ class FileViolation
     }
 
     /**
-     * Set the violated rule name.
+     * Set the rule the has been violated.
      *
      * @param string $rule Name of violated rule
      *

@@ -22,40 +22,36 @@
 namespace OxidEsales\ModuleCertificationTool;
 
 /**
- * Class View class for handling the template files
+ * Class View: Class for handling the template files.
+ *
+ * @package OxidEsales\ModuleCertificationTool
  */
 class View
 {
 
     /**
-     * Contain the nme of the template corresponding to the view object.
-     *
-     * @var string
+     * @var string Contains the name of the template corresponding to the view object.
      */
     protected $template = '';
 
     /**
-     * Contains all assigned variables.
-     *
-     * @var array
+     * @var array Contains all assigned variables.
      */
     protected $variables = array();
 
     /**
-     * The file name extension of the template files.
-     *
-     * @var string
+     * @var string The file name extension of the template files.
      */
     protected $templateExtension = 'phtml';
 
     /**
-     * The path of the directory containing the template files.
-     *
-     * @var string
+     * @var string The path of the directory containing the template files.
      */
     protected $templateDirectory = null;
 
-
+    /**
+     * The constructor of the class.
+     */
     public function  __construct()
     {
         $this->templateDirectory = realpath(__DIR__ .
@@ -98,7 +94,7 @@ class View
     }
 
     /**
-     * Reeturns the HTML code after rendering.
+     * Returns the HTML code after rendering.
      *
      * @return string the rendered HTML code
      * @throws \Exception

@@ -179,8 +179,9 @@ class CertificationRule
 
     /**
      * Set all violations.
-
+     *
      * @param CertificationRuleViolation[] $violations
+     *
      * @return null
      */
     public function setViolations( $violations )
