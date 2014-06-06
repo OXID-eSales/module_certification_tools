@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pmd xmlns:oxid="http://wiki.oxidforge.org/Certification/Modules" oxid:version="1.0.0" version="2.0.0-beta.7" timestamp="2014-05-14T16:25:36+02:00">
+    <file name="/htdocs/efire/module/evilController.php">
+        <violation beginline="17" endline="26" rule="Coverage" ruleset="Oxid Certification Rules" package="+global" externalInfoUrl="http://phpmd.org/rules/coverage.html#coverage" class="evilController" method="evilAction" priority="3">
+            Method evilController::evilAction has a Code Coverage of 0%, this metric should at least be a 90%.
+        </violation>
+    </file>
+
   <certification factor="816048850.5" price="163209770219">
     <rule name="Code Coverage" threshold="90" value="0" factor="30" violated="true">
       <file path="/htdocs/efire/eplmodule/oe/oepl/controllers/admin/oeplArticleFilterListController.php" line="21" namespace="+global" class="oeplArticleFilterListController" method="listArticleFilter" />

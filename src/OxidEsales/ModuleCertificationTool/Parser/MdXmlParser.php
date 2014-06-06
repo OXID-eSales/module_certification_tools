@@ -42,11 +42,8 @@ class MdXmlParser
      * @throws \Exception
      */
     public function getXmlObjectFromFile( $xmlFileName ) {
-        if ( !is_file( $xmlFileName ) ) {
-            throw new \Exception( 'file ' . $xmlFileName . ' was not found' );
-        }
         if ( !is_readable( $xmlFileName ) ) {
-            throw new \Exception( 'file ' . $xmlFileName . ' is not readable' );
+            throw new \Exception( 'file ' . $xmlFileName . ' is not found or not readable' );
         }
 
         $xml = simplexml_load_file( $xmlFileName );
@@ -64,11 +61,8 @@ class MdXmlParser
      */
     public function cleanUpXmlFile( $xmlFileName ) {
         // workaround for simpleXML namespace issue
-        if ( !is_file( $xmlFileName ) ) {
-            throw new \Exception( 'file ' . $xmlFileName . ' was not found' );
-        }
         if ( !is_readable( $xmlFileName ) ) {
-            throw new \Exception( 'file ' . $xmlFileName . ' is not readable' );
+            throw new \Exception( 'file ' . $xmlFileName . ' is not found or not readable' );
         }
 
         $xmlString = file_get_contents( $xmlFileName );

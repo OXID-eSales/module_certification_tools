@@ -65,28 +65,50 @@ class MainController
         $fileViolationHtmls  = array( 'Error while processing clover xml: file not found' );
         $mdHtml              = "";
 
-        if ( !is_dir( $this->configuration->modulePath ) || !is_readable( $this->configuration->modulePath ) ) {
-            throw new \Exception( 'no module found in ' . $this->configuration->modulePath );
-        }
+        $this->testModulePath( $this->configuration->modulePath );
 
         $certificationResult = $this->parseMd();
         if ( !( empty( $certificationResult ) ) ) {
             $mdHtml             = $this->getPrice( $certificationResult );
             $fileViolationHtmls = $this->getFileViolations( $certificationResult );
         }
+
         $view->assignVariable( 'certificationResult', $mdHtml );
         $view->assignVariable( 'fileViolations', $fileViolationHtmls );
-
         $genericHtml = $this->parseGeneric();
         $view->assignVariable( 'genericChecks', $genericHtml );
 
         $html = $view->render();
-
-        if ( false === file_put_contents( $this->configuration->outputFile, $html ) ) {
-            throw new \Exception( 'error while writing ' . $this->configuration->outputFile );
-        }
+        $this->writeOutputFile( $this->configuration->outputFile, $html );
 
         return $this;
+    }
+
+    /**
+     * Writes the output file.
+     *
+     * @param $outputFile Path to the output file
+     * @param $html Content to write
+     *
+     * @throws \Exception
+     */
+    private function writeOutputFile( $outputFile, $html ) {
+        if ( false === @file_put_contents( $outputFile, $html ) ) {
+            throw new \Exception( 'error while writing ' . $outputFile );
+        }
+    }
+
+    /**
+     * Tests if the path to module is a valid directory.
+     *
+     * @param $modulePath The path to the module dir
+     *
+     * @throws \Exception
+     */
+    private function testModulePath( $modulePath ) {
+        if ( !is_dir( $modulePath ) || !is_readable( $modulePath ) ) {
+            throw new \Exception( 'no module found in ' . $modulePath );
+        }
     }
 
     /**
