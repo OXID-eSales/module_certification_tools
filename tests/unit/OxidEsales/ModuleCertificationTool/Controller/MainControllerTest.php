@@ -14,8 +14,8 @@
  *
  *    For further details, see <http://www.gnu.org/licenses/>.
  *
- * @link      http://www.oxid-esales.com
- * @package   OXID module certification tool
+ * @link          http://www.oxid-esales.com
+ * @package       OXID module certification tool
  * @copyright (C) OXID eSales AG 2003-2014
  */
 
@@ -29,135 +29,140 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests the getter of violations.
-     *
-     * @return null
      */
-    public function testSetConfiguration(){
+    public function testSetConfiguration()
+    {
         $configuration = array(
             'modulePath'      => 'demoModule/',
             'mdXmlFile'       => 'unit/testdata/oxmd-result.xml',
             'outputFile'      => 'unit/testdata/report.html',
-            'additionalTests' => array( 'Directories' => 'unit/testdata/directory.xml',
-                                        'Globals'     => 'unit/testdata/globals.xml',
-                                        'Prefixes'    => 'unit/testdata/prefix.xml' )
+            'additionalTests' => array('Directories' => 'unit/testdata/directory.xml',
+                                       'Globals'     => 'unit/testdata/globals.xml',
+                                       'Prefixes'    => 'unit/testdata/prefix.xml')
         );
 
         $controller = new MainController();
-        $returnObject = $controller->setConfiguration( $configuration );
+        $returnObject = $controller->setConfiguration($configuration);
         $this->assertInstanceOf('OxidEsales\ModuleCertificationTool\Controller\MainController', $returnObject);
-
     }
 
 
-    public function testIndexAction() {
+    public function testIndexAction()
+    {
         $configuration = array(
             'modulePath'      => 'demoModule/',
             'mdXmlFile'       => 'unit/testdata/oxmd-result.xml',
             'outputFile'      => 'unit/testdata/report.html',
-            'additionalTests' => array( 'Directories' => 'unit/testdata/directory.xml',
-                                        'Globals'     => 'unit/testdata/globals.xml',
-                                        'Prefixes'    => 'unit/testdata/prefix.xml' )
+            'additionalTests' => array('Directories' => 'unit/testdata/directory.xml',
+                                       'Globals'     => 'unit/testdata/globals.xml',
+                                       'Prefixes'    => 'unit/testdata/prefix.xml')
         );
 
         $controller = new MainController();
-        $returnObject = $controller->setConfiguration( $configuration )->indexAction();
+        $returnObject = $controller->setConfiguration($configuration)->indexAction();
         $this->assertInstanceOf('OxidEsales\ModuleCertificationTool\Controller\MainController', $returnObject);
     }
 
-    public function testIndexActionWrongModulePath() {
-        $this->setExpectedException( '\\Exception' );
+    public function testIndexActionWrongModulePath()
+    {
+        $this->setExpectedException('\\Exception');
 
         $configuration = array(
             'modulePath'      => 'xxx',
             'mdXmlFile'       => 'unit/testdata/oxmd-result.xml',
             'outputFile'      => 'unit/testdata/report.html',
-            'additionalTests' => array( 'Directories' => 'unit/testdata/directory.xml',
-                                        'Globals'     => 'unit/testdata/globals.xml',
-                                        'Prefixes'    => 'unit/testdata/prefix.xml' )
+            'additionalTests' => array('Directories' => 'unit/testdata/directory.xml',
+                                       'Globals'     => 'unit/testdata/globals.xml',
+                                       'Prefixes'    => 'unit/testdata/prefix.xml')
         );
 
         $controller = new MainController();
-        $returnObject = $controller->setConfiguration( $configuration )->indexAction();
+        $returnObject = $controller->setConfiguration($configuration)->indexAction();
     }
 
-    public function testIndexActionWrongMdXmlFilePath() {
-        $this->setExpectedException( '\\Exception' );
+    public function testIndexActionWrongMdXmlFilePath()
+    {
+        $this->setExpectedException('\\Exception');
 
         $configuration = array(
             'modulePath'      => 'demoModule/',
             'mdXmlFile'       => 'xxx',
             'outputFile'      => 'unit/testdata/report.html',
-            'additionalTests' => array( 'Directories' => 'unit/testdata/directory.xml',
-                                        'Globals'     => 'unit/testdata/globals.xml',
-                                        'Prefixes'    => 'unit/testdata/prefix.xml' )
+            'additionalTests' => array('Directories' => 'unit/testdata/directory.xml',
+                                       'Globals'     => 'unit/testdata/globals.xml',
+                                       'Prefixes'    => 'unit/testdata/prefix.xml')
         );
 
         $controller = new MainController();
-        $returnObject = $controller->setConfiguration( $configuration )->indexAction();
+        $returnObject = $controller->setConfiguration($configuration)->indexAction();
     }
 
-    public function testIndexActionWrongOutputFilePath() {
-        $this->setExpectedException( '\\Exception' );
+    public function testIndexActionWrongOutputFilePath()
+    {
+        $this->setExpectedException('\\Exception');
 
         $configuration = array(
             'modulePath'      => 'demoModule/',
             'mdXmlFile'       => 'unit/testdata/oxmd-result.xml',
             'outputFile'      => '',
-            'additionalTests' => array( 'Directories' => 'unit/testdata/directory.xml',
-                                        'Globals'     => 'unit/testdata/globals.xml',
-                                        'Prefixes'    => 'unit/testdata/prefix.xml' )
+            'additionalTests' => array('Directories' => 'unit/testdata/directory.xml',
+                                       'Globals'     => 'unit/testdata/globals.xml',
+                                       'Prefixes'    => 'unit/testdata/prefix.xml')
         );
 
         $controller = new MainController();
-        $returnObject = $controller->setConfiguration( $configuration )->indexAction();
+        $returnObject = $controller->setConfiguration($configuration)->indexAction();
     }
 
-    public function testIndexActionWrongDirectoryXmlPath() {
-        $this->setExpectedException( '\\Exception' );
+    public function testIndexActionWrongDirectoryXmlPath()
+    {
+        $this->setExpectedException('\\Exception');
 
         $configuration = array(
             'modulePath'      => 'demoModule/',
             'mdXmlFile'       => 'unit/testdata/oxmd-result.xml',
             'outputFile'      => 'unit/testdata/report.html',
-            'additionalTests' => array( 'Directories' => 'xxx',
-                                        'Globals'     => 'unit/testdata/globals.xml',
-                                        'Prefixes'    => 'unit/testdata/prefix.xml' )
+            'additionalTests' => array('Directories' => 'xxx',
+                                       'Globals'     => 'unit/testdata/globals.xml',
+                                       'Prefixes'    => 'unit/testdata/prefix.xml')
         );
 
         $controller = new MainController();
-        $returnObject = $controller->setConfiguration( $configuration )->indexAction();
+        $returnObject = $controller->setConfiguration($configuration)->indexAction();
     }
 
-    public function testIndexActionWrongGlobalsXmlPath() {
-        $this->setExpectedException( '\\Exception' );
+    public function testIndexActionWrongGlobalsXmlPath()
+    {
+        $this->setExpectedException('\\Exception');
 
         $configuration = array(
             'modulePath'      => 'demoModule/',
             'mdXmlFile'       => 'unit/testdata/oxmd-result.xml',
             'outputFile'      => 'unit/testdata/report.html',
-            'additionalTests' => array( 'Directories' => 'unit/testdata/directory.xml',
-                                        'Globals'     => 'xxx',
-                                        'Prefixes'    => 'unit/testdata/prefix.xml' )
+            'additionalTests' => array('Directories' => 'unit/testdata/directory.xml',
+                                       'Globals'     => 'xxx',
+                                       'Prefixes'    => 'unit/testdata/prefix.xml')
         );
 
         $controller = new MainController();
-        $returnObject = $controller->setConfiguration( $configuration )->indexAction();
+        $returnObject = $controller->setConfiguration($configuration)->indexAction();
     }
 
-    public function testIndexActionWrongPrefixXmlPath() {
-        $this->setExpectedException( '\\Exception' );
+    public function testIndexActionWrongPrefixXmlPath()
+    {
+        $this->setExpectedException('\\Exception');
 
         $configuration = array(
             'modulePath'      => 'demoModule/',
             'mdXmlFile'       => 'unit/testdata/oxmd-result.xml',
             'outputFile'      => 'unit/testdata/report.html',
-            'additionalTests' => array( 'Directories' => 'unit/testdata/directory.xml',
-                                        'Globals'     => 'unit/testdata/globals.xml',
-                                        'Prefixes'    => 'xxx' )
+            'additionalTests' => array('Directories' => 'unit/testdata/directory.xml',
+                                       'Globals'     => 'unit/testdata/globals.xml',
+                                       'Prefixes'    => 'xxx')
         );
 
         $controller = new MainController();
-        $returnObject = $controller->setConfiguration( $configuration )->indexAction();
+        $returnObject = $controller->setConfiguration($configuration)->indexAction();
     }
 
 }

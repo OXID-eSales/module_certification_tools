@@ -27,15 +27,17 @@ use OxidEsales\ModuleCertificationTool\Result\GenericViolation;
  */
 class GenericViolationXmlParser
 {
+
     /**
      * Loads a XML file into am SimpleXML object.
      *
-     * @param $xmlFileName The name of the XML file.
+     * @param string $xmlFileName The name of the XML file.
      *
      * @return \SimpleXMLElement The SimpleXML object representing the XML file
      */
-    public function getXmlObjectFromFile( $xmlFileName ) {
-        $xml = simplexml_load_file( $xmlFileName );
+    public function getXmlObjectFromFile($xmlFileName)
+    {
+        $xml = simplexml_load_file($xmlFileName);
 
         return $xml;
     }
@@ -43,19 +45,20 @@ class GenericViolationXmlParser
     /**
      * Returns the violations from the XML output file.
      *
-     * @param $xml SimpleXML object from the XML output file
+     * @param  \SimpleXMLElement $xml Simple XML Element from the XML output file.
+     *
      * @return array Violations determined by a generic module
      */
-    public function parse( $xml )
+    public function parse($xml)
     {
         $violations = array();
-        if ( isset( $xml->failures->failure ) ) {
-            foreach ( $xml->failures->failure as $failureElement ) {
+        if (isset($xml->failures->failure)) {
+            foreach ($xml->failures->failure as $failureElement) {
                 $violation = new GenericViolation();
 
-                $violation->setMessage( trim( (string)$failureElement ) );
+                $violation->setMessage(trim((string) $failureElement));
 
-                $violations[ ] = $violation;
+                $violations[] = $violation;
             }
         }
 

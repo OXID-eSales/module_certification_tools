@@ -22,6 +22,7 @@ use OxidEsales\ModuleCertificationTool\Model\CertificationPrice;
 use OxidEsales\ModuleCertificationTool\Model\Violation;
 use OxidEsales\ModuleCertificationTool\Parser\MdXmlParser;
 use OxidEsales\ModuleCertificationTool\Parser\GenericViolationXmlParser;
+use OxidEsales\ModuleCertificationTool\Result\CertificationResult;
 use OxidEsales\ModuleCertificationTool\View;
 
 /**
@@ -44,9 +45,9 @@ class MainController
      *
      * @return $this The controller itself
      */
-    public function setConfiguration( $configuration )
+    public function setConfiguration($configuration)
     {
-        $this->configuration = (object)$configuration;
+        $this->configuration = (object) $configuration;
 
         return $this;
     }
@@ -60,26 +61,26 @@ class MainController
     public function indexAction()
     {
         $view = new View();
-        $view->setTemplate( 'index' );
+        $view->setTemplate('index');
 
-        $fileViolationHtmls  = array( 'Error while processing clover xml: file not found' );
-        $mdHtml              = "";
+        $fileViolationHtmls = array('Error while processing clover xml: file not found');
+        $mdHtml = "";
 
-        $this->testModulePath( $this->configuration->modulePath );
+        $this->testModulePath($this->configuration->modulePath);
 
         $certificationResult = $this->parseMd();
-        if ( !( empty( $certificationResult ) ) ) {
-            $mdHtml             = $this->getPrice( $certificationResult );
-            $fileViolationHtmls = $this->getFileViolations( $certificationResult );
+        if (!(empty($certificationResult))) {
+            $mdHtml = $this->getPrice($certificationResult);
+            $fileViolationHtmls = $this->getFileViolations($certificationResult);
         }
 
-        $view->assignVariable( 'certificationResult', $mdHtml );
-        $view->assignVariable( 'fileViolations', $fileViolationHtmls );
+        $view->assignVariable('certificationResult', $mdHtml);
+        $view->assignVariable('fileViolations', $fileViolationHtmls);
         $genericHtml = $this->parseGeneric();
-        $view->assignVariable( 'genericChecks', $genericHtml );
+        $view->assignVariable('genericChecks', $genericHtml);
 
         $html = $view->render();
-        $this->writeOutputFile( $this->configuration->outputFile, $html );
+        $this->writeOutputFile($this->configuration->outputFile, $html);
 
         return $this;
     }
@@ -87,40 +88,42 @@ class MainController
     /**
      * Writes the output file.
      *
-     * @param $outputFile Path to the output file
-     * @param $html Content to write
+     * @param string $outputFile  Path to the output file
+     * @param string $html        Content to write
      *
      * @throws \Exception
      */
-    private function writeOutputFile( $outputFile, $html ) {
-        if ( false === @file_put_contents( $outputFile, $html ) ) {
-            throw new \Exception( 'error while writing ' . $outputFile );
+    private function writeOutputFile($outputFile, $html)
+    {
+        if (false === @file_put_contents($outputFile, $html)) {
+            throw new \Exception('error while writing ' . $outputFile);
         }
     }
 
     /**
      * Tests if the path to module is a valid directory.
      *
-     * @param $modulePath The path to the module dir
+     * @param string $modulePath The path to the module dir
      *
      * @throws \Exception
      */
-    private function testModulePath( $modulePath ) {
-        if ( !is_dir( $modulePath ) || !is_readable( $modulePath ) ) {
-            throw new \Exception( 'no module found in ' . $modulePath );
+    private function testModulePath($modulePath)
+    {
+        if (!is_dir($modulePath) || !is_readable($modulePath)) {
+            throw new \Exception('no module found in ' . $modulePath);
         }
     }
 
     /**
      * Gets the price form a certification result object.
      *
-     * @param $certificationResult The certification result object
+     * @param CertificationResult $certificationResult The certification result object
      *
      * @return string The price as string
      */
-    private function getPrice( $certificationResult )
+    private function getPrice($certificationResult)
     {
-        $certificationPrice = new CertificationPrice( $certificationResult );
+        $certificationPrice = new CertificationPrice($certificationResult);
 
         return $certificationPrice->getHtml();
     }
@@ -133,8 +136,8 @@ class MainController
     private function parseMd()
     {
         $mdXmlParser = new MdXmlParser();
-        $mdXmlParser->cleanUpXmlFile( $this->configuration->mdXmlFile );
-        $certificationResult = $mdXmlParser->parse( $mdXmlParser->getXmlObjectFromFile( $this->configuration->mdXmlFile ) );
+        $mdXmlParser->cleanUpXmlFile($this->configuration->mdXmlFile);
+        $certificationResult = $mdXmlParser->parse($mdXmlParser->getXmlObjectFromFile($this->configuration->mdXmlFile));
 
         return $certificationResult;
     }
@@ -146,30 +149,31 @@ class MainController
      */
     private function parseGeneric()
     {
-        $genericHtml=array();
+        $genericHtml = array();
         $violationXmlParser = new GenericViolationXmlParser();
-        foreach(  $this->configuration->additionalTests as $header => $file ){
-            $violation = $violationXmlParser->parse( $violationXmlParser->getXmlObjectFromFile( $file ) );
-            $genericCheck        = new Violation( $violation, 'genericViolationList' );
-            $genericHtml[]       = $genericCheck->setHeading( $header )->getHtml();
+        foreach ($this->configuration->additionalTests as $header => $file) {
+            $violation = $violationXmlParser->parse($violationXmlParser->getXmlObjectFromFile($file));
+            $genericCheck = new Violation($violation, 'genericViolationList');
+            $genericHtml[] = $genericCheck->setHeading($header)->getHtml();
         }
+
         return $genericHtml;
     }
 
     /**
      * Parses the file violations from the OXMD file into an array of violation objects.
      *
-     * @param $certificationResult The data object of the OXMD file
+     * @param CertificationResult $certificationResult The data object of the OXMD file
      *
      * @return array The file violations
      */
-    private function getFileViolations( $certificationResult )
+    private function getFileViolations($certificationResult)
     {
         $fileViolationHtmls = array();
-        foreach ( $certificationResult->getViolations() as $ruleName => $fileViolations ) {
-            $fileViolations = new Violation( $fileViolations, 'fileViolationTable' );
-            $fileViolations->setHeading( $ruleName );
-            $fileViolationHtmls[ ] = $fileViolations->getHtml();
+        foreach ($certificationResult->getViolations() as $ruleName => $fileViolations) {
+            $fileViolations = new Violation($fileViolations, 'fileViolationTable');
+            $fileViolations->setHeading($ruleName);
+            $fileViolationHtmls[] = $fileViolations->getHtml();
         }
 
         return $fileViolationHtmls;

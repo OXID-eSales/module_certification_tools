@@ -6,5 +6,9 @@
 
 ## Project specific
 /bin/composer.phar
+/bin/oxmd
+/bin/pdepend
+/bin/phpmd
+/bin/phpunit
 /result/
 /vendor/

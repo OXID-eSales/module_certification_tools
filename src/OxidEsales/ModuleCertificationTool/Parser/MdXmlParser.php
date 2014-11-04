@@ -36,7 +36,7 @@ class MdXmlParser
     /**
      * Loads a XML file into a XML object.
      *
-     * @param $xmlFileName Name of the XML file
+     * @param string $xmlFileName Name of the XML file
      *
      * @return \SimpleXMLElement XML object
      * @throws \Exception
@@ -54,7 +54,7 @@ class MdXmlParser
     /**
      * Removes namespace stuff from a XML file to prevent SimpleXML issues.
      *
-     * @param $xmlFileName The name of the XML file
+     * @param string $xmlFileName The name of the XML file
      *
      * @return $this The object itself
      * @throws \Exception
@@ -112,8 +112,8 @@ class MdXmlParser
     /**
      * Parses the violations of a single file into a violation array.
      *
-     * @param $fileElement XML element of the file
-     * @param $fileViolations Already existig violations
+     * @param \SimpleXMLElement $fileElement XML element of the file
+     * @param array $fileViolations Already existig violations
      *
      * @return array Violation array
      */
@@ -140,7 +140,7 @@ class MdXmlParser
     /**
      * Parses a XML rule element into a rule object.
      *
-     * @param $ruleElement XML rule element
+     * @param \SimpleXMLElement $ruleElement XML rule element
      *
      * @return CertificationRule Rule object
      */
@@ -166,7 +166,7 @@ class MdXmlParser
     /**
      * Parses a XML file element into a rule violation object
      *
-     * @param $fileElement XML file element
+     * @param \SimpleXMLElement $fileElement XML file element
      *
      * @return CertificationRuleViolation Rule violation object
      */

@@ -50,7 +50,9 @@ use PHPMD\OXMD\Certification\ExtremeValue;
 use PHPMD\OXMD\Certification\ExtremeValues;
 use PHPMD\OXMD\Version;
 use PHPMD\PHPMD;
+use PHPMD\ProcessingError;
 use PHPMD\Report;
+use PHPMD\RuleViolation;
 
 /**
  * This class will render a Java-PMD compatible xml-report.
@@ -117,6 +119,7 @@ class XmlRenderer extends AbstractRenderer
         $writer->write(PHP_EOL);
 
         foreach ($report->getRuleViolations() as $violation) {
+            /** @var RuleViolation $violation */
             $fileName = $violation->getFileName();
 
             if ($this->fileName !== $fileName) {
@@ -165,6 +168,7 @@ class XmlRenderer extends AbstractRenderer
         }
 
         foreach ($report->getErrors() as $error) {
+            /** @var ProcessingError $error */
             $writer->write('  <error filename="');
             $writer->write($error->getFile());
             $writer->write('" msg="');

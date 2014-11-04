@@ -145,6 +145,10 @@ class GenericViolation
      */
     public function getInformation($type)
     {
+        if (!array_key_exists($type, $this->additionalInformation)) {
+            return null;
+        }
+
         return $this->additionalInformation[$type];
     }
 

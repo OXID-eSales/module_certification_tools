@@ -27,6 +27,7 @@ use PHPUnit_Framework_TestCase;
  */
 class GenericViolationTest extends PHPUnit_Framework_TestCase
 {
+
     /**
      * Test the setting and getting of message field
      *
@@ -37,8 +38,8 @@ class GenericViolationTest extends PHPUnit_Framework_TestCase
         $message = 'violation message';
 
         $violation = new GenericViolation();
-        $violation->setMessage( $message );
-        $this->assertEquals( $message, $violation->getMessage() );
+        $violation->setMessage($message);
+        $this->assertEquals($message, $violation->getMessage());
     }
 
     /**
@@ -51,8 +52,8 @@ class GenericViolationTest extends PHPUnit_Framework_TestCase
         $type = 'violation type';
 
         $violation = new GenericViolation();
-        $violation->setType( $type );
-        $this->assertEquals( $type, $violation->getType() );
+        $violation->setType($type);
+        $this->assertEquals($type, $violation->getType());
     }
 
     /**
@@ -65,32 +66,28 @@ class GenericViolationTest extends PHPUnit_Framework_TestCase
         $file = 'violation file';
 
         $violation = new GenericViolation();
-        $violation->setFile( $file );
-        $this->assertEquals( $file, $violation->getFile() );
+        $violation->setFile($file);
+        $this->assertEquals($file, $violation->getFile());
     }
 
     /**
      * Test the setting and getting of additional information field
-     *
-     * @return null
      */
     public function testSetGetAdditionalInformation()
     {
         $addInformation = 'additional violation information';
 
         $violation = new GenericViolation();
-        $infoType  = 'type';
-        $addInfo   = $violation->getInformation( $infoType );
-        $violation->addInformation( $infoType, $addInformation );
+        $infoType = 'type';
+        $addInfo = $violation->getInformation($infoType);
+        $this->assertEmpty($addInfo);
 
-        $this->assertEmpty( $addInfo );
-        $this->assertEquals( $addInformation, $violation->getInformation( $infoType ) );
+        $violation->addInformation($infoType, $addInformation);
+        $this->assertEquals($addInformation, $violation->getInformation($infoType));
     }
 
     /**
      * Set up test environment
-     *
-     * @return null
      */
     protected function setUp()
     {
@@ -99,8 +96,6 @@ class GenericViolationTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tear down test environment
-     *
-     * @return null
      */
     protected function tearDown()
     {

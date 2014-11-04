@@ -32,18 +32,14 @@ class ViolationTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests the getter of violations.
-     *
-     * @return null
      */
     public function testGetViolations()
     {
-        $violation = new violation( array(), 'string' );
+        $violation = new Violation( array(), 'string' );
     }
 
     /**
      * Tests the getter of templates.
-     *
-     * @return null
      */
     public function testGetTemplate()
     {
@@ -54,8 +50,6 @@ class ViolationTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests the getter/setter of heading.
-     *
-     * @return null
      */
     public function testSetGetHeading()
     {
@@ -68,8 +62,6 @@ class ViolationTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests the getter of html.
-     *
-     * @return null
      */
     public function testGetHtmlForGenericViolationList()
     {
@@ -92,8 +84,6 @@ class ViolationTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests the getter of html.
-     *
-     * @return null
      */
     public function testGetHtmlForFileViolationTable()
     {
