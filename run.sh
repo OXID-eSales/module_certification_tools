@@ -92,6 +92,19 @@ if [[ $? -eq 5 ]]; then
     exit 0;
 fi
 
+######################### Generate empty clover file in case it's not defined
+if [[ ! -f $CLOVER_LOCATION ]] ; then
+cat <<EOT > /tmp/empty_clover.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="0">
+  <project timestamp="0">
+  </project>
+</coverage>
+EOT
+
+CLOVER_LOCATION="/tmp/empty_clover.xml"
+fi
+
 ######################### Run tests and oxmd for metrics
 ${BASEPATH}/bin/runTestsAndMetrics.sh $MODULEPATH $BASEPATH $OUTPUTDIR $CLOVER_LOCATION
 
