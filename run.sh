@@ -33,7 +33,7 @@ DATE=$(/bin/date +%Y%m%d%H%M%S)
 OUTPUTDIR=/result/${DATE}
 
 #var settings
-MODULEPATH=$CFG_MODULEPATH
+if [ -z "$MODULEPATH" ]; then MODULEPATH=$CFG_MODULEPATH; fi
 CLOVER_LOCATION=$CFG_CLOVER_LOCATION
 DELETE_OLD_RUNS=$CFG_DELETE_OLD_RUNS
 PREFIX=$CFG_PREFIX
@@ -90,6 +90,19 @@ if [[ $? -eq 5 ]]; then
     echo "Error in result path handling"
     echo "Quit without running metrics"
     exit 0;
+fi
+
+######################### Generate empty clover file in case it's not defined
+if [[ ! -f $CLOVER_LOCATION ]] ; then
+cat <<EOT > /tmp/empty_clover.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="0">
+  <project timestamp="0">
+  </project>
+</coverage>
+EOT
+
+CLOVER_LOCATION="/tmp/empty_clover.xml"
 fi
 
 ######################### Run tests and oxmd for metrics
