@@ -1,6 +1,6 @@
 {
     "name": "oxid/modulecertificationtool",
-    "license": "GPL-3.0",
+    "license": "GPL-3.0-only",
     "prefer-stable": true,
     "require": {
         "phpmd/oxmd": "1.0.*",
