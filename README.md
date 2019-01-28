@@ -44,11 +44,3 @@ How to use
 
 3. Execute the `run.sh` script
  * When starting with -d option, CFG_DELETE_OLD_RUNS from config.cfg is ignored and all old results will be deleted
-
-
-License
--------
-
-The Module Certification Tool is licensed under a GPLv3 license.
-
-PHPMD and its OXID specific extensions are licensed under a BSD 3-Clause license.
